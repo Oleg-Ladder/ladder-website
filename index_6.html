@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ladder — Диагностика бизнес-решений</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:#07111E;color:#E8EEF8;font-family:'DM Sans',Helvetica,Arial,sans-serif;font-weight:300;overflow-x:hidden;font-size:16px}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 64px;height:64px;background:rgba(7,17,30,0.96);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,0.06)}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:0.12em;color:#E8EEF8;text-decoration:none}
+.logo-l{color:#3B82F6}
+.nav-right{display:flex;align-items:center;gap:32px}
+.nav-link{font-size:13px;color:rgba(232,238,248,0.55);text-decoration:none;letter-spacing:0.04em;transition:color .2s}
+.nav-link:hover{color:#E8EEF8}
+.nav-cta{background:#3B82F6;color:#fff;border:none;padding:10px 24px;font-size:13px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;cursor:pointer;text-decoration:none;display:inline-block;transition:background .2s}
+.nav-cta:hover{background:#2563EB}
+
+/* ── HERO ── */
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;padding:64px 0 0;overflow:hidden}
+.hero-left{display:flex;flex-direction:column;justify-content:center;padding:80px 64px 80px 64px;border-right:1px solid rgba(255,255,255,0.06)}
+.hero-eyebrow{font-size:11px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:#3B82F6;margin-bottom:28px;display:flex;align-items:center;gap:12px}
+.hero-eyebrow::before{content:'';width:32px;height:1px;background:#3B82F6}
+.hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(52px,5.5vw,84px);line-height:0.94;letter-spacing:0.02em;color:#E8EEF8;margin-bottom:32px}
+.hero h1 em{color:#3B82F6;font-style:normal}
+.hero-sub{font-size:17px;color:rgba(232,238,248,0.65);line-height:1.75;max-width:460px;margin-bottom:48px;font-weight:300}
+.hero-sub strong{color:rgba(232,238,248,0.9);font-weight:400}
+.hero-actions{display:flex;gap:16px;align-items:center}
+.btn-primary{background:#3B82F6;color:#fff;border:none;padding:15px 36px;font-size:13px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;text-decoration:none;display:inline-block;transition:all .2s}
+.btn-primary:hover{background:#2563EB;transform:translateY(-1px)}
+.btn-ghost{font-size:14px;color:rgba(232,238,248,0.5);text-decoration:none;letter-spacing:0.02em;transition:color .2s}
+.btn-ghost:hover{color:#E8EEF8}
+.hero-right{display:flex;align-items:center;justify-content:center;padding:80px 48px;background:linear-gradient(135deg,#07111E 0%,#0D1F35 100%);position:relative;overflow:hidden}
+.hero-right::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 40%,rgba(59,130,246,0.08) 0%,transparent 60%)}
+
+/* McKinsey-style SVG illustration */
+.hero-illustration{width:100%;max-width:520px;position:relative;z-index:1}
+
+/* ── DIVIDER ── */
+.divider{height:1px;background:rgba(255,255,255,0.06);margin:0}
+
+/* ── SCENARIOS ── */
+.scenarios{padding:100px 64px;background:#07111E}
+.sc-header{display:grid;grid-template-columns:1fr 2fr;gap:80px;align-items:start;margin-bottom:64px}
+.sc-eyebrow{font-size:11px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:#3B82F6;margin-bottom:20px;display:flex;align-items:center;gap:12px}
+.sc-eyebrow::before{content:'';width:32px;height:1px;background:#3B82F6}
+.sc-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,3.5vw,54px);line-height:0.95;letter-spacing:0.02em;color:#E8EEF8}
+.sc-title em{color:#3B82F6;font-style:normal}
+.sc-desc{font-size:16px;color:rgba(232,238,248,0.6);line-height:1.75;max-width:520px}
+.sc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,0.06)}
+.sc-card{background:#07111E;padding:36px 28px;cursor:pointer;transition:background .25s;position:relative;overflow:hidden}
+.sc-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:#3B82F6;transform:scaleX(0);transform-origin:left;transition:transform .3s}
+.sc-card:hover{background:#0D1F35}
+.sc-card:hover::before{transform:scaleX(1)}
+.sc-num{font-family:'Bebas Neue',sans-serif;font-size:40px;color:rgba(59,130,246,0.2);letter-spacing:0.04em;line-height:1;margin-bottom:20px;transition:color .25s}
+.sc-card:hover .sc-num{color:rgba(59,130,246,0.5)}
+.sc-name{font-size:16px;font-weight:500;color:#E8EEF8;margin-bottom:10px;line-height:1.3}
+.sc-text{font-size:13px;color:rgba(232,238,248,0.5);line-height:1.65}
+
+/* ── VERDICT ── */
+.verdict-section{padding:100px 64px;background:#0A1828;border-top:1px solid rgba(255,255,255,0.06);border-bottom:1px solid rgba(255,255,255,0.06)}
+.vd-inner{display:grid;grid-template-columns:1fr 1.6fr;gap:80px;align-items:start}
+.vd-left{}
+.vd-eyebrow{font-size:11px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:#3B82F6;margin-bottom:20px;display:flex;align-items:center;gap:12px}
+.vd-eyebrow::before{content:'';width:32px;height:1px;background:#3B82F6}
+.vd-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,3.5vw,54px);line-height:0.95;letter-spacing:0.02em;color:#E8EEF8;margin-bottom:24px}
+.vd-title em{color:#3B82F6;font-style:normal}
+.vd-desc{font-size:15px;color:rgba(232,238,248,0.6);line-height:1.75;margin-bottom:40px}
+.vd-axes-mini{display:flex;flex-direction:column;gap:14px}
+.vam-row{display:flex;align-items:center;gap:14px}
+.vam-label{font-size:12px;color:rgba(232,238,248,0.5);width:110px;flex-shrink:0}
+.vam-bar{flex:1;height:2px;background:rgba(255,255,255,0.08)}
+.vam-fill{height:100%;background:#3B82F6;transition:width 1s ease}
+.vam-fill.red{background:#EF4444}
+.vam-val{font-size:12px;font-weight:500;color:#E8EEF8;width:32px;text-align:right}
+.vd-card{background:#07111E;border:1px solid rgba(255,255,255,0.08);padding:40px;position:relative}
+.vd-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#1D4ED8,#3B82F6,#60A5FA)}
+.vd-card-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:32px;padding-bottom:24px;border-bottom:1px solid rgba(255,255,255,0.06)}
+.vdh-left{}
+.vdh-label{font-size:10px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:#3B82F6;margin-bottom:4px}
+.vdh-case{font-size:14px;color:rgba(232,238,248,0.5)}
+.vdh-right{text-align:right}
+.vdh-score{font-family:'Bebas Neue',sans-serif;font-size:48px;letter-spacing:0.04em;color:#E8EEF8;line-height:1}
+.vdh-score span{font-size:22px;color:#3B82F6}
+.vdh-risk{font-size:11px;color:rgba(232,238,248,0.4);margin-top:2px;letter-spacing:0.04em}
+.vd-axes{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:28px}
+.ax-row{}
+.ax-lbl{font-size:12px;color:rgba(232,238,248,0.45);margin-bottom:6px;display:flex;justify-content:space-between}
+.ax-lbl span{color:#E8EEF8;font-weight:400}
+.ax-bar{height:2px;background:rgba(255,255,255,0.07)}
+.ax-fill{height:100%;background:#3B82F6;transition:width 1.2s ease}
+.ax-fill.red{background:#EF4444}
+.vd-quote{font-size:15px;font-style:italic;color:rgba(232,238,248,0.8);line-height:1.75;padding:24px 0;border-top:1px solid rgba(255,255,255,0.06);border-bottom:1px solid rgba(255,255,255,0.06);margin-bottom:24px}
+.vd-quote em{font-style:normal;color:#E8EEF8;font-weight:400}
+.vd-recs{display:flex;flex-direction:column;gap:10px}
+.vd-rec{display:flex;gap:12px;font-size:13px;color:rgba(232,238,248,0.55);line-height:1.6}
+.vd-rec::before{content:'→';color:#3B82F6;flex-shrink:0;font-weight:400}
+
+/* ── PRICING ── */
+.pricing{padding:100px 64px;background:#07111E}
+.pr-header{display:grid;grid-template-columns:1fr 2fr;gap:80px;align-items:start;margin-bottom:56px}
+.pr-eyebrow{font-size:11px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:#3B82F6;margin-bottom:20px;display:flex;align-items:center;gap:12px}
+.pr-eyebrow::before{content:'';width:32px;height:1px;background:#3B82F6}
+.pr-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,3.5vw,54px);line-height:0.95;letter-spacing:0.02em;color:#E8EEF8}
+.pr-title em{color:#3B82F6;font-style:normal}
+.pr-desc{font-size:15px;color:rgba(232,238,248,0.6);line-height:1.75}
+.pr-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(255,255,255,0.06);max-width:900px}
+.pr-card{background:#07111E;padding:48px 40px;position:relative}
+.pr-card.featured{background:#0A1828}
+.pr-card.featured::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#1D4ED8,#3B82F6,#60A5FA)}
+.pr-tag{font-size:10px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:#3B82F6;margin-bottom:24px}
+.pr-price{font-family:'Bebas Neue',sans-serif;font-size:60px;letter-spacing:0.02em;color:#E8EEF8;line-height:1;margin-bottom:6px}
+.pr-sublabel{font-size:13px;color:rgba(232,238,248,0.4);margin-bottom:32px;letter-spacing:0.02em}
+.pr-features{display:flex;flex-direction:column;gap:12px;margin-bottom:36px}
+.pr-feat{display:flex;gap:12px;font-size:14px;color:rgba(232,238,248,0.5);line-height:1.5;align-items:flex-start}
+.pr-feat::before{content:'—';color:#3B82F6;flex-shrink:0;font-weight:300}
+.pr-feat.hi{color:rgba(232,238,248,0.85)}
+.pr-btn{width:100%;padding:15px;text-align:center;font-size:12px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;transition:all .2s;text-decoration:none;display:block;font-family:'DM Sans',sans-serif}
+.pr-btn-outline{background:transparent;border:1px solid rgba(232,238,248,0.15);color:rgba(232,238,248,0.45)}
+.pr-btn-outline:hover{border-color:#3B82F6;color:#E8EEF8}
+.pr-btn-solid{background:#3B82F6;border:none;color:#fff}
+.pr-btn-solid:hover{background:#2563EB}
+
+/* ── QUIZ ── */
+.quiz{padding:100px 64px;background:#0A1828;border-top:1px solid rgba(255,255,255,0.06)}
+.quiz-inner{display:grid;grid-template-columns:1fr 1.8fr;gap:80px;align-items:start}
+.qz-eyebrow{font-size:11px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:#3B82F6;margin-bottom:20px;display:flex;align-items:center;gap:12px}
+.qz-eyebrow::before{content:'';width:32px;height:1px;background:#3B82F6}
+.qz-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,3.5vw,54px);line-height:0.95;letter-spacing:0.02em;color:#E8EEF8;margin-bottom:20px}
+.qz-title em{color:#3B82F6;font-style:normal}
+.qz-desc{font-size:15px;color:rgba(232,238,248,0.6);line-height:1.75;margin-bottom:32px}
+.qz-promise{border-left:2px solid #3B82F6;padding-left:20px}
+.qz-promise p{font-size:13px;color:rgba(232,238,248,0.5);line-height:1.7;margin-bottom:6px}
+.qz-promise p:last-child{margin-bottom:0}
+.q-progress{height:1px;background:rgba(255,255,255,0.07);margin-bottom:48px}
+.q-progress-fill{height:100%;background:#3B82F6;transition:width .4s ease}
+.quiz-step{display:none}
+.quiz-step.active{display:block}
+.q-meta{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.q-tag{font-size:10px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:#3B82F6}
+.q-counter{font-size:11px;color:rgba(232,238,248,0.3)}
+.q-title{font-size:20px;font-weight:400;color:#E8EEF8;margin-bottom:28px;line-height:1.45}
+.q-options{display:flex;flex-direction:column;gap:8px;margin-bottom:32px}
+.q-option{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);padding:15px 20px;font-size:14px;color:rgba(232,238,248,0.7);cursor:pointer;transition:all .2s;text-align:left;font-family:'DM Sans',sans-serif;font-weight:300}
+.q-option:hover{border-color:#3B82F6;color:#E8EEF8;background:rgba(59,130,246,0.06)}
+.q-option.selected{border-color:#3B82F6;color:#E8EEF8;background:rgba(59,130,246,0.1)}
+.q-input{width:100%;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);padding:15px 20px;font-size:14px;color:#E8EEF8;font-family:'DM Sans',sans-serif;font-weight:300;outline:none;margin-bottom:32px;transition:border-color .2s}
+.q-input:focus{border-color:#3B82F6}
+.q-input::placeholder{color:rgba(232,238,248,0.25)}
+.q-nav{display:flex;gap:12px;align-items:center}
+.q-back{background:transparent;border:1px solid rgba(255,255,255,0.1);color:rgba(232,238,248,0.4);padding:12px 22px;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s}
+.q-back:hover{border-color:#3B82F6;color:#E8EEF8}
+.q-next{background:#3B82F6;border:none;color:#fff;padding:12px 28px;font-size:12px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background .2s}
+.q-next:hover{background:#2563EB}
+.quiz-done{display:none;padding:40px 0}
+.quiz-done h3{font-family:'Bebas Neue',sans-serif;font-size:48px;letter-spacing:0.04em;color:#E8EEF8;margin-bottom:12px}
+.quiz-done p{font-size:15px;color:rgba(232,238,248,0.55);margin-bottom:32px;line-height:1.75}
+
+/* ── FOOTER ── */
+footer{padding:28px 64px;border-top:1px solid rgba(255,255,255,0.06);display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.f-logo{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:0.12em;color:rgba(232,238,248,0.3)}
+.f-logo span{color:#3B82F6}
+.f-text{font-size:12px;color:rgba(232,238,248,0.25);letter-spacing:0.04em}
+
+.fu{opacity:0;transform:translateY(16px);transition:opacity .7s ease,transform .7s ease}
+.fu.vis{opacity:1;transform:translateY(0)}
+
+@media(max-width:960px){
+  nav{padding:0 24px}
+  .hero{grid-template-columns:1fr;min-height:auto}
+  .hero-left{padding:100px 24px 60px;border-right:none;border-bottom:1px solid rgba(255,255,255,0.06)}
+  .hero-right{padding:48px 24px;min-height:300px}
+  .scenarios,.verdict-section,.pricing,.quiz{padding:60px 24px}
+  .sc-header,.vd-inner,.pr-header,.quiz-inner{grid-template-columns:1fr;gap:40px}
+  .sc-grid{grid-template-columns:1fr 1fr}
+  .pr-grid{grid-template-columns:1fr}
+  .vd-axes{grid-template-columns:1fr}
+  footer{padding:24px;flex-direction:column;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo"><span class="logo-l">L</span>ADDER</a>
+  <div class="nav-right">
+    <a href="#how" class="nav-link">Как работает</a>
+    <a href="#pricing" class="nav-link">Тарифы</a>
+    <a href="#quiz" class="nav-cta">Пройти диагностику</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Диагностика бизнес-решений</div>
+    <h1>БИЗНЕС-РЕШЕНИЯ<br>НАЧИНАЮТСЯ<br>С <em>ПРАВИЛЬНЫХ</em><br>ВОПРОСОВ</h1>
+    <p class="hero-sub">Ladder анализирует вашу ситуацию через несколько AI-моделей и выдаёт <strong>честный вердикт</strong> — до того как вы потеряли деньги и время.</p>
+    <div class="hero-actions">
+      <a href="#quiz" class="btn-primary">Пройти диагностику</a>
+      <a href="#how" class="btn-ghost">Как это работает →</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <!-- McKinsey-style analytical illustration -->
+    <svg class="hero-illustration" viewBox="0 0 520 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Grid background -->
+      <defs>
+        <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+          <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(59,130,246,0.06)" stroke-width="1"/>
+        </pattern>
+        <linearGradient id="lineGrad" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#3B82F6" stop-opacity="0.8"/>
+          <stop offset="100%" stop-color="#60A5FA" stop-opacity="0.3"/>
+        </linearGradient>
+        <linearGradient id="barGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#3B82F6" stop-opacity="0.9"/>
+          <stop offset="100%" stop-color="#1D4ED8" stop-opacity="0.6"/>
+        </linearGradient>
+      </defs>
+      <rect width="520" height="400" fill="url(#grid)"/>
+
+      <!-- Main frame -->
+      <rect x="24" y="24" width="472" height="352" rx="2" stroke="rgba(59,130,246,0.15)" stroke-width="1" fill="none"/>
+
+      <!-- Header bar -->
+      <rect x="24" y="24" width="472" height="44" fill="rgba(59,130,246,0.06)"/>
+      <text x="44" y="51" font-family="monospace" font-size="11" fill="rgba(59,130,246,0.7)" letter-spacing="2">LADDER SCORE ANALYSIS</text>
+      <circle cx="456" cy="46" r="5" fill="rgba(59,130,246,0.4)"/>
+      <circle cx="474" cy="46" r="5" fill="rgba(59,130,246,0.2)"/>
+
+      <!-- Score circle -->
+      <circle cx="110" cy="168" r="60" stroke="rgba(59,130,246,0.12)" stroke-width="1" fill="none"/>
+      <circle cx="110" cy="168" r="60" stroke="url(#lineGrad)" stroke-width="3" fill="none"
+        stroke-dasharray="283" stroke-dashoffset="85" stroke-linecap="round"
+        transform="rotate(-90 110 168)"/>
+      <text x="110" y="160" font-family="'Bebas Neue',sans-serif" font-size="32" fill="#E8EEF8" text-anchor="middle" letter-spacing="1">74</text>
+      <text x="110" y="178" font-family="monospace" font-size="9" fill="rgba(232,238,248,0.35)" text-anchor="middle">/100</text>
+      <text x="110" y="198" font-family="monospace" font-size="8" fill="rgba(59,130,246,0.6)" text-anchor="middle" letter-spacing="1">LADDER SCORE</text>
+
+      <!-- Axes bars on right -->
+      <text x="200" y="90" font-family="monospace" font-size="9" fill="rgba(232,238,248,0.35)" letter-spacing="1">ПАРАМЕТРЫ</text>
+
+      <!-- Bar 1 - Idea -->
+      <text x="200" y="114" font-family="monospace" font-size="9" fill="rgba(232,238,248,0.45)">ИДЕЯ</text>
+      <rect x="200" y="120" width="270" height="6" rx="1" fill="rgba(255,255,255,0.05)"/>
+      <rect x="200" y="120" width="216" height="6" rx="1" fill="url(#barGrad)"/>
+      <text x="478" y="128" font-family="monospace" font-size="9" fill="rgba(59,130,246,0.7)" text-anchor="end">8</text>
+
+      <!-- Bar 2 - Market -->
+      <text x="200" y="148" font-family="monospace" font-size="9" fill="rgba(232,238,248,0.45)">РЫНОК</text>
+      <rect x="200" y="154" width="270" height="6" rx="1" fill="rgba(255,255,255,0.05)"/>
+      <rect x="200" y="154" width="162" height="6" rx="1" fill="url(#barGrad)"/>
+      <text x="478" y="162" font-family="monospace" font-size="9" fill="rgba(59,130,246,0.7)" text-anchor="end">6</text>
+
+      <!-- Bar 3 - Money RED -->
+      <text x="200" y="182" font-family="monospace" font-size="9" fill="rgba(232,238,248,0.45)">ДЕНЬГИ</text>
+      <rect x="200" y="188" width="270" height="6" rx="1" fill="rgba(255,255,255,0.05)"/>
+      <rect x="200" y="188" width="108" height="6" rx="1" fill="#EF4444" opacity="0.7"/>
+      <text x="478" y="196" font-family="monospace" font-size="9" fill="#EF4444" text-anchor="end">4</text>
+
+      <!-- Bar 4 - Team -->
+      <text x="200" y="216" font-family="monospace" font-size="9" fill="rgba(232,238,248,0.45)">КОМАНДА</text>
+      <rect x="200" y="222" width="270" height="6" rx="1" fill="rgba(255,255,255,0.05)"/>
+      <rect x="200" y="222" width="189" height="6" rx="1" fill="url(#barGrad)"/>
+      <text x="478" y="230" font-family="monospace" font-size="9" fill="rgba(59,130,246,0.7)" text-anchor="end">7</text>
+
+      <!-- Bar 5 - Sales -->
+      <text x="200" y="250" font-family="monospace" font-size="9" fill="rgba(232,238,248,0.45)">ПРОДАЖИ</text>
+      <rect x="200" y="256" width="270" height="6" rx="1" fill="rgba(255,255,255,0.05)"/>
+      <rect x="200" y="256" width="189" height="6" rx="1" fill="url(#barGrad)"/>
+      <text x="478" y="264" font-family="monospace" font-size="9" fill="rgba(59,130,246,0.7)" text-anchor="end">7</text>
+
+      <!-- Bar 6 - Survival -->
+      <text x="200" y="284" font-family="monospace" font-size="9" fill="rgba(232,238,248,0.45)">ВЫЖИВАЕМОСТЬ</text>
+      <rect x="200" y="290" width="270" height="6" rx="1" fill="rgba(255,255,255,0.05)"/>
+      <rect x="200" y="290" width="135" height="6" rx="1" fill="url(#barGrad)"/>
+      <text x="478" y="298" font-family="monospace" font-size="9" fill="rgba(59,130,246,0.7)" text-anchor="end">5</text>
+
+      <!-- Verdict box -->
+      <rect x="44" y="248" width="132" height="80" rx="1" stroke="rgba(59,130,246,0.2)" stroke-width="1" fill="rgba(59,130,246,0.04)"/>
+      <text x="54" y="268" font-family="monospace" font-size="8" fill="rgba(59,130,246,0.5)" letter-spacing="1">ВЕРДИКТ</text>
+      <text x="54" y="288" font-family="monospace" font-size="8" fill="rgba(232,238,248,0.45)" letter-spacing="0">СРЕДНИЙ РИСК</text>
+      <text x="54" y="304" font-family="monospace" font-size="8" fill="rgba(232,238,248,0.3)">ДЕНЬГИ: КРИТИЧНО</text>
+      <text x="54" y="318" font-family="monospace" font-size="8" fill="rgba(59,130,246,0.5)">→ DEEP ANALYSIS</text>
+
+      <!-- Bottom status bar -->
+      <rect x="24" y="340" width="472" height="36" fill="rgba(59,130,246,0.04)" stroke="rgba(59,130,246,0.08)" stroke-width="1"/>
+      <circle cx="44" cy="358" r="3" fill="rgba(59,130,246,0.6)"/>
+      <text x="56" y="362" font-family="monospace" font-size="9" fill="rgba(59,130,246,0.5)" letter-spacing="1">АНАЛИЗ ЗАВЕРШЁН</text>
+      <text x="400" y="362" font-family="monospace" font-size="9" fill="rgba(232,238,248,0.2)">ladderbiz.com</text>
+
+      <!-- Connecting lines -->
+      <line x1="110" y1="228" x2="110" y2="248" stroke="rgba(59,130,246,0.15)" stroke-width="1" stroke-dasharray="3 3"/>
+      <line x1="176" y1="168" x2="200" y2="168" stroke="rgba(59,130,246,0.15)" stroke-width="1" stroke-dasharray="3 3"/>
+    </svg>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SCENARIOS -->
+<section class="scenarios" id="how">
+  <div class="sc-header fu">
+    <div>
+      <div class="sc-eyebrow">Что мы проверяем</div>
+      <h2 class="sc-title">ВАША<br><em>СИТУАЦИЯ</em><br>— НАШ АНАЛИЗ</h2>
+    </div>
+    <p class="sc-desc">Ladder работает с четырьмя типами запросов. Под каждый — свои вопросы, своя логика анализа, свой вердикт. Никаких универсальных шаблонов.</p>
+  </div>
+  <div class="sc-grid fu">
+    <div class="sc-card" onclick="document.getElementById('quiz').scrollIntoView({behavior:'smooth'})">
+      <div class="sc-num">01</div>
+      <div class="sc-name">Новая идея</div>
+      <div class="sc-text">Хочу запустить бизнес с нуля. Не знаю — стоит ли, получится ли, где главные риски.</div>
+    </div>
+    <div class="sc-card" onclick="document.getElementById('quiz').scrollIntoView({behavior:'smooth'})">
+      <div class="sc-num">02</div>
+      <div class="sc-name">Действующий бизнес</div>
+      <div class="sc-text">Хочу масштабироваться, открыть новое направление или упаковать франшизу.</div>
+    </div>
+    <div class="sc-card" onclick="document.getElementById('quiz').scrollIntoView({behavior:'smooth'})">
+      <div class="sc-num">03</div>
+      <div class="sc-name">Покупка бизнеса</div>
+      <div class="sc-text">Рассматриваю франшизу или готовый бизнес. Хочу понять — это возможность или ловушка.</div>
+    </div>
+    <div class="sc-card" onclick="document.getElementById('quiz').scrollIntoView({behavior:'smooth'})">
+      <div class="sc-num">04</div>
+      <div class="sc-name">Что-то пошло не так</div>
+      <div class="sc-text">Уже запустил, но бизнес не идёт. Нужен честный взгляд снаружи — где проблема.</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- VERDICT EXAMPLE -->
+<section class="verdict-section">
+  <div class="vd-inner">
+    <div class="fu">
+      <div class="vd-eyebrow">Пример вердикта</div>
+      <h2 class="vd-title">ЧТО<br>ПОЛУЧАЕТЕ<br>НА <em>ВЫХОДЕ</em></h2>
+      <p class="vd-desc">Не мотивационный текст. Не общие советы. Конкретный разбор вашей ситуации по семи параметрам — с баллами, рисками и рекомендациями.</p>
+      <div class="vd-axes-mini">
+        <div class="vam-row"><span class="vam-label">Идея</span><div class="vam-bar"><div class="vam-fill" style="width:70%"></div></div><span class="vam-val">7</span></div>
+        <div class="vam-row"><span class="vam-label">Рынок</span><div class="vam-bar"><div class="vam-fill" style="width:50%"></div></div><span class="vam-val">5</span></div>
+        <div class="vam-row"><span class="vam-label">Деньги</span><div class="vam-bar"><div class="vam-fill red" style="width:40%"></div></div><span class="vam-val" style="color:#EF4444">4</span></div>
+        <div class="vam-row"><span class="vam-label">Реалистичность</span><div class="vam-bar"><div class="vam-fill" style="width:50%"></div></div><span class="vam-val">5</span></div>
+      </div>
+    </div>
+    <div class="vd-card fu">
+      <div class="vd-card-header">
+        <div>
+          <div class="vdh-label">Ladder Score</div>
+          <div class="vdh-case">Кофейня в спальном районе, Москва</div>
+        </div>
+        <div class="vdh-right">
+          <div class="vdh-score">61<span>/100</span></div>
+          <div class="vdh-risk">СРЕДНИЙ РИСК</div>
+        </div>
+      </div>
+      <div class="vd-axes">
+        <div class="ax-row"><div class="ax-lbl">Идея <span>7/10</span></div><div class="ax-bar"><div class="ax-fill" style="width:70%"></div></div></div>
+        <div class="ax-row"><div class="ax-lbl">Рынок <span>5/10</span></div><div class="ax-bar"><div class="ax-fill" style="width:50%"></div></div></div>
+        <div class="ax-row"><div class="ax-lbl">Деньги <span>4/10</span></div><div class="ax-bar"><div class="ax-fill red" style="width:40%"></div></div></div>
+        <div class="ax-row"><div class="ax-lbl">Команда <span>6/10</span></div><div class="ax-bar"><div class="ax-fill" style="width:60%"></div></div></div>
+        <div class="ax-row"><div class="ax-lbl">Реалистичность <span>5/10</span></div><div class="ax-bar"><div class="ax-fill" style="width:50%"></div></div></div>
+        <div class="ax-row"><div class="ax-lbl">Продажи <span>7/10</span></div><div class="ax-bar"><div class="ax-fill" style="width:70%"></div></div></div>
+      </div>
+      <div class="vd-quote">«Идея эмоционально привлекательна, но <em>финансовая модель не выдержит реальных условий</em>. Аренда в выбранной локации съест маржу раньше, чем появится постоянный поток клиентов. Запас прочности — 2–3 месяца, не 6–8.»</div>
+      <div class="vd-recs">
+        <div class="vd-rec">Проверить фактическую стоимость аренды — не объявления, а подписанные договоры</div>
+        <div class="vd-rec">Начать с формата «кофе с собой» — снизить точку безубыточности в 2 раза</div>
+        <div class="vd-rec">Протестировать спрос 2 недели на точке у метро до подписания договора</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <div class="pr-header fu">
+    <div>
+      <div class="pr-eyebrow">Тарифы</div>
+      <h2 class="pr-title">НАЧНИТЕ<br><em>БЕСПЛАТНО</em></h2>
+    </div>
+    <p class="pr-desc">Базовая диагностика — бесплатно. Если захотите полного разбора с конкурентами, финансовой логикой и дорожной картой — есть Deep Analysis.</p>
+  </div>
+  <div class="pr-grid fu">
+    <div class="pr-card">
+      <div class="pr-tag">Free Verdict</div>
+      <div class="pr-price">0 ₽</div>
+      <div class="pr-sublabel">базовая диагностика</div>
+      <div class="pr-features">
+        <div class="pr-feat">Ladder Score по 7 параметрам</div>
+        <div class="pr-feat">Честный вердикт в Telegram</div>
+        <div class="pr-feat">Топ-3 риска проекта</div>
+        <div class="pr-feat">Первые рекомендации</div>
+      </div>
+      <a href="#quiz" class="pr-btn pr-btn-outline">Начать бесплатно</a>
+    </div>
+    <div class="pr-card featured">
+      <div class="pr-tag">Deep Analysis</div>
+      <div class="pr-price">2 990 ₽</div>
+      <div class="pr-sublabel">полный разбор проекта</div>
+      <div class="pr-features">
+        <div class="pr-feat hi">Всё из Free Verdict</div>
+        <div class="pr-feat hi">Глубокий анализ слабых мест</div>
+        <div class="pr-feat hi">Разбор конкурентов</div>
+        <div class="pr-feat hi">Проверка финансовой логики</div>
+        <div class="pr-feat hi">Точки потери денег</div>
+        <div class="pr-feat hi">Стратегия запуска</div>
+        <div class="pr-feat hi">Дорожная карта на 3 месяца</div>
+      </div>
+      <a href="#quiz" class="pr-btn pr-btn-solid">Получить Deep Analysis</a>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- QUIZ -->
+<section class="quiz" id="quiz">
+  <div class="quiz-inner">
+    <div>
+      <div class="qz-eyebrow">Диагностика</div>
+      <h2 class="qz-title">ПРОВЕРЬ<br><em>СВОЮ</em><br>СИТУАЦИЮ</h2>
+      <p class="qz-desc">Только выбор вариантов и цифры. Никаких длинных текстов. Вердикт придёт в Telegram.</p>
+      <div class="qz-promise">
+        <p>Ladder не продаёт «успешный успех»</p>
+        <p>Ladder говорит то, что есть на самом деле</p>
+        <p>Даже если это неудобно слышать</p>
+      </div>
+    </div>
+    <div>
+      <div class="q-progress"><div class="q-progress-fill" id="progressBar" style="width:0%"></div></div>
+      <!-- РАЗВИЛКА -->
+      <div class="quiz-step active" id="step-0">
+        <div class="q-meta"><span class="q-tag">Ladder — Диагностика</span></div>
+        <div class="q-title">Что вы хотите проверить?</div>
+        <div class="q-options">
+          <div class="q-option" onclick="startBranch('b1')">Новая идея — запускаю с нуля</div>
+          <div class="q-option" onclick="startBranch('b2')">Действующий бизнес — новое направление или своя франшиза</div>
+          <div class="q-option" onclick="startBranch('b3')">Хочу купить франшизу или готовый бизнес</div>
+          <div class="q-option" onclick="startBranch('b4')">Уже запустил — что-то идёт не так</div>
+        </div>
+      </div>
+      <!-- ВЕТКА 1 -->
+      <div class="quiz-step" id="b1-1"><div class="q-meta"><span class="q-tag">Новая идея</span><span class="q-counter" id="b1-1-num"></span></div><div class="q-title">Сфера бизнеса</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b1',1)">Услуги</div><div class="q-option" onclick="selectOption(this,'b1',1)">Товары</div><div class="q-option" onclick="selectOption(this,'b1',1)">Технологии / IT</div><div class="q-option" onclick="selectOption(this,'b1',1)">Еда / общепит</div><div class="q-option" onclick="selectOption(this,'b1',1)">Образование</div><div class="q-option" onclick="selectOption(this,'b1',1)">Другое</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b1',1)">Далее →</button></div></div>
+      <div class="quiz-step" id="b1-2"><div class="q-meta"><span class="q-tag">Новая идея</span><span class="q-counter" id="b1-2-num"></span></div><div class="q-title">Город запуска</div><input class="q-input" type="text" placeholder="Например: Москва" id="b1-2-input"><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b1',2)">Далее →</button></div></div>
+      <div class="quiz-step" id="b1-3"><div class="q-meta"><span class="q-tag">Новая идея</span><span class="q-counter" id="b1-3-num"></span></div><div class="q-title">Кто ваш клиент?</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b1',3)">Частные люди</div><div class="q-option" onclick="selectOption(this,'b1',3)">Малый бизнес</div><div class="q-option" onclick="selectOption(this,'b1',3)">Крупный бизнес</div><div class="q-option" onclick="selectOption(this,'b1',3)">Государство</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b1',3)">Далее →</button></div></div>
+      <div class="quiz-step" id="b1-4"><div class="q-meta"><span class="q-tag">Новая идея</span><span class="q-counter" id="b1-4-num"></span></div><div class="q-title">Стартовый бюджет</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b1',4)">До 100 000 ₽</div><div class="q-option" onclick="selectOption(this,'b1',4)">100 000 — 500 000 ₽</div><div class="q-option" onclick="selectOption(this,'b1',4)">500 000 — 2 000 000 ₽</div><div class="q-option" onclick="selectOption(this,'b1',4)">Больше 2 000 000 ₽</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b1',4)">Далее →</button></div></div>
+      <div class="quiz-step" id="b1-5"><div class="q-meta"><span class="q-tag">Новая идея</span><span class="q-counter" id="b1-5-num"></span></div><div class="q-title">Опыт в этой сфере</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b1',5)">Нет опыта</div><div class="q-option" onclick="selectOption(this,'b1',5)">Меньше года</div><div class="q-option" onclick="selectOption(this,'b1',5)">1–3 года</div><div class="q-option" onclick="selectOption(this,'b1',5)">Больше 3 лет</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b1',5)">Далее →</button></div></div>
+      <div class="quiz-step" id="b1-6"><div class="q-meta"><span class="q-tag">Новая идея</span><span class="q-counter" id="b1-6-num"></span></div><div class="q-title">Команда</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b1',6)">Только я</div><div class="q-option" onclick="selectOption(this,'b1',6)">Я и партнёр</div><div class="q-option" onclick="selectOption(this,'b1',6)">3 и более человек</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b1',6)">Далее →</button></div></div>
+      <div class="quiz-step" id="b1-7"><div class="q-meta"><span class="q-tag">Новая идея</span><span class="q-counter" id="b1-7-num"></span></div><div class="q-title">Конкуренты</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b1',7)">Не знаю конкурентов</div><div class="q-option" onclick="selectOption(this,'b1',7)">Знаю, но я лучше</div><div class="q-option" onclick="selectOption(this,'b1',7)">Много сильных игроков</div><div class="q-option" onclick="selectOption(this,'b1',7)">Рынок практически пустой</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b1',7)">Далее →</button></div></div>
+      <div class="quiz-step" id="b1-8"><div class="q-meta"><span class="q-tag">Новая идея</span><span class="q-counter" id="b1-8-num"></span></div><div class="q-title">Как привлечёте первых клиентов?</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b1',8)">Соцсети и контент</div><div class="q-option" onclick="selectOption(this,'b1',8)">Сарафанное радио</div><div class="q-option" onclick="selectOption(this,'b1',8)">Платная реклама</div><div class="q-option" onclick="selectOption(this,'b1',8)">Уже есть контакты клиентов</div><div class="q-option" onclick="selectOption(this,'b1',8)">Пока не знаю</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b1',8)">Далее →</button></div></div>
+      <div class="quiz-step" id="b1-9"><div class="q-meta"><span class="q-tag">Новая идея</span><span class="q-counter" id="b1-9-num"></span></div><div class="q-title">Хоть кто-то уже сказал «куплю»?</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b1',9)">Да, есть такие люди</div><div class="q-option" onclick="selectOption(this,'b1',9)">Нет</div><div class="q-option" onclick="selectOption(this,'b1',9)">Ещё не спрашивал</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b1',9)">Далее →</button></div></div>
+      <div class="quiz-step" id="b1-10"><div class="q-meta"><span class="q-tag">Новая идея</span><span class="q-counter" id="b1-10-num"></span></div><div class="q-title">Сколько часов в день на проект?</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b1',10)">1–2 часа</div><div class="q-option" onclick="selectOption(this,'b1',10)">3–4 часа</div><div class="q-option" onclick="selectOption(this,'b1',10)">Полный день</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b1',10)">Далее →</button></div></div>
+      <div class="quiz-step" id="b1-11"><div class="q-meta"><span class="q-tag">Новая идея</span><span class="q-counter" id="b1-11-num"></span></div><div class="q-title">Планируете запустить через</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b1',11)">1 месяц</div><div class="q-option" onclick="selectOption(this,'b1',11)">1–3 месяца</div><div class="q-option" onclick="selectOption(this,'b1',11)">3–6 месяцев</div><div class="q-option" onclick="selectOption(this,'b1',11)">Больше полугода</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b1',11)">Далее →</button></div></div>
+      <div class="quiz-step" id="b1-12"><div class="q-meta"><span class="q-tag">Новая идея</span><span class="q-counter" id="b1-12-num"></span></div><div class="q-title">Финансовая подушка если полгода не будет дохода</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b1',12)">Есть — спокойно проживу</div><div class="q-option" onclick="selectOption(this,'b1',12)">Частично есть</div><div class="q-option" onclick="selectOption(this,'b1',12)">Нет — нужны деньги быстро</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b1',12)">Далее →</button></div></div>
+      <div class="quiz-step" id="b1-13"><div class="q-meta"><span class="q-tag">Новая идея</span><span class="q-counter" id="b1-13-num"></span></div><div class="q-title">Цель через год в рублях</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b1',13)">До 500 000 ₽</div><div class="q-option" onclick="selectOption(this,'b1',13)">500 000 — 2 000 000 ₽</div><div class="q-option" onclick="selectOption(this,'b1',13)">2 000 000 — 5 000 000 ₽</div><div class="q-option" onclick="selectOption(this,'b1',13)">Больше 5 000 000 ₽</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b1',13)">Далее →</button></div></div>
+      <div class="quiz-step" id="b1-14"><div class="q-meta"><span class="q-tag">Новая идея</span><span class="q-counter" id="b1-14-num"></span></div><div class="q-title">Почему именно сейчас решили запускать?</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b1',14)">Давно хотел — наконец решился</div><div class="q-option" onclick="selectOption(this,'b1',14)">Потерял работу / нет дохода</div><div class="q-option" onclick="selectOption(this,'b1',14)">Увидел конкретную возможность на рынке</div><div class="q-option" onclick="selectOption(this,'b1',14)">Подтолкнули обстоятельства</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="finishQuiz('b1')">Получить вердикт →</button></div></div>
+      <!-- ВЕТКА 2 -->
+      <div class="quiz-step" id="b2-1"><div class="q-meta"><span class="q-tag">Действующий бизнес</span><span class="q-counter" id="b2-1-num"></span></div><div class="q-title">Сфера бизнеса</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b2',1)">Услуги</div><div class="q-option" onclick="selectOption(this,'b2',1)">Товары</div><div class="q-option" onclick="selectOption(this,'b2',1)">Технологии / IT</div><div class="q-option" onclick="selectOption(this,'b2',1)">Еда / общепит</div><div class="q-option" onclick="selectOption(this,'b2',1)">Образование</div><div class="q-option" onclick="selectOption(this,'b2',1)">Другое</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b2',1)">Далее →</button></div></div>
+      <div class="quiz-step" id="b2-2"><div class="q-meta"><span class="q-tag">Действующий бизнес</span><span class="q-counter" id="b2-2-num"></span></div><div class="q-title">Сколько лет работаете?</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b2',2)">Меньше года</div><div class="q-option" onclick="selectOption(this,'b2',2)">1–3 года</div><div class="q-option" onclick="selectOption(this,'b2',2)">3–5 лет</div><div class="q-option" onclick="selectOption(this,'b2',2)">Больше 5 лет</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b2',2)">Далее →</button></div></div>
+      <div class="quiz-step" id="b2-3"><div class="q-meta"><span class="q-tag">Действующий бизнес</span><span class="q-counter" id="b2-3-num"></span></div><div class="q-title">Текущая выручка в месяц</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b2',3)">До 300 000 ₽</div><div class="q-option" onclick="selectOption(this,'b2',3)">300 000 — 1 000 000 ₽</div><div class="q-option" onclick="selectOption(this,'b2',3)">1 000 000 — 5 000 000 ₽</div><div class="q-option" onclick="selectOption(this,'b2',3)">Больше 5 000 000 ₽</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b2',3)">Далее →</button></div></div>
+      <div class="quiz-step" id="b2-4"><div class="q-meta"><span class="q-tag">Действующий бизнес</span><span class="q-counter" id="b2-4-num"></span></div><div class="q-title">Что планируете?</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b2',4)">Запустить новое направление</div><div class="q-option" onclick="selectOption(this,'b2',4)">Упаковать и продавать франшизу</div><div class="q-option" onclick="selectOption(this,'b2',4)">И то и другое</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b2',4)">Далее →</button></div></div>
+      <div class="quiz-step" id="b2-5"><div class="q-meta"><span class="q-tag">Действующий бизнес</span><span class="q-counter" id="b2-5-num"></span></div><div class="q-title">Стандарты и процессы описаны?</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b2',5)">Да — всё задокументировано</div><div class="q-option" onclick="selectOption(this,'b2',5)">Частично</div><div class="q-option" onclick="selectOption(this,'b2',5)">Нет — всё в голове</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b2',5)">Далее →</button></div></div>
+      <div class="quiz-step" id="b2-6"><div class="q-meta"><span class="q-tag">Действующий бизнес</span><span class="q-counter" id="b2-6-num"></span></div><div class="q-title">Бюджет на масштабирование</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b2',6)">До 300 000 ₽</div><div class="q-option" onclick="selectOption(this,'b2',6)">300 000 — 1 000 000 ₽</div><div class="q-option" onclick="selectOption(this,'b2',6)">Больше 1 000 000 ₽</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b2',6)">Далее →</button></div></div>
+      <div class="quiz-step" id="b2-7"><div class="q-meta"><span class="q-tag">Действующий бизнес</span><span class="q-counter" id="b2-7-num"></span></div><div class="q-title">Команда сейчас</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b2',7)">Только я</div><div class="q-option" onclick="selectOption(this,'b2',7)">2–3 человека</div><div class="q-option" onclick="selectOption(this,'b2',7)">4–10 человек</div><div class="q-option" onclick="selectOption(this,'b2',7)">Больше 10</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b2',7)">Далее →</button></div></div>
+      <div class="quiz-step" id="b2-8"><div class="q-meta"><span class="q-tag">Действующий бизнес</span><span class="q-counter" id="b2-8-num"></span></div><div class="q-title">Главное конкурентное преимущество</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b2',8)">Цена ниже рынка</div><div class="q-option" onclick="selectOption(this,'b2',8)">Качество выше конкурентов</div><div class="q-option" onclick="selectOption(this,'b2',8)">Скорость и сервис</div><div class="q-option" onclick="selectOption(this,'b2',8)">Уникальный продукт</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b2',8)">Далее →</button></div></div>
+      <div class="quiz-step" id="b2-9"><div class="q-meta"><span class="q-tag">Действующий бизнес</span><span class="q-counter" id="b2-9-num"></span></div><div class="q-title">Уже есть те, кто хочет купить франшизу?</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b2',9)">Да — есть конкретные люди</div><div class="q-option" onclick="selectOption(this,'b2',9)">Нет</div><div class="q-option" onclick="selectOption(this,'b2',9)">Не предлагал — не знаю</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b2',9)">Далее →</button></div></div>
+      <div class="quiz-step" id="b2-10"><div class="q-meta"><span class="q-tag">Действующий бизнес</span><span class="q-counter" id="b2-10-num"></span></div><div class="q-title">Что останавливало от масштабирования раньше?</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b2',10)">Не хватало денег</div><div class="q-option" onclick="selectOption(this,'b2',10)">Не хватало времени</div><div class="q-option" onclick="selectOption(this,'b2',10)">Не было системы и процессов</div><div class="q-option" onclick="selectOption(this,'b2',10)">Страх и неуверенность</div><div class="q-option" onclick="selectOption(this,'b2',10)">Ничего — просто не доходили руки</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b2',10)">Далее →</button></div></div>
+      <div class="quiz-step" id="b2-11"><div class="q-meta"><span class="q-tag">Действующий бизнес</span><span class="q-counter" id="b2-11-num"></span></div><div class="q-title">Цель через год в рублях</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b2',11)">До 1 000 000 ₽</div><div class="q-option" onclick="selectOption(this,'b2',11)">1 000 000 — 5 000 000 ₽</div><div class="q-option" onclick="selectOption(this,'b2',11)">5 000 000 — 15 000 000 ₽</div><div class="q-option" onclick="selectOption(this,'b2',11)">Больше 15 000 000 ₽</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="finishQuiz('b2')">Получить вердикт →</button></div></div>
+      <!-- ВЕТКА 3 -->
+      <div class="quiz-step" id="b3-1"><div class="q-meta"><span class="q-tag">Покупка бизнеса</span><span class="q-counter" id="b3-1-num"></span></div><div class="q-title">Что хотите купить?</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b3',1)">Франшизу</div><div class="q-option" onclick="selectOption(this,'b3',1)">Готовый бизнес целиком</div><div class="q-option" onclick="selectOption(this,'b3',1)">Долю в чужом бизнесе</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b3',1)">Далее →</button></div></div>
+      <div class="quiz-step" id="b3-2"><div class="q-meta"><span class="q-tag">Покупка бизнеса</span><span class="q-counter" id="b3-2-num"></span></div><div class="q-title">Есть конкретный вариант?</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b3',2)">Да — конкретный объект</div><div class="q-option" onclick="selectOption(this,'b3',2)">Несколько вариантов на выбор</div><div class="q-option" onclick="selectOption(this,'b3',2)">Пока только ищу</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b3',2)">Далее →</button></div></div>
+      <div class="quiz-step" id="b3-3"><div class="q-meta"><span class="q-tag">Покупка бизнеса</span><span class="q-counter" id="b3-3-num"></span></div><div class="q-title">Бюджет на покупку</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b3',3)">До 500 000 ₽</div><div class="q-option" onclick="selectOption(this,'b3',3)">500 000 — 2 000 000 ₽</div><div class="q-option" onclick="selectOption(this,'b3',3)">2 000 000 — 5 000 000 ₽</div><div class="q-option" onclick="selectOption(this,'b3',3)">Больше 5 000 000 ₽</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b3',3)">Далее →</button></div></div>
+      <div class="quiz-step" id="b3-4"><div class="q-meta"><span class="q-tag">Покупка бизнеса</span><span class="q-counter" id="b3-4-num"></span></div><div class="q-title">Опыт в этой сфере</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b3',4)">Нет опыта</div><div class="q-option" onclick="selectOption(this,'b3',4)">Меньше года</div><div class="q-option" onclick="selectOption(this,'b3',4)">1–3 года</div><div class="q-option" onclick="selectOption(this,'b3',4)">Больше 3 лет</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b3',4)">Далее →</button></div></div>
+      <div class="quiz-step" id="b3-5"><div class="q-meta"><span class="q-tag">Покупка бизнеса</span><span class="q-counter" id="b3-5-num"></span></div><div class="q-title">Видели реальную финансовую отчётность продавца?</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b3',5)">Да — изучил внимательно</div><div class="q-option" onclick="selectOption(this,'b3',5)">Показали, но не проверял</div><div class="q-option" onclick="selectOption(this,'b3',5)">Нет</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b3',5)">Далее →</button></div></div>
+      <div class="quiz-step" id="b3-6"><div class="q-meta"><span class="q-tag">Покупка бизнеса</span><span class="q-counter" id="b3-6-num"></span></div><div class="q-title">Есть работающие партнёры у продавца?</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b3',6)">Да — лично общался с ними</div><div class="q-option" onclick="selectOption(this,'b3',6)">Говорят что есть — не проверял</div><div class="q-option" onclick="selectOption(this,'b3',6)">Не знаю</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b3',6)">Далее →</button></div></div>
+      <div class="quiz-step" id="b3-7"><div class="q-meta"><span class="q-tag">Покупка бизнеса</span><span class="q-counter" id="b3-7-num"></span></div><div class="q-title">Юрист проверял договор?</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b3',7)">Да</div><div class="q-option" onclick="selectOption(this,'b3',7)">Нет</div><div class="q-option" onclick="selectOption(this,'b3',7)">Планирую перед подписанием</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b3',7)">Далее →</button></div></div>
+      <div class="quiz-step" id="b3-8"><div class="q-meta"><span class="q-tag">Покупка бизнеса</span><span class="q-counter" id="b3-8-num"></span></div><div class="q-title">Как будете управлять?</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b3',8)">Сам — лично</div><div class="q-option" onclick="selectOption(this,'b3',8)">Наёмный директор</div><div class="q-option" onclick="selectOption(this,'b3',8)">Партнёр будет управлять</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b3',8)">Далее →</button></div></div>
+      <div class="quiz-step" id="b3-9"><div class="q-meta"><span class="q-tag">Покупка бизнеса</span><span class="q-counter" id="b3-9-num"></span></div><div class="q-title">Финансовая подушка на полгода без прибыли</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b3',9)">Есть</div><div class="q-option" onclick="selectOption(this,'b3',9)">Частично</div><div class="q-option" onclick="selectOption(this,'b3',9)">Нет</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b3',9)">Далее →</button></div></div>
+      <div class="quiz-step" id="b3-10"><div class="q-meta"><span class="q-tag">Покупка бизнеса</span><span class="q-counter" id="b3-10-num"></span></div><div class="q-title">Почему именно эта ниша?</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b3',10)">Есть опыт в этой сфере</div><div class="q-option" onclick="selectOption(this,'b3',10)">Увидел возможность на рынке</div><div class="q-option" onclick="selectOption(this,'b3',10)">Посоветовали</div><div class="q-option" onclick="selectOption(this,'b3',10)">Просто нравится</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b3',10)">Далее →</button></div></div>
+      <div class="quiz-step" id="b3-11"><div class="q-meta"><span class="q-tag">Покупка бизнеса</span><span class="q-counter" id="b3-11-num"></span></div><div class="q-title">Цель через год в рублях</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b3',11)">До 1 000 000 ₽</div><div class="q-option" onclick="selectOption(this,'b3',11)">1 000 000 — 5 000 000 ₽</div><div class="q-option" onclick="selectOption(this,'b3',11)">Больше 5 000 000 ₽</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="finishQuiz('b3')">Получить вердикт →</button></div></div>
+      <!-- ВЕТКА 4 -->
+      <div class="quiz-step" id="b4-1"><div class="q-meta"><span class="q-tag">Уже запустил</span><span class="q-counter" id="b4-1-num"></span></div><div class="q-title">Сфера бизнеса</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b4',1)">Услуги</div><div class="q-option" onclick="selectOption(this,'b4',1)">Товары</div><div class="q-option" onclick="selectOption(this,'b4',1)">Технологии / IT</div><div class="q-option" onclick="selectOption(this,'b4',1)">Еда / общепит</div><div class="q-option" onclick="selectOption(this,'b4',1)">Образование</div><div class="q-option" onclick="selectOption(this,'b4',1)">Другое</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b4',1)">Далее →</button></div></div>
+      <div class="quiz-step" id="b4-2"><div class="q-meta"><span class="q-tag">Уже запустил</span><span class="q-counter" id="b4-2-num"></span></div><div class="q-title">Сколько времени работаете?</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b4',2)">До 3 месяцев</div><div class="q-option" onclick="selectOption(this,'b4',2)">3–6 месяцев</div><div class="q-option" onclick="selectOption(this,'b4',2)">6–12 месяцев</div><div class="q-option" onclick="selectOption(this,'b4',2)">Больше года</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b4',2)">Далее →</button></div></div>
+      <div class="quiz-step" id="b4-3"><div class="q-meta"><span class="q-tag">Уже запустил</span><span class="q-counter" id="b4-3-num"></span></div><div class="q-title">В чём главная проблема?</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b4',3)">Нет клиентов</div><div class="q-option" onclick="selectOption(this,'b4',3)">Нет денег — кончаются</div><div class="q-option" onclick="selectOption(this,'b4',3)">Конфликт с партнёром</div><div class="q-option" onclick="selectOption(this,'b4',3)">Экономика не сходится</div><div class="q-option" onclick="selectOption(this,'b4',3)">Всё сразу</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b4',3)">Далее →</button></div></div>
+      <div class="quiz-step" id="b4-4"><div class="q-meta"><span class="q-tag">Уже запустил</span><span class="q-counter" id="b4-4-num"></span></div><div class="q-title">Текущая выручка в месяц</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b4',4)">Ноль</div><div class="q-option" onclick="selectOption(this,'b4',4)">До 100 000 ₽</div><div class="q-option" onclick="selectOption(this,'b4',4)">100 000 — 500 000 ₽</div><div class="q-option" onclick="selectOption(this,'b4',4)">Больше 500 000 ₽</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b4',4)">Далее →</button></div></div>
+      <div class="quiz-step" id="b4-5"><div class="q-meta"><span class="q-tag">Уже запустил</span><span class="q-counter" id="b4-5-num"></span></div><div class="q-title">Расходы в месяц</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b4',5)">До 100 000 ₽</div><div class="q-option" onclick="selectOption(this,'b4',5)">100 000 — 300 000 ₽</div><div class="q-option" onclick="selectOption(this,'b4',5)">Больше 300 000 ₽</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b4',5)">Далее →</button></div></div>
+      <div class="quiz-step" id="b4-6"><div class="q-meta"><span class="q-tag">Уже запустил</span><span class="q-counter" id="b4-6-num"></span></div><div class="q-title">Сколько уже вложено</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b4',6)">До 300 000 ₽</div><div class="q-option" onclick="selectOption(this,'b4',6)">300 000 — 1 000 000 ₽</div><div class="q-option" onclick="selectOption(this,'b4',6)">Больше 1 000 000 ₽</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b4',6)">Далее →</button></div></div>
+      <div class="quiz-step" id="b4-7"><div class="q-meta"><span class="q-tag">Уже запустил</span><span class="q-counter" id="b4-7-num"></span></div><div class="q-title">Платящие клиенты есть?</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b4',7)">Да — регулярные</div><div class="q-option" onclick="selectOption(this,'b4',7)">Да — но единичные случаи</div><div class="q-option" onclick="selectOption(this,'b4',7)">Нет</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b4',7)">Далее →</button></div></div>
+      <div class="quiz-step" id="b4-8"><div class="q-meta"><span class="q-tag">Уже запустил</span><span class="q-counter" id="b4-8-num"></span></div><div class="q-title">Команда сейчас</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b4',8)">Только я</div><div class="q-option" onclick="selectOption(this,'b4',8)">2–3 человека</div><div class="q-option" onclick="selectOption(this,'b4',8)">Больше 3</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b4',8)">Далее →</button></div></div>
+      <div class="quiz-step" id="b4-9"><div class="q-meta"><span class="q-tag">Уже запустил</span><span class="q-counter" id="b4-9-num"></span></div><div class="q-title">Конкуренты которые делают то же самое успешно</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b4',9)">Да — есть и процветают</div><div class="q-option" onclick="selectOption(this,'b4',9)">Не знаю</div><div class="q-option" onclick="selectOption(this,'b4',9)">Таких нет</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b4',9)">Далее →</button></div></div>
+      <div class="quiz-step" id="b4-10"><div class="q-meta"><span class="q-tag">Уже запустил</span><span class="q-counter" id="b4-10-num"></span></div><div class="q-title">Готовы ещё вкладывать время и деньги?</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b4',10)">Да — есть ресурс и желание</div><div class="q-option" onclick="selectOption(this,'b4',10)">Немного осталось</div><div class="q-option" onclick="selectOption(this,'b4',10)">Нет — ресурсы на исходе</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="finishQuiz('b4')">Получить вердикт →</button></div></div>
+      <!-- ФИНИШ -->
+      <div class="quiz-done" id="quiz-done">
+        <h3>АНАЛИЗ ЗАПУЩЕН</h3>
+        <p>Ваш проект сейчас анализируется несколькими AI-моделями независимо друг от друга. Вердикт придёт в Telegram.</p>
+        <a href="https://t.me/LadderBizBot" target="_blank" class="btn-primary">Открыть Telegram →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="f-logo"><span>L</span>ADDER</div>
+  <div class="f-text">Не продаём успешный успех. Помогаем не потерять деньги. · ladderbiz.com</div>
+</footer>
+
+<script>
+const S={branch:null,step:0,history:[],answers:{}};
+const BL={b1:14,b2:11,b3:11,b4:10};
+function show(id){document.querySelectorAll('.quiz-step').forEach(s=>s.classList.remove('active'));const el=document.getElementById(id);if(el){el.classList.add('active');el.scrollIntoView({behavior:'smooth',block:'nearest'});}prog();}
+function prog(){let p=0;if(S.branch)p=Math.round((S.step/BL[S.branch])*100);document.getElementById('progressBar').style.width=p+'%';}
+function startBranch(b){S.branch=b;S.step=1;S.history=['step-0'];S.answers={};nums(b);show(b+'-1');}
+function nums(b){const t=BL[b];for(let i=1;i<=t;i++){const el=document.getElementById(b+'-'+i+'-num');if(el)el.textContent=i+' / '+t;}}
+function selectOption(el,b,s){el.closest('.q-options').querySelectorAll('.q-option').forEach(o=>o.classList.remove('selected'));el.classList.add('selected');S.answers[b+'-'+s]=el.textContent.trim();}
+function nextStep(b,cur){const k=b+'-'+cur;const inp=document.getElementById(k+'-input');if(inp){if(!inp.value.trim()){alert('Пожалуйста, введите ответ');return;}S.answers[k]=inp.value.trim();}else{const sel=document.querySelector('#'+k+' .q-option.selected');if(!sel){alert('Пожалуйста, выберите ответ');return;}S.answers[k]=sel.textContent.trim();}S.history.push(k);S.step=cur+1;show(b+'-'+(cur+1));}
+function goBack(){if(!S.history.length)return;const prev=S.history.pop();const p=prev.split('-');S.step=parseInt(p[p.length-1])||0;show(prev);}
+function finishQuiz(b){const last=BL[b];const k=b+'-'+last;const sel=document.querySelector('#'+k+' .q-option.selected');if(!sel){alert('Пожалуйста, выберите ответ');return;}S.answers[k]=sel.textContent.trim();document.querySelectorAll('.quiz-step').forEach(s=>s.classList.remove('active'));const done=document.getElementById('quiz-done');done.style.display='block';done.scrollIntoView({behavior:'smooth'});document.getElementById('progressBar').style.width='100%';}
+const obs=new IntersectionObserver((es)=>{es.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('vis'),i*80);obs.unobserve(e.target);}});},{threshold:0.05});
+document.querySelectorAll('.fu').forEach(el=>obs.observe(el));
+const bObs=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll('.ax-fill,.vam-fill').forEach(b=>{const w=b.style.width;b.style.width='0';setTimeout(()=>{b.style.width=w;},300);});bObs.unobserve(e.target);}});},{threshold:0.2});
+document.querySelectorAll('.vd-card,.vd-left').forEach(el=>bObs.observe(el));
+</script>
+</body>
+</html>
