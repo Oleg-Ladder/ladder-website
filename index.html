@@ -571,7 +571,7 @@ function containsStopWords(text){
 }
 
 // ── WEBHOOK URL — СЮДА ВСТАВИТЬ URL ИЗ MAKE ──
-const MAKE_WEBHOOK_URL = 'REPLACE_WITH_MAKE_WEBHOOK_URL';
+const MAKE_WEBHOOK_URL = 'Вставь это:  `https://hook.eu1.make.com/izdwpewxe5hxsytsg3frlfiistzk5ih8`';
 
 const S={branch:null,step:0,history:[],answers:{}};
 const BL={b1:14,b2:11,b3:11,b4:10};
@@ -689,7 +689,7 @@ async function finishQuiz(b){
     waiting.classList.remove('active');
     console.error('Webhook error:',err);
     // Показываем демо-вердикт если webhook не настроен
-    if(MAKE_WEBHOOK_URL==='REPLACE_WITH_MAKE_WEBHOOK_URL'){
+    if(MAKE_WEBHOOK_URL==='Вставь это:  `https://hook.eu1.make.com/izdwpewxe5hxsytsg3frlfiistzk5ih8`'){
       showVerdict(getDemoVerdict(), branchNames[b]);
     } else {
       document.getElementById('error-screen').classList.add('active');
