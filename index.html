@@ -11,8 +11,6 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{background:#07111E;color:#E8EEF8;font-family:'DM Sans',Helvetica,Arial,sans-serif;font-weight:300;overflow-x:hidden;font-size:16px}
-
-/* ── NAV ── */
 nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 64px;height:64px;background:rgba(7,17,30,0.96);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,0.06)}
 .logo{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:0.12em;color:#E8EEF8;text-decoration:none}
 .logo-l{color:#3B82F6}
@@ -21,10 +19,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .nav-link:hover{color:#E8EEF8}
 .nav-cta{background:#3B82F6;color:#fff;border:none;padding:10px 24px;font-size:13px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;cursor:pointer;text-decoration:none;display:inline-block;transition:background .2s}
 .nav-cta:hover{background:#2563EB}
-
-/* ── HERO ── */
 .hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;padding:64px 0 0;overflow:hidden}
-.hero-left{display:flex;flex-direction:column;justify-content:center;padding:80px 64px 80px 64px;border-right:1px solid rgba(255,255,255,0.06)}
+.hero-left{display:flex;flex-direction:column;justify-content:center;padding:80px 64px;border-right:1px solid rgba(255,255,255,0.06)}
 .hero-eyebrow{font-size:11px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:#3B82F6;margin-bottom:28px;display:flex;align-items:center;gap:12px}
 .hero-eyebrow::before{content:'';width:32px;height:1px;background:#3B82F6}
 .hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(52px,5.5vw,84px);line-height:0.94;letter-spacing:0.02em;color:#E8EEF8;margin-bottom:32px}
@@ -38,14 +34,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .btn-ghost:hover{color:#E8EEF8}
 .hero-right{display:flex;align-items:center;justify-content:center;padding:80px 48px;background:linear-gradient(135deg,#07111E 0%,#0D1F35 100%);position:relative;overflow:hidden}
 .hero-right::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 40%,rgba(59,130,246,0.08) 0%,transparent 60%)}
-
-/* McKinsey-style SVG illustration */
 .hero-illustration{width:100%;max-width:520px;position:relative;z-index:1}
-
-/* ── DIVIDER ── */
 .divider{height:1px;background:rgba(255,255,255,0.06);margin:0}
-
-/* ── SCENARIOS ── */
 .scenarios{padding:100px 64px;background:#07111E}
 .sc-header{display:grid;grid-template-columns:1fr 2fr;gap:80px;align-items:start;margin-bottom:64px}
 .sc-eyebrow{font-size:11px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:#3B82F6;margin-bottom:20px;display:flex;align-items:center;gap:12px}
@@ -62,11 +52,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .sc-card:hover .sc-num{color:rgba(59,130,246,0.5)}
 .sc-name{font-size:16px;font-weight:500;color:#E8EEF8;margin-bottom:10px;line-height:1.3}
 .sc-text{font-size:13px;color:rgba(232,238,248,0.5);line-height:1.65}
-
-/* ── VERDICT ── */
 .verdict-section{padding:100px 64px;background:#0A1828;border-top:1px solid rgba(255,255,255,0.06);border-bottom:1px solid rgba(255,255,255,0.06)}
 .vd-inner{display:grid;grid-template-columns:1fr 1.6fr;gap:80px;align-items:start}
-.vd-left{}
 .vd-eyebrow{font-size:11px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:#3B82F6;margin-bottom:20px;display:flex;align-items:center;gap:12px}
 .vd-eyebrow::before{content:'';width:32px;height:1px;background:#3B82F6}
 .vd-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,3.5vw,54px);line-height:0.95;letter-spacing:0.02em;color:#E8EEF8;margin-bottom:24px}
@@ -82,7 +69,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .vd-card{background:#07111E;border:1px solid rgba(255,255,255,0.08);padding:40px;position:relative}
 .vd-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#1D4ED8,#3B82F6,#60A5FA)}
 .vd-card-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:32px;padding-bottom:24px;border-bottom:1px solid rgba(255,255,255,0.06)}
-.vdh-left{}
 .vdh-label{font-size:10px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:#3B82F6;margin-bottom:4px}
 .vdh-case{font-size:14px;color:rgba(232,238,248,0.5)}
 .vdh-right{text-align:right}
@@ -90,7 +76,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .vdh-score span{font-size:22px;color:#3B82F6}
 .vdh-risk{font-size:11px;color:rgba(232,238,248,0.4);margin-top:2px;letter-spacing:0.04em}
 .vd-axes{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:28px}
-.ax-row{}
 .ax-lbl{font-size:12px;color:rgba(232,238,248,0.45);margin-bottom:6px;display:flex;justify-content:space-between}
 .ax-lbl span{color:#E8EEF8;font-weight:400}
 .ax-bar{height:2px;background:rgba(255,255,255,0.07)}
@@ -100,9 +85,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .vd-quote em{font-style:normal;color:#E8EEF8;font-weight:400}
 .vd-recs{display:flex;flex-direction:column;gap:10px}
 .vd-rec{display:flex;gap:12px;font-size:13px;color:rgba(232,238,248,0.55);line-height:1.6}
-.vd-rec::before{content:'→';color:#3B82F6;flex-shrink:0;font-weight:400}
-
-/* ── PRICING ── */
+.vd-rec::before{content:'→';color:#3B82F6;flex-shrink:0}
 .pricing{padding:100px 64px;background:#07111E}
 .pr-header{display:grid;grid-template-columns:1fr 2fr;gap:80px;align-items:start;margin-bottom:56px}
 .pr-eyebrow{font-size:11px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:#3B82F6;margin-bottom:20px;display:flex;align-items:center;gap:12px}
@@ -116,18 +99,16 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .pr-card.featured::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#1D4ED8,#3B82F6,#60A5FA)}
 .pr-tag{font-size:10px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:#3B82F6;margin-bottom:24px}
 .pr-price{font-family:'Bebas Neue',sans-serif;font-size:60px;letter-spacing:0.02em;color:#E8EEF8;line-height:1;margin-bottom:6px}
-.pr-sublabel{font-size:13px;color:rgba(232,238,248,0.4);margin-bottom:32px;letter-spacing:0.02em}
+.pr-sublabel{font-size:13px;color:rgba(232,238,248,0.4);margin-bottom:32px}
 .pr-features{display:flex;flex-direction:column;gap:12px;margin-bottom:36px}
 .pr-feat{display:flex;gap:12px;font-size:14px;color:rgba(232,238,248,0.5);line-height:1.5;align-items:flex-start}
-.pr-feat::before{content:'—';color:#3B82F6;flex-shrink:0;font-weight:300}
+.pr-feat::before{content:'—';color:#3B82F6;flex-shrink:0}
 .pr-feat.hi{color:rgba(232,238,248,0.85)}
 .pr-btn{width:100%;padding:15px;text-align:center;font-size:12px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;transition:all .2s;text-decoration:none;display:block;font-family:'DM Sans',sans-serif}
 .pr-btn-outline{background:transparent;border:1px solid rgba(232,238,248,0.15);color:rgba(232,238,248,0.45)}
 .pr-btn-outline:hover{border-color:#3B82F6;color:#E8EEF8}
 .pr-btn-solid{background:#3B82F6;border:none;color:#fff}
 .pr-btn-solid:hover{background:#2563EB}
-
-/* ── QUIZ ── */
 .quiz{padding:100px 64px;background:#0A1828;border-top:1px solid rgba(255,255,255,0.06)}
 .quiz-inner{display:grid;grid-template-columns:1fr 1.8fr;gap:80px;align-items:start}
 .qz-eyebrow{font-size:11px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:#3B82F6;margin-bottom:20px;display:flex;align-items:center;gap:12px}
@@ -137,7 +118,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .qz-desc{font-size:15px;color:rgba(232,238,248,0.6);line-height:1.75;margin-bottom:32px}
 .qz-promise{border-left:2px solid #3B82F6;padding-left:20px}
 .qz-promise p{font-size:13px;color:rgba(232,238,248,0.5);line-height:1.7;margin-bottom:6px}
-.qz-promise p:last-child{margin-bottom:0}
 .q-progress{height:1px;background:rgba(255,255,255,0.07);margin-bottom:48px}
 .q-progress-fill{height:100%;background:#3B82F6;transition:width .4s ease}
 .quiz-step{display:none}
@@ -150,27 +130,76 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .q-option{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);padding:15px 20px;font-size:14px;color:rgba(232,238,248,0.7);cursor:pointer;transition:all .2s;text-align:left;font-family:'DM Sans',sans-serif;font-weight:300}
 .q-option:hover{border-color:#3B82F6;color:#E8EEF8;background:rgba(59,130,246,0.06)}
 .q-option.selected{border-color:#3B82F6;color:#E8EEF8;background:rgba(59,130,246,0.1)}
-.q-input{width:100%;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);padding:15px 20px;font-size:14px;color:#E8EEF8;font-family:'DM Sans',sans-serif;font-weight:300;outline:none;margin-bottom:32px;transition:border-color .2s}
+.q-input{width:100%;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);padding:15px 20px;font-size:14px;color:#E8EEF8;font-family:'DM Sans',sans-serif;font-weight:300;outline:none;margin-bottom:12px;transition:border-color .2s}
 .q-input:focus{border-color:#3B82F6}
 .q-input::placeholder{color:rgba(232,238,248,0.25)}
+.disclaimer{font-size:11px;color:rgba(232,238,248,0.25);line-height:1.6;margin-bottom:24px;border-top:1px solid rgba(255,255,255,0.05);padding-top:12px}
+.disclaimer a{color:rgba(59,130,246,0.6);text-decoration:none}
 .q-nav{display:flex;gap:12px;align-items:center}
 .q-back{background:transparent;border:1px solid rgba(255,255,255,0.1);color:rgba(232,238,248,0.4);padding:12px 22px;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s}
 .q-back:hover{border-color:#3B82F6;color:#E8EEF8}
 .q-next{background:#3B82F6;border:none;color:#fff;padding:12px 28px;font-size:12px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background .2s}
 .q-next:hover{background:#2563EB}
-.quiz-done{display:none;padding:40px 0}
-.quiz-done h3{font-family:'Bebas Neue',sans-serif;font-size:48px;letter-spacing:0.04em;color:#E8EEF8;margin-bottom:12px}
-.quiz-done p{font-size:15px;color:rgba(232,238,248,0.55);margin-bottom:32px;line-height:1.75}
 
-/* ── FOOTER ── */
+/* ── ОЖИДАНИЕ ── */
+.waiting-screen{display:none;padding:40px 0;text-align:center}
+.waiting-screen.active{display:block}
+.waiting-spinner{width:48px;height:48px;border:2px solid rgba(59,130,246,0.15);border-top-color:#3B82F6;border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 32px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.waiting-title{font-family:'Bebas Neue',sans-serif;font-size:36px;letter-spacing:0.04em;color:#E8EEF8;margin-bottom:12px}
+.waiting-sub{font-size:14px;color:rgba(232,238,248,0.45);margin-bottom:40px;line-height:1.7}
+.waiting-features{display:flex;flex-direction:column;gap:10px;text-align:left;max-width:380px;margin:0 auto 40px}
+.wf-item{display:flex;gap:12px;font-size:13px;color:rgba(232,238,248,0.4);align-items:center}
+.wf-dot{width:6px;height:6px;border-radius:50%;background:#3B82F6;flex-shrink:0}
+.waiting-timer{font-size:12px;color:rgba(232,238,248,0.25);letter-spacing:0.06em}
+
+/* ── ВЕРДИКТ ── */
+.verdict-result{display:none;padding:20px 0}
+.verdict-result.active{display:block}
+.vr-score-block{background:#07111E;border:1px solid rgba(255,255,255,0.08);padding:32px;margin-bottom:16px;position:relative}
+.vr-score-block::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#1D4ED8,#3B82F6,#60A5FA)}
+.vr-score-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.vr-label{font-size:10px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:#3B82F6}
+.vr-score-num{font-family:'Bebas Neue',sans-serif;font-size:56px;color:#E8EEF8;line-height:1}
+.vr-score-num span{font-size:24px;color:#3B82F6}
+.vr-verdict-text{font-size:16px;font-weight:400;color:#E8EEF8;line-height:1.5}
+.vr-block{background:#07111E;border:1px solid rgba(255,255,255,0.08);padding:24px;margin-bottom:12px}
+.vr-block-title{font-size:10px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:#3B82F6;margin-bottom:16px}
+.vr-critical{background:rgba(239,68,68,0.06);border:1px solid rgba(239,68,68,0.15);padding:16px;font-size:14px;color:rgba(232,238,248,0.8);line-height:1.7;margin-bottom:12px}
+.vr-list{display:flex;flex-direction:column;gap:10px}
+.vr-list-item{display:flex;gap:10px;font-size:14px;color:rgba(232,238,248,0.65);line-height:1.6}
+.vr-dot-red{width:6px;height:6px;border-radius:50%;background:#EF4444;flex-shrink:0;margin-top:7px}
+.vr-dot-green{width:6px;height:6px;border-radius:50%;background:#22C55E;flex-shrink:0;margin-top:7px}
+.vr-action{background:rgba(59,130,246,0.06);border:1px solid rgba(59,130,246,0.2);padding:20px;font-size:15px;color:#E8EEF8;line-height:1.7;margin-bottom:12px}
+.vr-action strong{color:#3B82F6}
+
+/* ── DEEP ANALYSIS БЛОК ── */
+.deep-upsell{background:#0A1828;border:1px solid rgba(59,130,246,0.25);padding:32px;margin-bottom:12px;position:relative}
+.deep-upsell::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#1D4ED8,#3B82F6,#60A5FA)}
+.deep-upsell-title{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:0.04em;color:#E8EEF8;margin-bottom:6px}
+.deep-upsell-price{font-size:13px;color:#3B82F6;font-weight:500;margin-bottom:16px}
+.deep-upsell-desc{font-size:14px;color:rgba(232,238,248,0.55);line-height:1.7;margin-bottom:20px}
+.deep-upsell-list{display:flex;flex-direction:column;gap:8px;margin-bottom:24px}
+.dul-item{display:flex;gap:10px;font-size:13px;color:rgba(232,238,248,0.6)}
+.dul-item::before{content:'→';color:#3B82F6;flex-shrink:0}
+.btn-deep{width:100%;padding:16px;background:#3B82F6;border:none;color:#fff;font-size:13px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background .2s}
+.btn-deep:hover{background:#2563EB}
+.btn-restart{width:100%;padding:12px;background:transparent;border:1px solid rgba(255,255,255,0.1);color:rgba(232,238,248,0.35);font-size:12px;letter-spacing:0.06em;text-transform:uppercase;cursor:pointer;font-family:'DM Sans',sans-serif;margin-top:8px;transition:all .2s}
+.btn-restart:hover{border-color:#3B82F6;color:#E8EEF8}
+
+/* ── ERROR ── */
+.error-screen{display:none;padding:40px 0;text-align:center}
+.error-screen.active{display:block}
+.error-icon{font-size:40px;margin-bottom:16px}
+.error-title{font-family:'Bebas Neue',sans-serif;font-size:32px;color:#EF4444;margin-bottom:12px}
+.error-text{font-size:14px;color:rgba(232,238,248,0.45);line-height:1.7;margin-bottom:24px}
+
 footer{padding:28px 64px;border-top:1px solid rgba(255,255,255,0.06);display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
 .f-logo{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:0.12em;color:rgba(232,238,248,0.3)}
 .f-logo span{color:#3B82F6}
 .f-text{font-size:12px;color:rgba(232,238,248,0.25);letter-spacing:0.04em}
-
 .fu{opacity:0;transform:translateY(16px);transition:opacity .7s ease,transform .7s ease}
 .fu.vis{opacity:1;transform:translateY(0)}
-
 @media(max-width:960px){
   nav{padding:0 24px}
   .hero{grid-template-columns:1fr;min-height:auto}
@@ -187,7 +216,6 @@ footer{padding:28px 64px;border-top:1px solid rgba(255,255,255,0.06);display:fle
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
   <a href="#" class="logo"><span class="logo-l">L</span>ADDER</a>
   <div class="nav-right">
@@ -197,7 +225,6 @@ footer{padding:28px 64px;border-top:1px solid rgba(255,255,255,0.06);display:fle
   </div>
 </nav>
 
-<!-- HERO -->
 <section class="hero">
   <div class="hero-left">
     <div class="hero-eyebrow">Диагностика бизнес-решений</div>
@@ -209,104 +236,63 @@ footer{padding:28px 64px;border-top:1px solid rgba(255,255,255,0.06);display:fle
     </div>
   </div>
   <div class="hero-right">
-    <!-- McKinsey-style analytical illustration -->
     <svg class="hero-illustration" viewBox="0 0 520 400" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <!-- Grid background -->
       <defs>
-        <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-          <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(59,130,246,0.06)" stroke-width="1"/>
-        </pattern>
-        <linearGradient id="lineGrad" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%" stop-color="#3B82F6" stop-opacity="0.8"/>
-          <stop offset="100%" stop-color="#60A5FA" stop-opacity="0.3"/>
-        </linearGradient>
-        <linearGradient id="barGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#3B82F6" stop-opacity="0.9"/>
-          <stop offset="100%" stop-color="#1D4ED8" stop-opacity="0.6"/>
-        </linearGradient>
+        <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(59,130,246,0.06)" stroke-width="1"/></pattern>
+        <linearGradient id="lineGrad" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#3B82F6" stop-opacity="0.8"/><stop offset="100%" stop-color="#60A5FA" stop-opacity="0.3"/></linearGradient>
+        <linearGradient id="barGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#3B82F6" stop-opacity="0.9"/><stop offset="100%" stop-color="#1D4ED8" stop-opacity="0.6"/></linearGradient>
       </defs>
       <rect width="520" height="400" fill="url(#grid)"/>
-
-      <!-- Main frame -->
       <rect x="24" y="24" width="472" height="352" rx="2" stroke="rgba(59,130,246,0.15)" stroke-width="1" fill="none"/>
-
-      <!-- Header bar -->
       <rect x="24" y="24" width="472" height="44" fill="rgba(59,130,246,0.06)"/>
       <text x="44" y="51" font-family="monospace" font-size="11" fill="rgba(59,130,246,0.7)" letter-spacing="2">LADDER SCORE ANALYSIS</text>
       <circle cx="456" cy="46" r="5" fill="rgba(59,130,246,0.4)"/>
       <circle cx="474" cy="46" r="5" fill="rgba(59,130,246,0.2)"/>
-
-      <!-- Score circle -->
       <circle cx="110" cy="168" r="60" stroke="rgba(59,130,246,0.12)" stroke-width="1" fill="none"/>
-      <circle cx="110" cy="168" r="60" stroke="url(#lineGrad)" stroke-width="3" fill="none"
-        stroke-dasharray="283" stroke-dashoffset="85" stroke-linecap="round"
-        transform="rotate(-90 110 168)"/>
+      <circle cx="110" cy="168" r="60" stroke="url(#lineGrad)" stroke-width="3" fill="none" stroke-dasharray="283" stroke-dashoffset="85" stroke-linecap="round" transform="rotate(-90 110 168)"/>
       <text x="110" y="160" font-family="'Bebas Neue',sans-serif" font-size="32" fill="#E8EEF8" text-anchor="middle" letter-spacing="1">74</text>
       <text x="110" y="178" font-family="monospace" font-size="9" fill="rgba(232,238,248,0.35)" text-anchor="middle">/100</text>
       <text x="110" y="198" font-family="monospace" font-size="8" fill="rgba(59,130,246,0.6)" text-anchor="middle" letter-spacing="1">LADDER SCORE</text>
-
-      <!-- Axes bars on right -->
       <text x="200" y="90" font-family="monospace" font-size="9" fill="rgba(232,238,248,0.35)" letter-spacing="1">ПАРАМЕТРЫ</text>
-
-      <!-- Bar 1 - Idea -->
       <text x="200" y="114" font-family="monospace" font-size="9" fill="rgba(232,238,248,0.45)">ИДЕЯ</text>
       <rect x="200" y="120" width="270" height="6" rx="1" fill="rgba(255,255,255,0.05)"/>
       <rect x="200" y="120" width="216" height="6" rx="1" fill="url(#barGrad)"/>
       <text x="478" y="128" font-family="monospace" font-size="9" fill="rgba(59,130,246,0.7)" text-anchor="end">8</text>
-
-      <!-- Bar 2 - Market -->
       <text x="200" y="148" font-family="monospace" font-size="9" fill="rgba(232,238,248,0.45)">РЫНОК</text>
       <rect x="200" y="154" width="270" height="6" rx="1" fill="rgba(255,255,255,0.05)"/>
       <rect x="200" y="154" width="162" height="6" rx="1" fill="url(#barGrad)"/>
       <text x="478" y="162" font-family="monospace" font-size="9" fill="rgba(59,130,246,0.7)" text-anchor="end">6</text>
-
-      <!-- Bar 3 - Money RED -->
       <text x="200" y="182" font-family="monospace" font-size="9" fill="rgba(232,238,248,0.45)">ДЕНЬГИ</text>
       <rect x="200" y="188" width="270" height="6" rx="1" fill="rgba(255,255,255,0.05)"/>
       <rect x="200" y="188" width="108" height="6" rx="1" fill="#EF4444" opacity="0.7"/>
       <text x="478" y="196" font-family="monospace" font-size="9" fill="#EF4444" text-anchor="end">4</text>
-
-      <!-- Bar 4 - Team -->
       <text x="200" y="216" font-family="monospace" font-size="9" fill="rgba(232,238,248,0.45)">КОМАНДА</text>
       <rect x="200" y="222" width="270" height="6" rx="1" fill="rgba(255,255,255,0.05)"/>
       <rect x="200" y="222" width="189" height="6" rx="1" fill="url(#barGrad)"/>
       <text x="478" y="230" font-family="monospace" font-size="9" fill="rgba(59,130,246,0.7)" text-anchor="end">7</text>
-
-      <!-- Bar 5 - Sales -->
       <text x="200" y="250" font-family="monospace" font-size="9" fill="rgba(232,238,248,0.45)">ПРОДАЖИ</text>
       <rect x="200" y="256" width="270" height="6" rx="1" fill="rgba(255,255,255,0.05)"/>
       <rect x="200" y="256" width="189" height="6" rx="1" fill="url(#barGrad)"/>
       <text x="478" y="264" font-family="monospace" font-size="9" fill="rgba(59,130,246,0.7)" text-anchor="end">7</text>
-
-      <!-- Bar 6 - Survival -->
       <text x="200" y="284" font-family="monospace" font-size="9" fill="rgba(232,238,248,0.45)">ВЫЖИВАЕМОСТЬ</text>
       <rect x="200" y="290" width="270" height="6" rx="1" fill="rgba(255,255,255,0.05)"/>
       <rect x="200" y="290" width="135" height="6" rx="1" fill="url(#barGrad)"/>
       <text x="478" y="298" font-family="monospace" font-size="9" fill="rgba(59,130,246,0.7)" text-anchor="end">5</text>
-
-      <!-- Verdict box -->
       <rect x="44" y="248" width="132" height="80" rx="1" stroke="rgba(59,130,246,0.2)" stroke-width="1" fill="rgba(59,130,246,0.04)"/>
       <text x="54" y="268" font-family="monospace" font-size="8" fill="rgba(59,130,246,0.5)" letter-spacing="1">ВЕРДИКТ</text>
-      <text x="54" y="288" font-family="monospace" font-size="8" fill="rgba(232,238,248,0.45)" letter-spacing="0">СРЕДНИЙ РИСК</text>
+      <text x="54" y="288" font-family="monospace" font-size="8" fill="rgba(232,238,248,0.45)">СРЕДНИЙ РИСК</text>
       <text x="54" y="304" font-family="monospace" font-size="8" fill="rgba(232,238,248,0.3)">ДЕНЬГИ: КРИТИЧНО</text>
       <text x="54" y="318" font-family="monospace" font-size="8" fill="rgba(59,130,246,0.5)">→ DEEP ANALYSIS</text>
-
-      <!-- Bottom status bar -->
       <rect x="24" y="340" width="472" height="36" fill="rgba(59,130,246,0.04)" stroke="rgba(59,130,246,0.08)" stroke-width="1"/>
       <circle cx="44" cy="358" r="3" fill="rgba(59,130,246,0.6)"/>
       <text x="56" y="362" font-family="monospace" font-size="9" fill="rgba(59,130,246,0.5)" letter-spacing="1">АНАЛИЗ ЗАВЕРШЁН</text>
       <text x="400" y="362" font-family="monospace" font-size="9" fill="rgba(232,238,248,0.2)">ladderbiz.com</text>
-
-      <!-- Connecting lines -->
-      <line x1="110" y1="228" x2="110" y2="248" stroke="rgba(59,130,246,0.15)" stroke-width="1" stroke-dasharray="3 3"/>
-      <line x1="176" y1="168" x2="200" y2="168" stroke="rgba(59,130,246,0.15)" stroke-width="1" stroke-dasharray="3 3"/>
     </svg>
   </div>
 </section>
 
 <div class="divider"></div>
 
-<!-- SCENARIOS -->
 <section class="scenarios" id="how">
   <div class="sc-header fu">
     <div>
@@ -341,13 +327,12 @@ footer{padding:28px 64px;border-top:1px solid rgba(255,255,255,0.06);display:fle
 
 <div class="divider"></div>
 
-<!-- VERDICT EXAMPLE -->
 <section class="verdict-section">
   <div class="vd-inner">
     <div class="fu">
       <div class="vd-eyebrow">Пример вердикта</div>
       <h2 class="vd-title">ЧТО<br>ПОЛУЧАЕТЕ<br>НА <em>ВЫХОДЕ</em></h2>
-      <p class="vd-desc">Не мотивационный текст. Не общие советы. Конкретный разбор вашей ситуации по семи параметрам — с баллами, рисками и рекомендациями.</p>
+      <p class="vd-desc">Не мотивационный текст. Конкретный разбор вашей ситуации по параметрам — с баллами, рисками и рекомендациями.</p>
       <div class="vd-axes-mini">
         <div class="vam-row"><span class="vam-label">Идея</span><div class="vam-bar"><div class="vam-fill" style="width:70%"></div></div><span class="vam-val">7</span></div>
         <div class="vam-row"><span class="vam-label">Рынок</span><div class="vam-bar"><div class="vam-fill" style="width:50%"></div></div><span class="vam-val">5</span></div>
@@ -357,14 +342,8 @@ footer{padding:28px 64px;border-top:1px solid rgba(255,255,255,0.06);display:fle
     </div>
     <div class="vd-card fu">
       <div class="vd-card-header">
-        <div>
-          <div class="vdh-label">Ladder Score</div>
-          <div class="vdh-case">Кофейня в спальном районе, Москва</div>
-        </div>
-        <div class="vdh-right">
-          <div class="vdh-score">61<span>/100</span></div>
-          <div class="vdh-risk">СРЕДНИЙ РИСК</div>
-        </div>
+        <div><div class="vdh-label">Ladder Score</div><div class="vdh-case">Кофейня в спальном районе, Москва</div></div>
+        <div class="vdh-right"><div class="vdh-score">61<span>/100</span></div><div class="vdh-risk">СРЕДНИЙ РИСК</div></div>
       </div>
       <div class="vd-axes">
         <div class="ax-row"><div class="ax-lbl">Идея <span>7/10</span></div><div class="ax-bar"><div class="ax-fill" style="width:70%"></div></div></div>
@@ -374,11 +353,11 @@ footer{padding:28px 64px;border-top:1px solid rgba(255,255,255,0.06);display:fle
         <div class="ax-row"><div class="ax-lbl">Реалистичность <span>5/10</span></div><div class="ax-bar"><div class="ax-fill" style="width:50%"></div></div></div>
         <div class="ax-row"><div class="ax-lbl">Продажи <span>7/10</span></div><div class="ax-bar"><div class="ax-fill" style="width:70%"></div></div></div>
       </div>
-      <div class="vd-quote">«Идея эмоционально привлекательна, но <em>финансовая модель не выдержит реальных условий</em>. Аренда в выбранной локации съест маржу раньше, чем появится постоянный поток клиентов. Запас прочности — 2–3 месяца, не 6–8.»</div>
+      <div class="vd-quote">«Идея эмоционально привлекательна, но <em>финансовая модель не выдержит реальных условий</em>. Аренда в выбранной локации съест маржу раньше, чем появится постоянный поток клиентов.»</div>
       <div class="vd-recs">
         <div class="vd-rec">Проверить фактическую стоимость аренды — не объявления, а подписанные договоры</div>
         <div class="vd-rec">Начать с формата «кофе с собой» — снизить точку безубыточности в 2 раза</div>
-        <div class="vd-rec">Протестировать спрос 2 недели на точке у метро до подписания договора</div>
+        <div class="vd-rec">Протестировать спрос 2 недели до подписания договора</div>
       </div>
     </div>
   </div>
@@ -386,14 +365,13 @@ footer{padding:28px 64px;border-top:1px solid rgba(255,255,255,0.06);display:fle
 
 <div class="divider"></div>
 
-<!-- PRICING -->
 <section class="pricing" id="pricing">
   <div class="pr-header fu">
     <div>
       <div class="pr-eyebrow">Тарифы</div>
       <h2 class="pr-title">НАЧНИТЕ<br><em>БЕСПЛАТНО</em></h2>
     </div>
-    <p class="pr-desc">Базовая диагностика — бесплатно. Если захотите полного разбора с конкурентами, финансовой логикой и дорожной картой — есть Deep Analysis.</p>
+    <p class="pr-desc">Базовая диагностика — бесплатно. Если захотите полного разбора с финансовой логикой и дорожной картой — есть Deep Analysis.</p>
   </div>
   <div class="pr-grid fu">
     <div class="pr-card">
@@ -401,8 +379,8 @@ footer{padding:28px 64px;border-top:1px solid rgba(255,255,255,0.06);display:fle
       <div class="pr-price">0 ₽</div>
       <div class="pr-sublabel">базовая диагностика</div>
       <div class="pr-features">
-        <div class="pr-feat">Ladder Score по 7 параметрам</div>
-        <div class="pr-feat">Честный вердикт в Telegram</div>
+        <div class="pr-feat">Ladder Score по параметрам</div>
+        <div class="pr-feat">Честный вердикт прямо на сайте</div>
         <div class="pr-feat">Топ-3 риска проекта</div>
         <div class="pr-feat">Первые рекомендации</div>
       </div>
@@ -415,11 +393,11 @@ footer{padding:28px 64px;border-top:1px solid rgba(255,255,255,0.06);display:fle
       <div class="pr-features">
         <div class="pr-feat hi">Всё из Free Verdict</div>
         <div class="pr-feat hi">Глубокий анализ слабых мест</div>
-        <div class="pr-feat hi">Разбор конкурентов</div>
         <div class="pr-feat hi">Проверка финансовой логики</div>
         <div class="pr-feat hi">Точки потери денег</div>
         <div class="pr-feat hi">Стратегия запуска</div>
         <div class="pr-feat hi">Дорожная карта на 3 месяца</div>
+        <div class="pr-feat hi">Скрипт первой продажи</div>
       </div>
       <a href="#quiz" class="pr-btn pr-btn-solid">Получить Deep Analysis</a>
     </div>
@@ -434,15 +412,16 @@ footer{padding:28px 64px;border-top:1px solid rgba(255,255,255,0.06);display:fle
     <div>
       <div class="qz-eyebrow">Диагностика</div>
       <h2 class="qz-title">ПРОВЕРЬ<br><em>СВОЮ</em><br>СИТУАЦИЮ</h2>
-      <p class="qz-desc">Только выбор вариантов и цифры. Никаких длинных текстов. Вердикт придёт в Telegram.</p>
+      <p class="qz-desc">Только выбор вариантов и цифры. Никаких длинных текстов. Вердикт появится прямо здесь.</p>
       <div class="qz-promise">
         <p>Ladder не продаёт «успешный успех»</p>
         <p>Ladder говорит то, что есть на самом деле</p>
         <p>Даже если это неудобно слышать</p>
       </div>
     </div>
-    <div>
+    <div id="quiz-container">
       <div class="q-progress"><div class="q-progress-fill" id="progressBar" style="width:0%"></div></div>
+
       <!-- РАЗВИЛКА -->
       <div class="quiz-step active" id="step-0">
         <div class="q-meta"><span class="q-tag">Ladder — Диагностика</span></div>
@@ -453,10 +432,12 @@ footer{padding:28px 64px;border-top:1px solid rgba(255,255,255,0.06);display:fle
           <div class="q-option" onclick="startBranch('b3')">Хочу купить франшизу или готовый бизнес</div>
           <div class="q-option" onclick="startBranch('b4')">Уже запустил — что-то идёт не так</div>
         </div>
+        <div class="disclaimer">Нажимая «Далее», вы соглашаетесь с <a href="#">политикой конфиденциальности</a> и даёте согласие на обработку данных в соответствии с Федеральным законом №152-ФЗ «О персональных данных». Мы не собираем персональные данные — только обезличенные ответы на вопросы диагностики.</div>
       </div>
+
       <!-- ВЕТКА 1 -->
       <div class="quiz-step" id="b1-1"><div class="q-meta"><span class="q-tag">Новая идея</span><span class="q-counter" id="b1-1-num"></span></div><div class="q-title">Сфера бизнеса</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b1',1)">Услуги</div><div class="q-option" onclick="selectOption(this,'b1',1)">Товары</div><div class="q-option" onclick="selectOption(this,'b1',1)">Технологии / IT</div><div class="q-option" onclick="selectOption(this,'b1',1)">Еда / общепит</div><div class="q-option" onclick="selectOption(this,'b1',1)">Образование</div><div class="q-option" onclick="selectOption(this,'b1',1)">Другое</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b1',1)">Далее →</button></div></div>
-      <div class="quiz-step" id="b1-2"><div class="q-meta"><span class="q-tag">Новая идея</span><span class="q-counter" id="b1-2-num"></span></div><div class="q-title">Город запуска</div><input class="q-input" type="text" placeholder="Например: Москва" id="b1-2-input"><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b1',2)">Далее →</button></div></div>
+      <div class="quiz-step" id="b1-2"><div class="q-meta"><span class="q-tag">Новая идея</span><span class="q-counter" id="b1-2-num"></span></div><div class="q-title">Город запуска</div><input class="q-input" type="text" placeholder="Например: Москва" id="b1-2-input"><div class="disclaimer">Город используется только для анализа рынка. Персональные данные не собираются (152-ФЗ).</div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b1',2)">Далее →</button></div></div>
       <div class="quiz-step" id="b1-3"><div class="q-meta"><span class="q-tag">Новая идея</span><span class="q-counter" id="b1-3-num"></span></div><div class="q-title">Кто ваш клиент?</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b1',3)">Частные люди</div><div class="q-option" onclick="selectOption(this,'b1',3)">Малый бизнес</div><div class="q-option" onclick="selectOption(this,'b1',3)">Крупный бизнес</div><div class="q-option" onclick="selectOption(this,'b1',3)">Государство</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b1',3)">Далее →</button></div></div>
       <div class="quiz-step" id="b1-4"><div class="q-meta"><span class="q-tag">Новая идея</span><span class="q-counter" id="b1-4-num"></span></div><div class="q-title">Стартовый бюджет</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b1',4)">До 100 000 ₽</div><div class="q-option" onclick="selectOption(this,'b1',4)">100 000 — 500 000 ₽</div><div class="q-option" onclick="selectOption(this,'b1',4)">500 000 — 2 000 000 ₽</div><div class="q-option" onclick="selectOption(this,'b1',4)">Больше 2 000 000 ₽</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b1',4)">Далее →</button></div></div>
       <div class="quiz-step" id="b1-5"><div class="q-meta"><span class="q-tag">Новая идея</span><span class="q-counter" id="b1-5-num"></span></div><div class="q-title">Опыт в этой сфере</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b1',5)">Нет опыта</div><div class="q-option" onclick="selectOption(this,'b1',5)">Меньше года</div><div class="q-option" onclick="selectOption(this,'b1',5)">1–3 года</div><div class="q-option" onclick="selectOption(this,'b1',5)">Больше 3 лет</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b1',5)">Далее →</button></div></div>
@@ -469,6 +450,7 @@ footer{padding:28px 64px;border-top:1px solid rgba(255,255,255,0.06);display:fle
       <div class="quiz-step" id="b1-12"><div class="q-meta"><span class="q-tag">Новая идея</span><span class="q-counter" id="b1-12-num"></span></div><div class="q-title">Финансовая подушка если полгода не будет дохода</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b1',12)">Есть — спокойно проживу</div><div class="q-option" onclick="selectOption(this,'b1',12)">Частично есть</div><div class="q-option" onclick="selectOption(this,'b1',12)">Нет — нужны деньги быстро</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b1',12)">Далее →</button></div></div>
       <div class="quiz-step" id="b1-13"><div class="q-meta"><span class="q-tag">Новая идея</span><span class="q-counter" id="b1-13-num"></span></div><div class="q-title">Цель через год в рублях</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b1',13)">До 500 000 ₽</div><div class="q-option" onclick="selectOption(this,'b1',13)">500 000 — 2 000 000 ₽</div><div class="q-option" onclick="selectOption(this,'b1',13)">2 000 000 — 5 000 000 ₽</div><div class="q-option" onclick="selectOption(this,'b1',13)">Больше 5 000 000 ₽</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b1',13)">Далее →</button></div></div>
       <div class="quiz-step" id="b1-14"><div class="q-meta"><span class="q-tag">Новая идея</span><span class="q-counter" id="b1-14-num"></span></div><div class="q-title">Почему именно сейчас решили запускать?</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b1',14)">Давно хотел — наконец решился</div><div class="q-option" onclick="selectOption(this,'b1',14)">Потерял работу / нет дохода</div><div class="q-option" onclick="selectOption(this,'b1',14)">Увидел конкретную возможность на рынке</div><div class="q-option" onclick="selectOption(this,'b1',14)">Подтолкнули обстоятельства</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="finishQuiz('b1')">Получить вердикт →</button></div></div>
+
       <!-- ВЕТКА 2 -->
       <div class="quiz-step" id="b2-1"><div class="q-meta"><span class="q-tag">Действующий бизнес</span><span class="q-counter" id="b2-1-num"></span></div><div class="q-title">Сфера бизнеса</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b2',1)">Услуги</div><div class="q-option" onclick="selectOption(this,'b2',1)">Товары</div><div class="q-option" onclick="selectOption(this,'b2',1)">Технологии / IT</div><div class="q-option" onclick="selectOption(this,'b2',1)">Еда / общепит</div><div class="q-option" onclick="selectOption(this,'b2',1)">Образование</div><div class="q-option" onclick="selectOption(this,'b2',1)">Другое</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b2',1)">Далее →</button></div></div>
       <div class="quiz-step" id="b2-2"><div class="q-meta"><span class="q-tag">Действующий бизнес</span><span class="q-counter" id="b2-2-num"></span></div><div class="q-title">Сколько лет работаете?</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b2',2)">Меньше года</div><div class="q-option" onclick="selectOption(this,'b2',2)">1–3 года</div><div class="q-option" onclick="selectOption(this,'b2',2)">3–5 лет</div><div class="q-option" onclick="selectOption(this,'b2',2)">Больше 5 лет</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b2',2)">Далее →</button></div></div>
@@ -481,6 +463,7 @@ footer{padding:28px 64px;border-top:1px solid rgba(255,255,255,0.06);display:fle
       <div class="quiz-step" id="b2-9"><div class="q-meta"><span class="q-tag">Действующий бизнес</span><span class="q-counter" id="b2-9-num"></span></div><div class="q-title">Уже есть те, кто хочет купить франшизу?</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b2',9)">Да — есть конкретные люди</div><div class="q-option" onclick="selectOption(this,'b2',9)">Нет</div><div class="q-option" onclick="selectOption(this,'b2',9)">Не предлагал — не знаю</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b2',9)">Далее →</button></div></div>
       <div class="quiz-step" id="b2-10"><div class="q-meta"><span class="q-tag">Действующий бизнес</span><span class="q-counter" id="b2-10-num"></span></div><div class="q-title">Что останавливало от масштабирования раньше?</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b2',10)">Не хватало денег</div><div class="q-option" onclick="selectOption(this,'b2',10)">Не хватало времени</div><div class="q-option" onclick="selectOption(this,'b2',10)">Не было системы и процессов</div><div class="q-option" onclick="selectOption(this,'b2',10)">Страх и неуверенность</div><div class="q-option" onclick="selectOption(this,'b2',10)">Ничего — просто не доходили руки</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b2',10)">Далее →</button></div></div>
       <div class="quiz-step" id="b2-11"><div class="q-meta"><span class="q-tag">Действующий бизнес</span><span class="q-counter" id="b2-11-num"></span></div><div class="q-title">Цель через год в рублях</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b2',11)">До 1 000 000 ₽</div><div class="q-option" onclick="selectOption(this,'b2',11)">1 000 000 — 5 000 000 ₽</div><div class="q-option" onclick="selectOption(this,'b2',11)">5 000 000 — 15 000 000 ₽</div><div class="q-option" onclick="selectOption(this,'b2',11)">Больше 15 000 000 ₽</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="finishQuiz('b2')">Получить вердикт →</button></div></div>
+
       <!-- ВЕТКА 3 -->
       <div class="quiz-step" id="b3-1"><div class="q-meta"><span class="q-tag">Покупка бизнеса</span><span class="q-counter" id="b3-1-num"></span></div><div class="q-title">Что хотите купить?</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b3',1)">Франшизу</div><div class="q-option" onclick="selectOption(this,'b3',1)">Готовый бизнес целиком</div><div class="q-option" onclick="selectOption(this,'b3',1)">Долю в чужом бизнесе</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b3',1)">Далее →</button></div></div>
       <div class="quiz-step" id="b3-2"><div class="q-meta"><span class="q-tag">Покупка бизнеса</span><span class="q-counter" id="b3-2-num"></span></div><div class="q-title">Есть конкретный вариант?</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b3',2)">Да — конкретный объект</div><div class="q-option" onclick="selectOption(this,'b3',2)">Несколько вариантов на выбор</div><div class="q-option" onclick="selectOption(this,'b3',2)">Пока только ищу</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b3',2)">Далее →</button></div></div>
@@ -493,6 +476,7 @@ footer{padding:28px 64px;border-top:1px solid rgba(255,255,255,0.06);display:fle
       <div class="quiz-step" id="b3-9"><div class="q-meta"><span class="q-tag">Покупка бизнеса</span><span class="q-counter" id="b3-9-num"></span></div><div class="q-title">Финансовая подушка на полгода без прибыли</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b3',9)">Есть</div><div class="q-option" onclick="selectOption(this,'b3',9)">Частично</div><div class="q-option" onclick="selectOption(this,'b3',9)">Нет</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b3',9)">Далее →</button></div></div>
       <div class="quiz-step" id="b3-10"><div class="q-meta"><span class="q-tag">Покупка бизнеса</span><span class="q-counter" id="b3-10-num"></span></div><div class="q-title">Почему именно эта ниша?</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b3',10)">Есть опыт в этой сфере</div><div class="q-option" onclick="selectOption(this,'b3',10)">Увидел возможность на рынке</div><div class="q-option" onclick="selectOption(this,'b3',10)">Посоветовали</div><div class="q-option" onclick="selectOption(this,'b3',10)">Просто нравится</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b3',10)">Далее →</button></div></div>
       <div class="quiz-step" id="b3-11"><div class="q-meta"><span class="q-tag">Покупка бизнеса</span><span class="q-counter" id="b3-11-num"></span></div><div class="q-title">Цель через год в рублях</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b3',11)">До 1 000 000 ₽</div><div class="q-option" onclick="selectOption(this,'b3',11)">1 000 000 — 5 000 000 ₽</div><div class="q-option" onclick="selectOption(this,'b3',11)">Больше 5 000 000 ₽</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="finishQuiz('b3')">Получить вердикт →</button></div></div>
+
       <!-- ВЕТКА 4 -->
       <div class="quiz-step" id="b4-1"><div class="q-meta"><span class="q-tag">Уже запустил</span><span class="q-counter" id="b4-1-num"></span></div><div class="q-title">Сфера бизнеса</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b4',1)">Услуги</div><div class="q-option" onclick="selectOption(this,'b4',1)">Товары</div><div class="q-option" onclick="selectOption(this,'b4',1)">Технологии / IT</div><div class="q-option" onclick="selectOption(this,'b4',1)">Еда / общепит</div><div class="q-option" onclick="selectOption(this,'b4',1)">Образование</div><div class="q-option" onclick="selectOption(this,'b4',1)">Другое</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b4',1)">Далее →</button></div></div>
       <div class="quiz-step" id="b4-2"><div class="q-meta"><span class="q-tag">Уже запустил</span><span class="q-counter" id="b4-2-num"></span></div><div class="q-title">Сколько времени работаете?</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b4',2)">До 3 месяцев</div><div class="q-option" onclick="selectOption(this,'b4',2)">3–6 месяцев</div><div class="q-option" onclick="selectOption(this,'b4',2)">6–12 месяцев</div><div class="q-option" onclick="selectOption(this,'b4',2)">Больше года</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b4',2)">Далее →</button></div></div>
@@ -504,12 +488,70 @@ footer{padding:28px 64px;border-top:1px solid rgba(255,255,255,0.06);display:fle
       <div class="quiz-step" id="b4-8"><div class="q-meta"><span class="q-tag">Уже запустил</span><span class="q-counter" id="b4-8-num"></span></div><div class="q-title">Команда сейчас</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b4',8)">Только я</div><div class="q-option" onclick="selectOption(this,'b4',8)">2–3 человека</div><div class="q-option" onclick="selectOption(this,'b4',8)">Больше 3</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b4',8)">Далее →</button></div></div>
       <div class="quiz-step" id="b4-9"><div class="q-meta"><span class="q-tag">Уже запустил</span><span class="q-counter" id="b4-9-num"></span></div><div class="q-title">Конкуренты которые делают то же самое успешно</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b4',9)">Да — есть и процветают</div><div class="q-option" onclick="selectOption(this,'b4',9)">Не знаю</div><div class="q-option" onclick="selectOption(this,'b4',9)">Таких нет</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b4',9)">Далее →</button></div></div>
       <div class="quiz-step" id="b4-10"><div class="q-meta"><span class="q-tag">Уже запустил</span><span class="q-counter" id="b4-10-num"></span></div><div class="q-title">Готовы ещё вкладывать время и деньги?</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b4',10)">Да — есть ресурс и желание</div><div class="q-option" onclick="selectOption(this,'b4',10)">Немного осталось</div><div class="q-option" onclick="selectOption(this,'b4',10)">Нет — ресурсы на исходе</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="finishQuiz('b4')">Получить вердикт →</button></div></div>
-      <!-- ФИНИШ -->
-      <div class="quiz-done" id="quiz-done">
-        <h3>АНАЛИЗ ЗАПУЩЕН</h3>
-        <p>Ваш проект сейчас анализируется несколькими AI-моделями независимо друг от друга. Вердикт придёт в Telegram.</p>
-        <a href="https://t.me/LadderBizBot" target="_blank" class="btn-primary">Открыть Telegram →</a>
+
+      <!-- ОЖИДАНИЕ -->
+      <div class="waiting-screen" id="waiting-screen">
+        <div class="waiting-spinner"></div>
+        <div class="waiting-title">ВАШ ПРОЕКТ<br>ПОД МИКРОСКОПОМ</div>
+        <div class="waiting-sub">Три независимых AI-аналитика изучают вашу ситуацию.<br>Это займёт около 30–60 секунд.</div>
+        <div class="waiting-features">
+          <div class="wf-item"><div class="wf-dot"></div>GPT-4o анализирует рыночные риски</div>
+          <div class="wf-item"><div class="wf-dot"></div>Claude проверяет финансовую логику</div>
+          <div class="wf-item"><div class="wf-dot"></div>Gemini оценивает конкурентную среду</div>
+          <div class="wf-item"><div class="wf-dot"></div>AI-арбитр формирует итоговый вердикт</div>
+        </div>
+        <div class="waiting-timer" id="waiting-timer">Осталось примерно 45 секунд...</div>
       </div>
+
+      <!-- ВЕРДИКТ -->
+      <div class="verdict-result" id="verdict-result">
+        <div class="vr-score-block">
+          <div class="vr-score-row">
+            <div><div class="vr-label">Ladder Score</div><div id="vr-branch-label" style="font-size:13px;color:rgba(232,238,248,0.4);margin-top:4px"></div></div>
+            <div class="vr-score-num" id="vr-score">—<span>/10</span></div>
+          </div>
+          <div class="vr-verdict-text" id="vr-verdict"></div>
+        </div>
+        <div class="vr-block">
+          <div class="vr-block-title">Критический риск</div>
+          <div class="vr-critical" id="vr-critical"></div>
+        </div>
+        <div class="vr-block">
+          <div class="vr-block-title">Слабые места</div>
+          <div class="vr-list" id="vr-weak"></div>
+        </div>
+        <div class="vr-block">
+          <div class="vr-block-title">Что работает</div>
+          <div class="vr-list" id="vr-strong"></div>
+        </div>
+        <div class="vr-block">
+          <div class="vr-block-title">Сделай прямо сейчас</div>
+          <div class="vr-action"><strong>→</strong> <span id="vr-action"></span></div>
+        </div>
+        <div class="deep-upsell">
+          <div class="deep-upsell-title">DEEP ANALYSIS</div>
+          <div class="deep-upsell-price">2 990 ₽ — полный разбор проекта</div>
+          <div class="deep-upsell-desc">Вы получили честный вердикт. Хотите знать точно — что делать дальше, где деньги и как избежать главных ошибок?</div>
+          <div class="deep-upsell-list">
+            <div class="dul-item">Финансовая модель и расчёт окупаемости</div>
+            <div class="dul-item">План первых 90 дней с конкретными задачами</div>
+            <div class="dul-item">Скрипт первой продажи</div>
+            <div class="dul-item">Красные флаги — что проверить до вложений</div>
+            <div class="dul-item">Аналоги бизнесов которые выжили и почему</div>
+          </div>
+          <button class="btn-deep" onclick="orderDeepAnalysis()">Получить Deep Analysis за 2 990 ₽ →</button>
+        </div>
+        <button class="btn-restart" onclick="restartQuiz()">Пройти новую диагностику</button>
+      </div>
+
+      <!-- ОШИБКА -->
+      <div class="error-screen" id="error-screen">
+        <div class="error-icon">⚠</div>
+        <div class="error-title">Не удалось получить вердикт</div>
+        <div class="error-text">Что-то пошло не так при анализе. Попробуйте ещё раз — обычно это временная проблема.</div>
+        <button class="btn-restart" onclick="restartQuiz()">Попробовать снова</button>
+      </div>
+
     </div>
   </div>
 </section>
@@ -520,16 +562,193 @@ footer{padding:28px 64px;border-top:1px solid rgba(255,255,255,0.06);display:fle
 </footer>
 
 <script>
+// ── СТОП-СЛОВА (фильтр) ──
+const STOP_WORDS = ['порно','секс','эскорт','наркот','героин','кокаин','мефедрон','бомб','взрывч','оружи','автомат','пистолет','война','вагнер','убий','террор','экстремизм','мошенниц','пирамид','алкоголь','водка','пиво','табак','сигарет','мат','хуй','пизд','еба','блять','сука','проститут'];
+
+function containsStopWords(text){
+  const lower = text.toLowerCase();
+  return STOP_WORDS.some(w => lower.includes(w));
+}
+
+// ── WEBHOOK URL — СЮДА ВСТАВИТЬ URL ИЗ MAKE ──
+const MAKE_WEBHOOK_URL = 'REPLACE_WITH_MAKE_WEBHOOK_URL';
+
 const S={branch:null,step:0,history:[],answers:{}};
 const BL={b1:14,b2:11,b3:11,b4:10};
-function show(id){document.querySelectorAll('.quiz-step').forEach(s=>s.classList.remove('active'));const el=document.getElementById(id);if(el){el.classList.add('active');el.scrollIntoView({behavior:'smooth',block:'nearest'});}prog();}
-function prog(){let p=0;if(S.branch)p=Math.round((S.step/BL[S.branch])*100);document.getElementById('progressBar').style.width=p+'%';}
-function startBranch(b){S.branch=b;S.step=1;S.history=['step-0'];S.answers={};nums(b);show(b+'-1');}
-function nums(b){const t=BL[b];for(let i=1;i<=t;i++){const el=document.getElementById(b+'-'+i+'-num');if(el)el.textContent=i+' / '+t;}}
-function selectOption(el,b,s){el.closest('.q-options').querySelectorAll('.q-option').forEach(o=>o.classList.remove('selected'));el.classList.add('selected');S.answers[b+'-'+s]=el.textContent.trim();}
-function nextStep(b,cur){const k=b+'-'+cur;const inp=document.getElementById(k+'-input');if(inp){if(!inp.value.trim()){alert('Пожалуйста, введите ответ');return;}S.answers[k]=inp.value.trim();}else{const sel=document.querySelector('#'+k+' .q-option.selected');if(!sel){alert('Пожалуйста, выберите ответ');return;}S.answers[k]=sel.textContent.trim();}S.history.push(k);S.step=cur+1;show(b+'-'+(cur+1));}
-function goBack(){if(!S.history.length)return;const prev=S.history.pop();const p=prev.split('-');S.step=parseInt(p[p.length-1])||0;show(prev);}
-function finishQuiz(b){const last=BL[b];const k=b+'-'+last;const sel=document.querySelector('#'+k+' .q-option.selected');if(!sel){alert('Пожалуйста, выберите ответ');return;}S.answers[k]=sel.textContent.trim();document.querySelectorAll('.quiz-step').forEach(s=>s.classList.remove('active'));const done=document.getElementById('quiz-done');done.style.display='block';done.scrollIntoView({behavior:'smooth'});document.getElementById('progressBar').style.width='100%';}
+
+function show(id){
+  document.querySelectorAll('.quiz-step').forEach(s=>s.classList.remove('active'));
+  const el=document.getElementById(id);
+  if(el){el.classList.add('active');el.scrollIntoView({behavior:'smooth',block:'nearest'});}
+  prog();
+}
+
+function prog(){
+  let p=0;
+  if(S.branch)p=Math.round((S.step/BL[S.branch])*100);
+  document.getElementById('progressBar').style.width=p+'%';
+}
+
+function startBranch(b){
+  S.branch=b;S.step=1;S.history=['step-0'];S.answers={};
+  nums(b);show(b+'-1');
+}
+
+function nums(b){
+  const t=BL[b];
+  for(let i=1;i<=t;i++){
+    const el=document.getElementById(b+'-'+i+'-num');
+    if(el)el.textContent=i+' / '+t;
+  }
+}
+
+function selectOption(el,b,s){
+  el.closest('.q-options').querySelectorAll('.q-option').forEach(o=>o.classList.remove('selected'));
+  el.classList.add('selected');
+  S.answers[b+'-'+s]=el.textContent.trim();
+}
+
+function nextStep(b,cur){
+  const k=b+'-'+cur;
+  const inp=document.getElementById(k+'-input');
+  if(inp){
+    if(!inp.value.trim()){alert('Пожалуйста, введите ответ');return;}
+    if(containsStopWords(inp.value)){alert('Обнаружен недопустимый контент. Пожалуйста, введите корректные данные.');return;}
+    S.answers[k]=inp.value.trim();
+  } else {
+    const sel=document.querySelector('#'+k+' .q-option.selected');
+    if(!sel){alert('Пожалуйста, выберите ответ');return;}
+    S.answers[k]=sel.textContent.trim();
+  }
+  S.history.push(k);S.step=cur+1;show(b+'-'+(cur+1));
+}
+
+function goBack(){
+  if(!S.history.length)return;
+  const prev=S.history.pop();
+  const p=prev.split('-');
+  S.step=parseInt(p[p.length-1])||0;
+  show(prev);
+}
+
+async function finishQuiz(b){
+  const last=BL[b];
+  const k=b+'-'+last;
+  const sel=document.querySelector('#'+k+' .q-option.selected');
+  if(!sel){alert('Пожалуйста, выберите ответ');return;}
+  S.answers[k]=sel.textContent.trim();
+
+  // Проверка стоп-слов во всех ответах
+  const allAnswers=Object.values(S.answers).join(' ');
+  if(containsStopWords(allAnswers)){
+    alert('Обнаружен недопустимый контент. Диагностика недоступна для данного запроса.');
+    return;
+  }
+
+  // Показываем экран ожидания
+  document.querySelectorAll('.quiz-step').forEach(s=>s.classList.remove('active'));
+  const waiting=document.getElementById('waiting-screen');
+  waiting.classList.add('active');
+  waiting.scrollIntoView({behavior:'smooth',block:'nearest'});
+  document.getElementById('progressBar').style.width='100%';
+
+  // Таймер
+  let secs=45;
+  const timerEl=document.getElementById('waiting-timer');
+  const timer=setInterval(()=>{
+    secs--;
+    if(secs>0)timerEl.textContent='Осталось примерно '+secs+' секунд...';
+    else timerEl.textContent='Почти готово...';
+  },1000);
+
+  const branchNames={b1:'Новая идея',b2:'Действующий бизнес',b3:'Покупка бизнеса',b4:'Уже запустил'};
+
+  try {
+    const payload={
+      branch: branchNames[b],
+      answers: S.answers,
+      timestamp: new Date().toISOString()
+    };
+
+    const resp=await fetch(MAKE_WEBHOOK_URL,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify(payload)
+    });
+
+    clearInterval(timer);
+
+    if(!resp.ok)throw new Error('HTTP '+resp.status);
+    const data=await resp.json();
+
+    waiting.classList.remove('active');
+    showVerdict(data, branchNames[b]);
+
+  } catch(err){
+    clearInterval(timer);
+    waiting.classList.remove('active');
+    console.error('Webhook error:',err);
+    // Показываем демо-вердикт если webhook не настроен
+    if(MAKE_WEBHOOK_URL==='REPLACE_WITH_MAKE_WEBHOOK_URL'){
+      showVerdict(getDemoVerdict(), branchNames[b]);
+    } else {
+      document.getElementById('error-screen').classList.add('active');
+      document.getElementById('error-screen').scrollIntoView({behavior:'smooth',block:'nearest'});
+    }
+  }
+}
+
+function showVerdict(data, branchName){
+  const vr=document.getElementById('verdict-result');
+  vr.classList.add('active');
+  vr.scrollIntoView({behavior:'smooth',block:'nearest'});
+
+  document.getElementById('vr-branch-label').textContent=branchName;
+  document.getElementById('vr-score').innerHTML=(data.final_score||data.score||'—')+'<span>/10</span>';
+  document.getElementById('vr-verdict').textContent=data.final_verdict||data.verdict||'';
+  document.getElementById('vr-critical').textContent=data.critical_risk||'';
+  document.getElementById('vr-action').textContent=data.action_now||'';
+
+  const weakEl=document.getElementById('vr-weak');
+  weakEl.innerHTML='';
+  (data.weak_points||[]).forEach(p=>{
+    weakEl.innerHTML+='<div class="vr-list-item"><div class="vr-dot-red"></div><div>'+p+'</div></div>';
+  });
+
+  const strongEl=document.getElementById('vr-strong');
+  strongEl.innerHTML='';
+  (data.strengths||[]).forEach(p=>{
+    strongEl.innerHTML+='<div class="vr-list-item"><div class="vr-dot-green"></div><div>'+p+'</div></div>';
+  });
+}
+
+function getDemoVerdict(){
+  return {
+    final_score:6.2,
+    final_verdict:'Идея жизнеспособна, но есть критические риски',
+    critical_risk:'Бюджет может не покрыть первые 3 месяца работы без дохода. Это самая частая причина закрытия на старте.',
+    weak_points:['Нет подтверждённого спроса — никто ещё не сказал «куплю»','Конкуренты уже работают в этой нише','Недостаточно времени на проект'],
+    strengths:['Есть опыт в теме — снижает операционные риски','Чёткая цель на год'],
+    action_now:'Найди 5 человек которые готовы заплатить прямо сейчас. Не «интересно» — именно заплатить. Если не найдёшь за неделю — идея не готова к запуску.'
+  };
+}
+
+function orderDeepAnalysis(){
+  // TODO: интегрировать платёжную систему
+  alert('Платёжная система будет подключена в ближайшие дни. Напишите нам в Telegram: @LadderBizBot');
+}
+
+function restartQuiz(){
+  S.branch=null;S.step=0;S.history=[];S.answers={};
+  document.getElementById('waiting-screen').classList.remove('active');
+  document.getElementById('verdict-result').classList.remove('active');
+  document.getElementById('error-screen').classList.remove('active');
+  document.getElementById('progressBar').style.width='0%';
+  show('step-0');
+  document.getElementById('quiz').scrollIntoView({behavior:'smooth'});
+}
+
+// ── АНИМАЦИИ ──
 const obs=new IntersectionObserver((es)=>{es.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('vis'),i*80);obs.unobserve(e.target);}});},{threshold:0.05});
 document.querySelectorAll('.fu').forEach(el=>obs.observe(el));
 const bObs=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll('.ax-fill,.vam-fill').forEach(b=>{const w=b.style.width;b.style.width='0';setTimeout(()=>{b.style.width=w;},300);});bObs.unobserve(e.target);}});},{threshold:0.2});
