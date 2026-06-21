@@ -184,6 +184,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .dul-item::before{content:'→';color:#3B82F6;flex-shrink:0}
 .btn-deep{width:100%;padding:16px;background:#3B82F6;border:none;color:#fff;font-size:13px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background .2s}
 .btn-deep:hover{background:#2563EB}
+.q-option.multi-hint{border-color:rgba(59,130,246,0.3)}
+.deep-upsell-cta{font-size:13px;color:rgba(232,238,248,0.5);text-align:center;margin-top:8px}
 .btn-restart{width:100%;padding:12px;background:transparent;border:1px solid rgba(255,255,255,0.1);color:rgba(232,238,248,0.35);font-size:12px;letter-spacing:0.06em;text-transform:uppercase;cursor:pointer;font-family:'DM Sans',sans-serif;margin-top:8px;transition:all .2s}
 .btn-restart:hover{border-color:#3B82F6;color:#E8EEF8}
 
@@ -201,16 +203,49 @@ footer{padding:28px 64px;border-top:1px solid rgba(255,255,255,0.06);display:fle
 .fu{opacity:0;transform:translateY(16px);transition:opacity .7s ease,transform .7s ease}
 .fu.vis{opacity:1;transform:translateY(0)}
 @media(max-width:960px){
-  nav{padding:0 24px}
+  html,body{overflow-x:hidden;max-width:100vw;width:100%}
+  *{max-width:100%;word-break:break-word}
+  nav{padding:0 16px;height:56px}
+  .nav-link{display:none}
+  .nav-cta{padding:8px 14px;font-size:12px}
   .hero{grid-template-columns:1fr;min-height:auto}
-  .hero-left{padding:100px 24px 60px;border-right:none;border-bottom:1px solid rgba(255,255,255,0.06)}
-  .hero-right{padding:48px 24px;min-height:300px}
-  .scenarios,.verdict-section,.pricing,.quiz{padding:60px 24px}
-  .sc-header,.vd-inner,.pr-header,.quiz-inner{grid-template-columns:1fr;gap:40px}
+  .hero-left{padding:88px 20px 52px;border-right:none;border-bottom:1px solid rgba(255,255,255,0.06)}
+  .hero h1{font-size:clamp(40px,10vw,64px)}
+  .hero-sub{font-size:15px;margin-bottom:36px}
+  .hero-right{padding:36px 20px;min-height:220px}
+  .scenarios,.verdict-section,.pricing,.quiz{padding:52px 20px}
+  .sc-header,.vd-inner,.pr-header,.quiz-inner{grid-template-columns:1fr;gap:32px}
   .sc-grid{grid-template-columns:1fr 1fr}
-  .pr-grid{grid-template-columns:1fr}
+  .sc-card{padding:24px 16px}
+  .sc-name{font-size:14px}
+  .sc-text{font-size:12px}
+  .pr-grid{grid-template-columns:1fr;max-width:100%}
+  .pr-card{padding:32px 24px}
+  .pr-price{font-size:48px}
   .vd-axes{grid-template-columns:1fr}
-  footer{padding:24px;flex-direction:column;text-align:center}
+  .vd-card{padding:24px 20px}
+  .vd-card-header{flex-direction:column;gap:12px;align-items:flex-start}
+  .vdh-right{text-align:left}
+  .vdh-score{font-size:40px}
+  .quiz-inner{gap:32px}
+  .q-title{font-size:17px}
+  .q-option{font-size:14px;padding:13px 16px}
+  .q-input{font-size:14px;padding:13px 16px}
+  .waiting-features{max-width:100%;padding:0 4px}
+  .deep-upsell{padding:24px 20px}
+  .vr-score-block{padding:24px 20px}
+  .vr-block{padding:20px 16px}
+  footer{padding:20px;flex-direction:column;text-align:center}
+  .hero-illustration{max-width:100%;overflow:hidden}
+  svg{max-width:100%;height:auto}
+}
+@media(max-width:480px){
+  .sc-grid{grid-template-columns:1fr}
+  .hero h1{font-size:clamp(36px,11vw,54px)}
+  .hero-actions{flex-direction:column;align-items:flex-start;gap:12px}
+  .btn-primary{width:100%;text-align:center}
+  .vr-score-num{font-size:48px}
+  .sc-title,.vd-title,.pr-title,.qz-title{font-size:clamp(30px,9vw,48px)}
 }
 </style>
 </head>
@@ -399,7 +434,7 @@ footer{padding:28px 64px;border-top:1px solid rgba(255,255,255,0.06);display:fle
         <div class="pr-feat hi">Дорожная карта на 3 месяца</div>
         <div class="pr-feat hi">Скрипт первой продажи</div>
       </div>
-      <a href="#quiz" class="pr-btn pr-btn-solid">Получить Deep Analysis</a>
+      <button onclick="showDeepComingSoon()" class="pr-btn pr-btn-solid">Получить Deep Analysis</button>
     </div>
   </div>
 </section>
@@ -425,69 +460,576 @@ footer{padding:28px 64px;border-top:1px solid rgba(255,255,255,0.06);display:fle
       <!-- РАЗВИЛКА -->
       <div class="quiz-step active" id="step-0">
         <div class="q-meta"><span class="q-tag">Ladder — Диагностика</span></div>
-        <div class="q-title">Что вы хотите проверить?</div>
+        <div class="q-title">Что хочешь проверить?</div>
         <div class="q-options">
           <div class="q-option" onclick="startBranch('b1')">Новая идея — запускаю с нуля</div>
-          <div class="q-option" onclick="startBranch('b2')">Действующий бизнес — новое направление или своя франшиза</div>
+          <div class="q-option" onclick="startBranch('b2')">Действующий бизнес — новое направление или франшиза</div>
           <div class="q-option" onclick="startBranch('b3')">Хочу купить франшизу или готовый бизнес</div>
           <div class="q-option" onclick="startBranch('b4')">Уже запустил — что-то идёт не так</div>
         </div>
         <div class="disclaimer">Нажимая «Далее», вы соглашаетесь с <a href="#">политикой конфиденциальности</a> и даёте согласие на обработку данных в соответствии с Федеральным законом №152-ФЗ «О персональных данных». Мы не собираем персональные данные — только обезличенные ответы на вопросы диагностики.</div>
       </div>
 
-      <!-- ВЕТКА 1 -->
-      <div class="quiz-step" id="b1-1"><div class="q-meta"><span class="q-tag">Новая идея</span><span class="q-counter" id="b1-1-num"></span></div><div class="q-title">Сфера бизнеса</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b1',1)">Услуги</div><div class="q-option" onclick="selectOption(this,'b1',1)">Товары</div><div class="q-option" onclick="selectOption(this,'b1',1)">Технологии / IT</div><div class="q-option" onclick="selectOption(this,'b1',1)">Еда / общепит</div><div class="q-option" onclick="selectOption(this,'b1',1)">Образование</div><div class="q-option" onclick="selectOption(this,'b1',1)">Другое</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b1',1)">Далее →</button></div></div>
-      <div class="quiz-step" id="b1-2"><div class="q-meta"><span class="q-tag">Новая идея</span><span class="q-counter" id="b1-2-num"></span></div><div class="q-title">Город запуска</div><input class="q-input" type="text" placeholder="Например: Москва" id="b1-2-input"><div class="disclaimer">Город используется только для анализа рынка. Персональные данные не собираются (152-ФЗ).</div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b1',2)">Далее →</button></div></div>
-      <div class="quiz-step" id="b1-3"><div class="q-meta"><span class="q-tag">Новая идея</span><span class="q-counter" id="b1-3-num"></span></div><div class="q-title">Кто ваш клиент?</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b1',3)">Частные люди</div><div class="q-option" onclick="selectOption(this,'b1',3)">Малый бизнес</div><div class="q-option" onclick="selectOption(this,'b1',3)">Крупный бизнес</div><div class="q-option" onclick="selectOption(this,'b1',3)">Государство</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b1',3)">Далее →</button></div></div>
-      <div class="quiz-step" id="b1-4"><div class="q-meta"><span class="q-tag">Новая идея</span><span class="q-counter" id="b1-4-num"></span></div><div class="q-title">Стартовый бюджет</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b1',4)">До 100 000 ₽</div><div class="q-option" onclick="selectOption(this,'b1',4)">100 000 — 500 000 ₽</div><div class="q-option" onclick="selectOption(this,'b1',4)">500 000 — 2 000 000 ₽</div><div class="q-option" onclick="selectOption(this,'b1',4)">Больше 2 000 000 ₽</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b1',4)">Далее →</button></div></div>
-      <div class="quiz-step" id="b1-5"><div class="q-meta"><span class="q-tag">Новая идея</span><span class="q-counter" id="b1-5-num"></span></div><div class="q-title">Опыт в этой сфере</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b1',5)">Нет опыта</div><div class="q-option" onclick="selectOption(this,'b1',5)">Меньше года</div><div class="q-option" onclick="selectOption(this,'b1',5)">1–3 года</div><div class="q-option" onclick="selectOption(this,'b1',5)">Больше 3 лет</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b1',5)">Далее →</button></div></div>
-      <div class="quiz-step" id="b1-6"><div class="q-meta"><span class="q-tag">Новая идея</span><span class="q-counter" id="b1-6-num"></span></div><div class="q-title">Команда</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b1',6)">Только я</div><div class="q-option" onclick="selectOption(this,'b1',6)">Я и партнёр</div><div class="q-option" onclick="selectOption(this,'b1',6)">3 и более человек</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b1',6)">Далее →</button></div></div>
-      <div class="quiz-step" id="b1-7"><div class="q-meta"><span class="q-tag">Новая идея</span><span class="q-counter" id="b1-7-num"></span></div><div class="q-title">Конкуренты</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b1',7)">Не знаю конкурентов</div><div class="q-option" onclick="selectOption(this,'b1',7)">Знаю, но я лучше</div><div class="q-option" onclick="selectOption(this,'b1',7)">Много сильных игроков</div><div class="q-option" onclick="selectOption(this,'b1',7)">Рынок практически пустой</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b1',7)">Далее →</button></div></div>
-      <div class="quiz-step" id="b1-8"><div class="q-meta"><span class="q-tag">Новая идея</span><span class="q-counter" id="b1-8-num"></span></div><div class="q-title">Как привлечёте первых клиентов?</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b1',8)">Соцсети и контент</div><div class="q-option" onclick="selectOption(this,'b1',8)">Сарафанное радио</div><div class="q-option" onclick="selectOption(this,'b1',8)">Платная реклама</div><div class="q-option" onclick="selectOption(this,'b1',8)">Уже есть контакты клиентов</div><div class="q-option" onclick="selectOption(this,'b1',8)">Пока не знаю</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b1',8)">Далее →</button></div></div>
-      <div class="quiz-step" id="b1-9"><div class="q-meta"><span class="q-tag">Новая идея</span><span class="q-counter" id="b1-9-num"></span></div><div class="q-title">Хоть кто-то уже сказал «куплю»?</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b1',9)">Да, есть такие люди</div><div class="q-option" onclick="selectOption(this,'b1',9)">Нет</div><div class="q-option" onclick="selectOption(this,'b1',9)">Ещё не спрашивал</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b1',9)">Далее →</button></div></div>
-      <div class="quiz-step" id="b1-10"><div class="q-meta"><span class="q-tag">Новая идея</span><span class="q-counter" id="b1-10-num"></span></div><div class="q-title">Сколько часов в день на проект?</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b1',10)">1–2 часа</div><div class="q-option" onclick="selectOption(this,'b1',10)">3–4 часа</div><div class="q-option" onclick="selectOption(this,'b1',10)">Полный день</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b1',10)">Далее →</button></div></div>
-      <div class="quiz-step" id="b1-11"><div class="q-meta"><span class="q-tag">Новая идея</span><span class="q-counter" id="b1-11-num"></span></div><div class="q-title">Планируете запустить через</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b1',11)">1 месяц</div><div class="q-option" onclick="selectOption(this,'b1',11)">1–3 месяца</div><div class="q-option" onclick="selectOption(this,'b1',11)">3–6 месяцев</div><div class="q-option" onclick="selectOption(this,'b1',11)">Больше полугода</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b1',11)">Далее →</button></div></div>
-      <div class="quiz-step" id="b1-12"><div class="q-meta"><span class="q-tag">Новая идея</span><span class="q-counter" id="b1-12-num"></span></div><div class="q-title">Финансовая подушка если полгода не будет дохода</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b1',12)">Есть — спокойно проживу</div><div class="q-option" onclick="selectOption(this,'b1',12)">Частично есть</div><div class="q-option" onclick="selectOption(this,'b1',12)">Нет — нужны деньги быстро</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b1',12)">Далее →</button></div></div>
-      <div class="quiz-step" id="b1-13"><div class="q-meta"><span class="q-tag">Новая идея</span><span class="q-counter" id="b1-13-num"></span></div><div class="q-title">Цель через год в рублях</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b1',13)">До 500 000 ₽</div><div class="q-option" onclick="selectOption(this,'b1',13)">500 000 — 2 000 000 ₽</div><div class="q-option" onclick="selectOption(this,'b1',13)">2 000 000 — 5 000 000 ₽</div><div class="q-option" onclick="selectOption(this,'b1',13)">Больше 5 000 000 ₽</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b1',13)">Далее →</button></div></div>
-      <div class="quiz-step" id="b1-14"><div class="q-meta"><span class="q-tag">Новая идея</span><span class="q-counter" id="b1-14-num"></span></div><div class="q-title">Почему именно сейчас решили запускать?</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b1',14)">Давно хотел — наконец решился</div><div class="q-option" onclick="selectOption(this,'b1',14)">Потерял работу / нет дохода</div><div class="q-option" onclick="selectOption(this,'b1',14)">Увидел конкретную возможность на рынке</div><div class="q-option" onclick="selectOption(this,'b1',14)">Подтолкнули обстоятельства</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="finishQuiz('b1')">Получить вердикт →</button></div></div>
+      <!-- ═══ ВЕТКА 1 — НОВАЯ ИДЕЯ (13 вопросов) ═══ -->
+      <div class="quiz-step" id="b1-1">
+        <div class="q-meta"><span class="q-tag">Новая идея</span><span class="q-counter" id="b1-1-num"></span></div>
+        <div class="q-title">Отрасль бизнеса</div>
+        <div class="q-options">
+          <div class="q-option" onclick="selectOption(this,'b1',1)">Производство (мебель, одежда, еда, стройматериалы, косметика)</div>
+          <div class="q-option" onclick="selectOption(this,'b1',1)">Торговля (розница, опт, маркетплейсы, интернет-магазин)</div>
+          <div class="q-option" onclick="selectOption(this,'b1',1)">Услуги для людей (красота, здоровье, ремонт, клининг)</div>
+          <div class="q-option" onclick="selectOption(this,'b1',1)">Юридия, бухгалтерия, консалтинг</div>
+          <div class="q-option" onclick="selectOption(this,'b1',1)">Услуги для бизнеса (маркетинг, реклама, HR, логистика)</div>
+          <div class="q-option" onclick="selectOption(this,'b1',1)">Общепит (кафе, ресторан, доставка еды, кейтеринг)</div>
+          <div class="q-option" onclick="selectOption(this,'b1',1)">IT и приложения (сервис, маркетплейс, SaaS, разработка)</div>
+          <div class="q-option" onclick="selectOption(this,'b1',1)">Строительство и ремонт (жилые, коммерческие объекты)</div>
+          <div class="q-option" onclick="selectOption(this,'b1',1)">Медицина, здоровье, фитнес</div>
+          <div class="q-option" onclick="selectOption(this,'b1',1)">Образование (школа, курсы, репетиторство, онлайн)</div>
+          <div class="q-option" onclick="selectOption(this,'b1',1)">Туризм, гостиницы, развлечения</div>
+          <div class="q-option" onclick="selectOption(this,'b1',1)">Сельское хозяйство, животноводство</div>
+          <div class="q-option" onclick="selectOption(this,'b1',1)">Транспорт и логистика</div>
+          <div class="q-option" onclick="selectOption(this,'b1',1)">Недвижимость (аренда, продажа, управление)</div>
+        </div>
+        <div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b1',1)">Далее →</button></div>
+      </div>
 
-      <!-- ВЕТКА 2 -->
-      <div class="quiz-step" id="b2-1"><div class="q-meta"><span class="q-tag">Действующий бизнес</span><span class="q-counter" id="b2-1-num"></span></div><div class="q-title">Сфера бизнеса</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b2',1)">Услуги</div><div class="q-option" onclick="selectOption(this,'b2',1)">Товары</div><div class="q-option" onclick="selectOption(this,'b2',1)">Технологии / IT</div><div class="q-option" onclick="selectOption(this,'b2',1)">Еда / общепит</div><div class="q-option" onclick="selectOption(this,'b2',1)">Образование</div><div class="q-option" onclick="selectOption(this,'b2',1)">Другое</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b2',1)">Далее →</button></div></div>
-      <div class="quiz-step" id="b2-2"><div class="q-meta"><span class="q-tag">Действующий бизнес</span><span class="q-counter" id="b2-2-num"></span></div><div class="q-title">Сколько лет работаете?</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b2',2)">Меньше года</div><div class="q-option" onclick="selectOption(this,'b2',2)">1–3 года</div><div class="q-option" onclick="selectOption(this,'b2',2)">3–5 лет</div><div class="q-option" onclick="selectOption(this,'b2',2)">Больше 5 лет</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b2',2)">Далее →</button></div></div>
-      <div class="quiz-step" id="b2-3"><div class="q-meta"><span class="q-tag">Действующий бизнес</span><span class="q-counter" id="b2-3-num"></span></div><div class="q-title">Текущая выручка в месяц</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b2',3)">До 300 000 ₽</div><div class="q-option" onclick="selectOption(this,'b2',3)">300 000 — 1 000 000 ₽</div><div class="q-option" onclick="selectOption(this,'b2',3)">1 000 000 — 5 000 000 ₽</div><div class="q-option" onclick="selectOption(this,'b2',3)">Больше 5 000 000 ₽</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b2',3)">Далее →</button></div></div>
-      <div class="quiz-step" id="b2-4"><div class="q-meta"><span class="q-tag">Действующий бизнес</span><span class="q-counter" id="b2-4-num"></span></div><div class="q-title">Что планируете?</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b2',4)">Запустить новое направление</div><div class="q-option" onclick="selectOption(this,'b2',4)">Упаковать и продавать франшизу</div><div class="q-option" onclick="selectOption(this,'b2',4)">И то и другое</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b2',4)">Далее →</button></div></div>
-      <div class="quiz-step" id="b2-5"><div class="q-meta"><span class="q-tag">Действующий бизнес</span><span class="q-counter" id="b2-5-num"></span></div><div class="q-title">Стандарты и процессы описаны?</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b2',5)">Да — всё задокументировано</div><div class="q-option" onclick="selectOption(this,'b2',5)">Частично</div><div class="q-option" onclick="selectOption(this,'b2',5)">Нет — всё в голове</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b2',5)">Далее →</button></div></div>
-      <div class="quiz-step" id="b2-6"><div class="q-meta"><span class="q-tag">Действующий бизнес</span><span class="q-counter" id="b2-6-num"></span></div><div class="q-title">Бюджет на масштабирование</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b2',6)">До 300 000 ₽</div><div class="q-option" onclick="selectOption(this,'b2',6)">300 000 — 1 000 000 ₽</div><div class="q-option" onclick="selectOption(this,'b2',6)">Больше 1 000 000 ₽</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b2',6)">Далее →</button></div></div>
-      <div class="quiz-step" id="b2-7"><div class="q-meta"><span class="q-tag">Действующий бизнес</span><span class="q-counter" id="b2-7-num"></span></div><div class="q-title">Команда сейчас</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b2',7)">Только я</div><div class="q-option" onclick="selectOption(this,'b2',7)">2–3 человека</div><div class="q-option" onclick="selectOption(this,'b2',7)">4–10 человек</div><div class="q-option" onclick="selectOption(this,'b2',7)">Больше 10</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b2',7)">Далее →</button></div></div>
-      <div class="quiz-step" id="b2-8"><div class="q-meta"><span class="q-tag">Действующий бизнес</span><span class="q-counter" id="b2-8-num"></span></div><div class="q-title">Главное конкурентное преимущество</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b2',8)">Цена ниже рынка</div><div class="q-option" onclick="selectOption(this,'b2',8)">Качество выше конкурентов</div><div class="q-option" onclick="selectOption(this,'b2',8)">Скорость и сервис</div><div class="q-option" onclick="selectOption(this,'b2',8)">Уникальный продукт</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b2',8)">Далее →</button></div></div>
-      <div class="quiz-step" id="b2-9"><div class="q-meta"><span class="q-tag">Действующий бизнес</span><span class="q-counter" id="b2-9-num"></span></div><div class="q-title">Уже есть те, кто хочет купить франшизу?</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b2',9)">Да — есть конкретные люди</div><div class="q-option" onclick="selectOption(this,'b2',9)">Нет</div><div class="q-option" onclick="selectOption(this,'b2',9)">Не предлагал — не знаю</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b2',9)">Далее →</button></div></div>
-      <div class="quiz-step" id="b2-10"><div class="q-meta"><span class="q-tag">Действующий бизнес</span><span class="q-counter" id="b2-10-num"></span></div><div class="q-title">Что останавливало от масштабирования раньше?</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b2',10)">Не хватало денег</div><div class="q-option" onclick="selectOption(this,'b2',10)">Не хватало времени</div><div class="q-option" onclick="selectOption(this,'b2',10)">Не было системы и процессов</div><div class="q-option" onclick="selectOption(this,'b2',10)">Страх и неуверенность</div><div class="q-option" onclick="selectOption(this,'b2',10)">Ничего — просто не доходили руки</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b2',10)">Далее →</button></div></div>
-      <div class="quiz-step" id="b2-11"><div class="q-meta"><span class="q-tag">Действующий бизнес</span><span class="q-counter" id="b2-11-num"></span></div><div class="q-title">Цель через год в рублях</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b2',11)">До 1 000 000 ₽</div><div class="q-option" onclick="selectOption(this,'b2',11)">1 000 000 — 5 000 000 ₽</div><div class="q-option" onclick="selectOption(this,'b2',11)">5 000 000 — 15 000 000 ₽</div><div class="q-option" onclick="selectOption(this,'b2',11)">Больше 15 000 000 ₽</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="finishQuiz('b2')">Получить вердикт →</button></div></div>
+      <div class="quiz-step" id="b1-2">
+        <div class="q-meta"><span class="q-tag">Новая идея</span><span class="q-counter" id="b1-2-num"></span></div>
+        <div class="q-title">Кто будет покупать? <span style="font-size:13px;color:rgba(232,238,248,0.4);font-weight:300">(можно выбрать несколько)</span></div>
+        <div class="q-options multi" id="b1-2-multi">
+          <div class="q-option" onclick="toggleMulti(this,'b1',2)">Обычные люди (B2C)</div>
+          <div class="q-option" onclick="toggleMulti(this,'b1',2)">Малый и средний бизнес (B2B)</div>
+          <div class="q-option" onclick="toggleMulti(this,'b1',2)">Крупный бизнес и корпорации (B2B)</div>
+          <div class="q-option" onclick="toggleMulti(this,'b1',2)">Государство и госструктуры (B2G)</div>
+        </div>
+        <div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStepMulti('b1',2)">Далее →</button></div>
+      </div>
 
-      <!-- ВЕТКА 3 -->
-      <div class="quiz-step" id="b3-1"><div class="q-meta"><span class="q-tag">Покупка бизнеса</span><span class="q-counter" id="b3-1-num"></span></div><div class="q-title">Что хотите купить?</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b3',1)">Франшизу</div><div class="q-option" onclick="selectOption(this,'b3',1)">Готовый бизнес целиком</div><div class="q-option" onclick="selectOption(this,'b3',1)">Долю в чужом бизнесе</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b3',1)">Далее →</button></div></div>
-      <div class="quiz-step" id="b3-2"><div class="q-meta"><span class="q-tag">Покупка бизнеса</span><span class="q-counter" id="b3-2-num"></span></div><div class="q-title">Есть конкретный вариант?</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b3',2)">Да — конкретный объект</div><div class="q-option" onclick="selectOption(this,'b3',2)">Несколько вариантов на выбор</div><div class="q-option" onclick="selectOption(this,'b3',2)">Пока только ищу</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b3',2)">Далее →</button></div></div>
-      <div class="quiz-step" id="b3-3"><div class="q-meta"><span class="q-tag">Покупка бизнеса</span><span class="q-counter" id="b3-3-num"></span></div><div class="q-title">Бюджет на покупку</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b3',3)">До 500 000 ₽</div><div class="q-option" onclick="selectOption(this,'b3',3)">500 000 — 2 000 000 ₽</div><div class="q-option" onclick="selectOption(this,'b3',3)">2 000 000 — 5 000 000 ₽</div><div class="q-option" onclick="selectOption(this,'b3',3)">Больше 5 000 000 ₽</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b3',3)">Далее →</button></div></div>
-      <div class="quiz-step" id="b3-4"><div class="q-meta"><span class="q-tag">Покупка бизнеса</span><span class="q-counter" id="b3-4-num"></span></div><div class="q-title">Опыт в этой сфере</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b3',4)">Нет опыта</div><div class="q-option" onclick="selectOption(this,'b3',4)">Меньше года</div><div class="q-option" onclick="selectOption(this,'b3',4)">1–3 года</div><div class="q-option" onclick="selectOption(this,'b3',4)">Больше 3 лет</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b3',4)">Далее →</button></div></div>
-      <div class="quiz-step" id="b3-5"><div class="q-meta"><span class="q-tag">Покупка бизнеса</span><span class="q-counter" id="b3-5-num"></span></div><div class="q-title">Видели реальную финансовую отчётность продавца?</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b3',5)">Да — изучил внимательно</div><div class="q-option" onclick="selectOption(this,'b3',5)">Показали, но не проверял</div><div class="q-option" onclick="selectOption(this,'b3',5)">Нет</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b3',5)">Далее →</button></div></div>
-      <div class="quiz-step" id="b3-6"><div class="q-meta"><span class="q-tag">Покупка бизнеса</span><span class="q-counter" id="b3-6-num"></span></div><div class="q-title">Есть работающие партнёры у продавца?</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b3',6)">Да — лично общался с ними</div><div class="q-option" onclick="selectOption(this,'b3',6)">Говорят что есть — не проверял</div><div class="q-option" onclick="selectOption(this,'b3',6)">Не знаю</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b3',6)">Далее →</button></div></div>
-      <div class="quiz-step" id="b3-7"><div class="q-meta"><span class="q-tag">Покупка бизнеса</span><span class="q-counter" id="b3-7-num"></span></div><div class="q-title">Юрист проверял договор?</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b3',7)">Да</div><div class="q-option" onclick="selectOption(this,'b3',7)">Нет</div><div class="q-option" onclick="selectOption(this,'b3',7)">Планирую перед подписанием</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b3',7)">Далее →</button></div></div>
-      <div class="quiz-step" id="b3-8"><div class="q-meta"><span class="q-tag">Покупка бизнеса</span><span class="q-counter" id="b3-8-num"></span></div><div class="q-title">Как будете управлять?</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b3',8)">Сам — лично</div><div class="q-option" onclick="selectOption(this,'b3',8)">Наёмный директор</div><div class="q-option" onclick="selectOption(this,'b3',8)">Партнёр будет управлять</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b3',8)">Далее →</button></div></div>
-      <div class="quiz-step" id="b3-9"><div class="q-meta"><span class="q-tag">Покупка бизнеса</span><span class="q-counter" id="b3-9-num"></span></div><div class="q-title">Финансовая подушка на полгода без прибыли</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b3',9)">Есть</div><div class="q-option" onclick="selectOption(this,'b3',9)">Частично</div><div class="q-option" onclick="selectOption(this,'b3',9)">Нет</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b3',9)">Далее →</button></div></div>
-      <div class="quiz-step" id="b3-10"><div class="q-meta"><span class="q-tag">Покупка бизнеса</span><span class="q-counter" id="b3-10-num"></span></div><div class="q-title">Почему именно эта ниша?</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b3',10)">Есть опыт в этой сфере</div><div class="q-option" onclick="selectOption(this,'b3',10)">Увидел возможность на рынке</div><div class="q-option" onclick="selectOption(this,'b3',10)">Посоветовали</div><div class="q-option" onclick="selectOption(this,'b3',10)">Просто нравится</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b3',10)">Далее →</button></div></div>
-      <div class="quiz-step" id="b3-11"><div class="q-meta"><span class="q-tag">Покупка бизнеса</span><span class="q-counter" id="b3-11-num"></span></div><div class="q-title">Цель через год в рублях</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b3',11)">До 1 000 000 ₽</div><div class="q-option" onclick="selectOption(this,'b3',11)">1 000 000 — 5 000 000 ₽</div><div class="q-option" onclick="selectOption(this,'b3',11)">Больше 5 000 000 ₽</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="finishQuiz('b3')">Получить вердикт →</button></div></div>
+      <div class="quiz-step" id="b1-3">
+        <div class="q-meta"><span class="q-tag">Новая идея</span><span class="q-counter" id="b1-3-num"></span></div>
+        <div class="q-title">Где будешь продавать?</div>
+        <div class="q-options">
+          <div class="q-option" onclick="selectOption(this,'b1',3)">Один город</div>
+          <div class="q-option" onclick="selectOption(this,'b1',3)">Регион (несколько городов)</div>
+          <div class="q-option" onclick="selectOption(this,'b1',3)">Вся Россия</div>
+          <div class="q-option" onclick="selectOption(this,'b1',3)">За рубеж (экспорт)</div>
+        </div>
+        <div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b1',3)">Далее →</button></div>
+      </div>
 
-      <!-- ВЕТКА 4 -->
-      <div class="quiz-step" id="b4-1"><div class="q-meta"><span class="q-tag">Уже запустил</span><span class="q-counter" id="b4-1-num"></span></div><div class="q-title">Сфера бизнеса</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b4',1)">Услуги</div><div class="q-option" onclick="selectOption(this,'b4',1)">Товары</div><div class="q-option" onclick="selectOption(this,'b4',1)">Технологии / IT</div><div class="q-option" onclick="selectOption(this,'b4',1)">Еда / общепит</div><div class="q-option" onclick="selectOption(this,'b4',1)">Образование</div><div class="q-option" onclick="selectOption(this,'b4',1)">Другое</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b4',1)">Далее →</button></div></div>
-      <div class="quiz-step" id="b4-2"><div class="q-meta"><span class="q-tag">Уже запустил</span><span class="q-counter" id="b4-2-num"></span></div><div class="q-title">Сколько времени работаете?</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b4',2)">До 3 месяцев</div><div class="q-option" onclick="selectOption(this,'b4',2)">3–6 месяцев</div><div class="q-option" onclick="selectOption(this,'b4',2)">6–12 месяцев</div><div class="q-option" onclick="selectOption(this,'b4',2)">Больше года</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b4',2)">Далее →</button></div></div>
-      <div class="quiz-step" id="b4-3"><div class="q-meta"><span class="q-tag">Уже запустил</span><span class="q-counter" id="b4-3-num"></span></div><div class="q-title">В чём главная проблема?</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b4',3)">Нет клиентов</div><div class="q-option" onclick="selectOption(this,'b4',3)">Нет денег — кончаются</div><div class="q-option" onclick="selectOption(this,'b4',3)">Конфликт с партнёром</div><div class="q-option" onclick="selectOption(this,'b4',3)">Экономика не сходится</div><div class="q-option" onclick="selectOption(this,'b4',3)">Всё сразу</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b4',3)">Далее →</button></div></div>
-      <div class="quiz-step" id="b4-4"><div class="q-meta"><span class="q-tag">Уже запустил</span><span class="q-counter" id="b4-4-num"></span></div><div class="q-title">Текущая выручка в месяц</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b4',4)">Ноль</div><div class="q-option" onclick="selectOption(this,'b4',4)">До 100 000 ₽</div><div class="q-option" onclick="selectOption(this,'b4',4)">100 000 — 500 000 ₽</div><div class="q-option" onclick="selectOption(this,'b4',4)">Больше 500 000 ₽</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b4',4)">Далее →</button></div></div>
-      <div class="quiz-step" id="b4-5"><div class="q-meta"><span class="q-tag">Уже запустил</span><span class="q-counter" id="b4-5-num"></span></div><div class="q-title">Расходы в месяц</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b4',5)">До 100 000 ₽</div><div class="q-option" onclick="selectOption(this,'b4',5)">100 000 — 300 000 ₽</div><div class="q-option" onclick="selectOption(this,'b4',5)">Больше 300 000 ₽</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b4',5)">Далее →</button></div></div>
-      <div class="quiz-step" id="b4-6"><div class="q-meta"><span class="q-tag">Уже запустил</span><span class="q-counter" id="b4-6-num"></span></div><div class="q-title">Сколько уже вложено</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b4',6)">До 300 000 ₽</div><div class="q-option" onclick="selectOption(this,'b4',6)">300 000 — 1 000 000 ₽</div><div class="q-option" onclick="selectOption(this,'b4',6)">Больше 1 000 000 ₽</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b4',6)">Далее →</button></div></div>
-      <div class="quiz-step" id="b4-7"><div class="q-meta"><span class="q-tag">Уже запустил</span><span class="q-counter" id="b4-7-num"></span></div><div class="q-title">Платящие клиенты есть?</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b4',7)">Да — регулярные</div><div class="q-option" onclick="selectOption(this,'b4',7)">Да — но единичные случаи</div><div class="q-option" onclick="selectOption(this,'b4',7)">Нет</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b4',7)">Далее →</button></div></div>
-      <div class="quiz-step" id="b4-8"><div class="q-meta"><span class="q-tag">Уже запустил</span><span class="q-counter" id="b4-8-num"></span></div><div class="q-title">Команда сейчас</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b4',8)">Только я</div><div class="q-option" onclick="selectOption(this,'b4',8)">2–3 человека</div><div class="q-option" onclick="selectOption(this,'b4',8)">Больше 3</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b4',8)">Далее →</button></div></div>
-      <div class="quiz-step" id="b4-9"><div class="q-meta"><span class="q-tag">Уже запустил</span><span class="q-counter" id="b4-9-num"></span></div><div class="q-title">Конкуренты которые делают то же самое успешно</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b4',9)">Да — есть и процветают</div><div class="q-option" onclick="selectOption(this,'b4',9)">Не знаю</div><div class="q-option" onclick="selectOption(this,'b4',9)">Таких нет</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b4',9)">Далее →</button></div></div>
-      <div class="quiz-step" id="b4-10"><div class="q-meta"><span class="q-tag">Уже запустил</span><span class="q-counter" id="b4-10-num"></span></div><div class="q-title">Готовы ещё вкладывать время и деньги?</div><div class="q-options"><div class="q-option" onclick="selectOption(this,'b4',10)">Да — есть ресурс и желание</div><div class="q-option" onclick="selectOption(this,'b4',10)">Немного осталось</div><div class="q-option" onclick="selectOption(this,'b4',10)">Нет — ресурсы на исходе</div></div><div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="finishQuiz('b4')">Получить вердикт →</button></div></div>
+      <div class="quiz-step" id="b1-4">
+        <div class="q-meta"><span class="q-tag">Новая идея</span><span class="q-counter" id="b1-4-num"></span></div>
+        <div class="q-title">Сколько в среднем заплатит один клиент за раз?</div>
+        <div class="q-options">
+          <div class="q-option" onclick="selectOption(this,'b1',4)">До 1 000 ₽</div>
+          <div class="q-option" onclick="selectOption(this,'b1',4)">1 000 — 10 000 ₽</div>
+          <div class="q-option" onclick="selectOption(this,'b1',4)">10 000 — 100 000 ₽</div>
+          <div class="q-option" onclick="selectOption(this,'b1',4)">Больше 100 000 ₽</div>
+        </div>
+        <div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b1',4)">Далее →</button></div>
+      </div>
+
+      <div class="quiz-step" id="b1-5">
+        <div class="q-meta"><span class="q-tag">Новая идея</span><span class="q-counter" id="b1-5-num"></span></div>
+        <div class="q-title">Примерная маржа — что останется после всех расходов?</div>
+        <div class="q-options">
+          <div class="q-option" onclick="selectOption(this,'b1',5)">Пока не считал</div>
+          <div class="q-option" onclick="selectOption(this,'b1',5)">До 20%</div>
+          <div class="q-option" onclick="selectOption(this,'b1',5)">20–40%</div>
+          <div class="q-option" onclick="selectOption(this,'b1',5)">Больше 40%</div>
+        </div>
+        <div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b1',5)">Далее →</button></div>
+      </div>
+
+      <div class="quiz-step" id="b1-6">
+        <div class="q-meta"><span class="q-tag">Новая идея</span><span class="q-counter" id="b1-6-num"></span></div>
+        <div class="q-title">Стартовый бюджет на запуск</div>
+        <div class="q-options">
+          <div class="q-option" onclick="selectOption(this,'b1',6)">До 100 000 ₽</div>
+          <div class="q-option" onclick="selectOption(this,'b1',6)">100 000 — 500 000 ₽</div>
+          <div class="q-option" onclick="selectOption(this,'b1',6)">500 000 — 2 000 000 ₽</div>
+          <div class="q-option" onclick="selectOption(this,'b1',6)">Больше 2 000 000 ₽</div>
+        </div>
+        <div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b1',6)">Далее →</button></div>
+      </div>
+
+      <div class="quiz-step" id="b1-7">
+        <div class="q-meta"><span class="q-tag">Новая идея</span><span class="q-counter" id="b1-7-num"></span></div>
+        <div class="q-title">Есть ли у тебя опыт в этой сфере?</div>
+        <div class="q-options">
+          <div class="q-option" onclick="selectOption(this,'b1',7)">Нет, буду разбираться с нуля</div>
+          <div class="q-option" onclick="selectOption(this,'b1',7)">Есть немного — меньше года</div>
+          <div class="q-option" onclick="selectOption(this,'b1',7)">1–3 года опыта</div>
+          <div class="q-option" onclick="selectOption(this,'b1',7)">Больше 3 лет — хорошо знаю рынок</div>
+        </div>
+        <div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b1',7)">Далее →</button></div>
+      </div>
+
+      <div class="quiz-step" id="b1-8">
+        <div class="q-meta"><span class="q-tag">Новая идея</span><span class="q-counter" id="b1-8-num"></span></div>
+        <div class="q-title">Конкуренты в твоей нише</div>
+        <div class="q-options">
+          <div class="q-option" onclick="selectOption(this,'b1',8)">Не знаю кто конкуренты — не смотрел</div>
+          <div class="q-option" onclick="selectOption(this,'b1',8)">Знаю конкурентов, у меня есть отличие</div>
+          <div class="q-option" onclick="selectOption(this,'b1',8)">Много сильных игроков на рынке</div>
+          <div class="q-option" onclick="selectOption(this,'b1',8)">Рынок почти пустой — первый в нише</div>
+        </div>
+        <div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b1',8)">Далее →</button></div>
+      </div>
+
+      <div class="quiz-step" id="b1-9">
+        <div class="q-meta"><span class="q-tag">Новая идея</span><span class="q-counter" id="b1-9-num"></span></div>
+        <div class="q-title">Хоть кто-то уже сказал «куплю»?</div>
+        <div class="q-options">
+          <div class="q-option" onclick="selectOption(this,'b1',9)">Да — есть люди готовые платить</div>
+          <div class="q-option" onclick="selectOption(this,'b1',9)">Нет</div>
+          <div class="q-option" onclick="selectOption(this,'b1',9)">Ещё не спрашивал</div>
+        </div>
+        <div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b1',9)">Далее →</button></div>
+      </div>
+
+      <div class="quiz-step" id="b1-10">
+        <div class="q-meta"><span class="q-tag">Новая идея</span><span class="q-counter" id="b1-10-num"></span></div>
+        <div class="q-title">Сколько часов в день готов вкладывать в проект?</div>
+        <div class="q-options">
+          <div class="q-option" onclick="selectOption(this,'b1',10)">1–2 часа (параллельно с основной работой)</div>
+          <div class="q-option" onclick="selectOption(this,'b1',10)">3–4 часа в день</div>
+          <div class="q-option" onclick="selectOption(this,'b1',10)">Полный день — только этим занимаюсь</div>
+        </div>
+        <div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b1',10)">Далее →</button></div>
+      </div>
+
+      <div class="quiz-step" id="b1-11">
+        <div class="q-meta"><span class="q-tag">Новая идея</span><span class="q-counter" id="b1-11-num"></span></div>
+        <div class="q-title">Когда планируешь запустить?</div>
+        <div class="q-options">
+          <div class="q-option" onclick="selectOption(this,'b1',11)">В течение месяца</div>
+          <div class="q-option" onclick="selectOption(this,'b1',11)">1–3 месяца</div>
+          <div class="q-option" onclick="selectOption(this,'b1',11)">3–6 месяцев</div>
+          <div class="q-option" onclick="selectOption(this,'b1',11)">Больше полугода</div>
+        </div>
+        <div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b1',11)">Далее →</button></div>
+      </div>
+
+      <div class="quiz-step" id="b1-12">
+        <div class="q-meta"><span class="q-tag">Новая идея</span><span class="q-counter" id="b1-12-num"></span></div>
+        <div class="q-title">Если первые полгода не будет дохода — финансово выдержишь?</div>
+        <div class="q-options">
+          <div class="q-option" onclick="selectOption(this,'b1',12)">Да, есть запас — спокойно проживу</div>
+          <div class="q-option" onclick="selectOption(this,'b1',12)">Частично — придётся крутиться</div>
+          <div class="q-option" onclick="selectOption(this,'b1',12)">Нет — деньги нужны быстро</div>
+        </div>
+        <div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b1',12)">Далее →</button></div>
+      </div>
+
+      <div class="quiz-step" id="b1-13">
+        <div class="q-meta"><span class="q-tag">Новая идея</span><span class="q-counter" id="b1-13-num"></span></div>
+        <div class="q-title">Зачем запускаешь именно сейчас?</div>
+        <div class="q-options">
+          <div class="q-option" onclick="selectOption(this,'b1',13)">Давно хотел — наконец решился</div>
+          <div class="q-option" onclick="selectOption(this,'b1',13)">Потерял работу или нет дохода</div>
+          <div class="q-option" onclick="selectOption(this,'b1',13)">Увидел конкретную возможность на рынке</div>
+          <div class="q-option" onclick="selectOption(this,'b1',13)">Обстоятельства подтолкнули</div>
+        </div>
+        <div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="finishQuiz('b1')">Получить вердикт →</button></div>
+      </div>
+
+      <!-- ═══ ВЕТКА 2 — ДЕЙСТВУЮЩИЙ БИЗНЕС (11 вопросов) ═══ -->
+      <div class="quiz-step" id="b2-1">
+        <div class="q-meta"><span class="q-tag">Действующий бизнес</span><span class="q-counter" id="b2-1-num"></span></div>
+        <div class="q-title">Отрасль бизнеса</div>
+        <div class="q-options">
+          <div class="q-option" onclick="selectOption(this,'b2',1)">Производство (мебель, одежда, еда, стройматериалы, косметика)</div>
+          <div class="q-option" onclick="selectOption(this,'b2',1)">Торговля (розница, опт, маркетплейсы, интернет-магазин)</div>
+          <div class="q-option" onclick="selectOption(this,'b2',1)">Услуги для людей (красота, здоровье, ремонт, клининг)</div>
+          <div class="q-option" onclick="selectOption(this,'b2',1)">Юридия, бухгалтерия, консалтинг</div>
+          <div class="q-option" onclick="selectOption(this,'b2',1)">Услуги для бизнеса (маркетинг, реклама, HR, логистика)</div>
+          <div class="q-option" onclick="selectOption(this,'b2',1)">Общепит (кафе, ресторан, доставка еды)</div>
+          <div class="q-option" onclick="selectOption(this,'b2',1)">IT и приложения (сервис, маркетплейс, SaaS)</div>
+          <div class="q-option" onclick="selectOption(this,'b2',1)">Строительство и ремонт</div>
+          <div class="q-option" onclick="selectOption(this,'b2',1)">Медицина, здоровье, фитнес</div>
+          <div class="q-option" onclick="selectOption(this,'b2',1)">Образование (школа, курсы, онлайн)</div>
+          <div class="q-option" onclick="selectOption(this,'b2',1)">Туризм, гостиницы, развлечения</div>
+          <div class="q-option" onclick="selectOption(this,'b2',1)">Транспорт и логистика</div>
+          <div class="q-option" onclick="selectOption(this,'b2',1)">Недвижимость (аренда, продажа, управление)</div>
+        </div>
+        <div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b2',1)">Далее →</button></div>
+      </div>
+
+      <div class="quiz-step" id="b2-2">
+        <div class="q-meta"><span class="q-tag">Действующий бизнес</span><span class="q-counter" id="b2-2-num"></span></div>
+        <div class="q-title">Сколько лет работает бизнес?</div>
+        <div class="q-options">
+          <div class="q-option" onclick="selectOption(this,'b2',2)">Меньше года</div>
+          <div class="q-option" onclick="selectOption(this,'b2',2)">1–3 года</div>
+          <div class="q-option" onclick="selectOption(this,'b2',2)">3–5 лет</div>
+          <div class="q-option" onclick="selectOption(this,'b2',2)">Больше 5 лет</div>
+        </div>
+        <div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b2',2)">Далее →</button></div>
+      </div>
+
+      <div class="quiz-step" id="b2-3">
+        <div class="q-meta"><span class="q-tag">Действующий бизнес</span><span class="q-counter" id="b2-3-num"></span></div>
+        <div class="q-title">Где продаёте сейчас?</div>
+        <div class="q-options">
+          <div class="q-option" onclick="selectOption(this,'b2',3)">Один город</div>
+          <div class="q-option" onclick="selectOption(this,'b2',3)">Регион</div>
+          <div class="q-option" onclick="selectOption(this,'b2',3)">Вся Россия</div>
+          <div class="q-option" onclick="selectOption(this,'b2',3)">Россия + зарубеж</div>
+        </div>
+        <div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b2',3)">Далее →</button></div>
+      </div>
+
+      <div class="quiz-step" id="b2-4">
+        <div class="q-meta"><span class="q-tag">Действующий бизнес</span><span class="q-counter" id="b2-4-num"></span></div>
+        <div class="q-title">Кто ваши покупатели? <span style="font-size:13px;color:rgba(232,238,248,0.4);font-weight:300">(можно несколько)</span></div>
+        <div class="q-options multi" id="b2-4-multi">
+          <div class="q-option" onclick="toggleMulti(this,'b2',4)">Обычные люди (B2C)</div>
+          <div class="q-option" onclick="toggleMulti(this,'b2',4)">Малый и средний бизнес (B2B)</div>
+          <div class="q-option" onclick="toggleMulti(this,'b2',4)">Крупный бизнес (B2B)</div>
+          <div class="q-option" onclick="toggleMulti(this,'b2',4)">Государство (B2G)</div>
+        </div>
+        <div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStepMulti('b2',4)">Далее →</button></div>
+      </div>
+
+      <div class="quiz-step" id="b2-5">
+        <div class="q-meta"><span class="q-tag">Действующий бизнес</span><span class="q-counter" id="b2-5-num"></span></div>
+        <div class="q-title">Выручка в месяц сейчас</div>
+        <div class="q-options">
+          <div class="q-option" onclick="selectOption(this,'b2',5)">До 300 000 ₽</div>
+          <div class="q-option" onclick="selectOption(this,'b2',5)">300 000 — 1 000 000 ₽</div>
+          <div class="q-option" onclick="selectOption(this,'b2',5)">1 000 000 — 5 000 000 ₽</div>
+          <div class="q-option" onclick="selectOption(this,'b2',5)">Больше 5 000 000 ₽</div>
+        </div>
+        <div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b2',5)">Далее →</button></div>
+      </div>
+
+      <div class="quiz-step" id="b2-6">
+        <div class="q-meta"><span class="q-tag">Действующий бизнес</span><span class="q-counter" id="b2-6-num"></span></div>
+        <div class="q-title">Средний чек одной продажи</div>
+        <div class="q-options">
+          <div class="q-option" onclick="selectOption(this,'b2',6)">До 1 000 ₽</div>
+          <div class="q-option" onclick="selectOption(this,'b2',6)">1 000 — 10 000 ₽</div>
+          <div class="q-option" onclick="selectOption(this,'b2',6)">10 000 — 100 000 ₽</div>
+          <div class="q-option" onclick="selectOption(this,'b2',6)">Больше 100 000 ₽</div>
+        </div>
+        <div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b2',6)">Далее →</button></div>
+      </div>
+
+      <div class="quiz-step" id="b2-7">
+        <div class="q-meta"><span class="q-tag">Действующий бизнес</span><span class="q-counter" id="b2-7-num"></span></div>
+        <div class="q-title">Что хотите сделать?</div>
+        <div class="q-options">
+          <div class="q-option" onclick="selectOption(this,'b2',7)">Масштабировать текущее направление</div>
+          <div class="q-option" onclick="selectOption(this,'b2',7)">Открыть новое направление</div>
+          <div class="q-option" onclick="selectOption(this,'b2',7)">Упаковать в франшизу</div>
+          <div class="q-option" onclick="selectOption(this,'b2',7)">Выйти в новый регион или страну</div>
+        </div>
+        <div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b2',7)">Далее →</button></div>
+      </div>
+
+      <div class="quiz-step" id="b2-8">
+        <div class="q-meta"><span class="q-tag">Действующий бизнес</span><span class="q-counter" id="b2-8-num"></span></div>
+        <div class="q-title">Главная проблема прямо сейчас</div>
+        <div class="q-options">
+          <div class="q-option" onclick="selectOption(this,'b2',8)">Нет клиентов — трафик не идёт</div>
+          <div class="q-option" onclick="selectOption(this,'b2',8)">Клиенты есть, но денег не хватает</div>
+          <div class="q-option" onclick="selectOption(this,'b2',8)">Команда не справляется с объёмом</div>
+          <div class="q-option" onclick="selectOption(this,'b2',8)">Конкуренты давят — теряем долю рынка</div>
+          <div class="q-option" onclick="selectOption(this,'b2',8)">Не понимаю куда расти дальше</div>
+        </div>
+        <div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b2',8)">Далее →</button></div>
+      </div>
+
+      <div class="quiz-step" id="b2-9">
+        <div class="q-meta"><span class="q-tag">Действующий бизнес</span><span class="q-counter" id="b2-9-num"></span></div>
+        <div class="q-title">Команда</div>
+        <div class="q-options">
+          <div class="q-option" onclick="selectOption(this,'b2',9)">Только я</div>
+          <div class="q-option" onclick="selectOption(this,'b2',9)">2–5 человек</div>
+          <div class="q-option" onclick="selectOption(this,'b2',9)">6–20 человек</div>
+          <div class="q-option" onclick="selectOption(this,'b2',9)">Больше 20 человек</div>
+        </div>
+        <div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b2',9)">Далее →</button></div>
+      </div>
+
+      <div class="quiz-step" id="b2-10">
+        <div class="q-meta"><span class="q-tag">Действующий бизнес</span><span class="q-counter" id="b2-10-num"></span></div>
+        <div class="q-title">Бюджет на развитие</div>
+        <div class="q-options">
+          <div class="q-option" onclick="selectOption(this,'b2',10)">До 300 000 ₽</div>
+          <div class="q-option" onclick="selectOption(this,'b2',10)">300 000 — 1 000 000 ₽</div>
+          <div class="q-option" onclick="selectOption(this,'b2',10)">Больше 1 000 000 ₽</div>
+          <div class="q-option" onclick="selectOption(this,'b2',10)">Пока не определился</div>
+        </div>
+        <div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b2',10)">Далее →</button></div>
+      </div>
+
+      <div class="quiz-step" id="b2-11">
+        <div class="q-meta"><span class="q-tag">Действующий бизнес</span><span class="q-counter" id="b2-11-num"></span></div>
+        <div class="q-title">Если полгода не будет роста — финансово выдержите?</div>
+        <div class="q-options">
+          <div class="q-option" onclick="selectOption(this,'b2',11)">Да, есть запас</div>
+          <div class="q-option" onclick="selectOption(this,'b2',11)">Частично — придётся крутиться</div>
+          <div class="q-option" onclick="selectOption(this,'b2',11)">Нет — нужен результат быстро</div>
+        </div>
+        <div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="finishQuiz('b2')">Получить вердикт →</button></div>
+      </div>
+
+      <!-- ═══ ВЕТКА 3 — ПОКУПКА БИЗНЕСА (10 вопросов) ═══ -->
+      <div class="quiz-step" id="b3-1">
+        <div class="q-meta"><span class="q-tag">Покупка бизнеса</span><span class="q-counter" id="b3-1-num"></span></div>
+        <div class="q-title">Что рассматриваете?</div>
+        <div class="q-options">
+          <div class="q-option" onclick="selectOption(this,'b3',1)">Готовую франшизу</div>
+          <div class="q-option" onclick="selectOption(this,'b3',1)">Готовый действующий бизнес</div>
+          <div class="q-option" onclick="selectOption(this,'b3',1)">Ещё не определился — смотрю варианты</div>
+        </div>
+        <div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b3',1)">Далее →</button></div>
+      </div>
+
+      <div class="quiz-step" id="b3-2">
+        <div class="q-meta"><span class="q-tag">Покупка бизнеса</span><span class="q-counter" id="b3-2-num"></span></div>
+        <div class="q-title">Отрасль</div>
+        <div class="q-options">
+          <div class="q-option" onclick="selectOption(this,'b3',2)">Производство</div>
+          <div class="q-option" onclick="selectOption(this,'b3',2)">Торговля и ритейл</div>
+          <div class="q-option" onclick="selectOption(this,'b3',2)">Услуги для людей (красота, здоровье, ремонт)</div>
+          <div class="q-option" onclick="selectOption(this,'b3',2)">Услуги для бизнеса (консалтинг, маркетинг, IT)</div>
+          <div class="q-option" onclick="selectOption(this,'b3',2)">Общепит (кафе, ресторан, доставка)</div>
+          <div class="q-option" onclick="selectOption(this,'b3',2)">IT и технологии</div>
+          <div class="q-option" onclick="selectOption(this,'b3',2)">Строительство и ремонт</div>
+          <div class="q-option" onclick="selectOption(this,'b3',2)">Медицина и здоровье</div>
+          <div class="q-option" onclick="selectOption(this,'b3',2)">Образование</div>
+          <div class="q-option" onclick="selectOption(this,'b3',2)">Туризм и гостиницы</div>
+          <div class="q-option" onclick="selectOption(this,'b3',2)">Транспорт и логистика</div>
+          <div class="q-option" onclick="selectOption(this,'b3',2)">Недвижимость</div>
+        </div>
+        <div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b3',2)">Далее →</button></div>
+      </div>
+
+      <div class="quiz-step" id="b3-3">
+        <div class="q-meta"><span class="q-tag">Покупка бизнеса</span><span class="q-counter" id="b3-3-num"></span></div>
+        <div class="q-title">Где планируете работать?</div>
+        <div class="q-options">
+          <div class="q-option" onclick="selectOption(this,'b3',3)">Один город</div>
+          <div class="q-option" onclick="selectOption(this,'b3',3)">Регион</div>
+          <div class="q-option" onclick="selectOption(this,'b3',3)">Вся Россия</div>
+          <div class="q-option" onclick="selectOption(this,'b3',3)">Зарубеж</div>
+        </div>
+        <div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b3',3)">Далее →</button></div>
+      </div>
+
+      <div class="quiz-step" id="b3-4">
+        <div class="q-meta"><span class="q-tag">Покупка бизнеса</span><span class="q-counter" id="b3-4-num"></span></div>
+        <div class="q-title">Бюджет на покупку</div>
+        <div class="q-options">
+          <div class="q-option" onclick="selectOption(this,'b3',4)">До 500 000 ₽</div>
+          <div class="q-option" onclick="selectOption(this,'b3',4)">500 000 — 2 000 000 ₽</div>
+          <div class="q-option" onclick="selectOption(this,'b3',4)">2 000 000 — 5 000 000 ₽</div>
+          <div class="q-option" onclick="selectOption(this,'b3',4)">Больше 5 000 000 ₽</div>
+        </div>
+        <div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b3',4)">Далее →</button></div>
+      </div>
+
+      <div class="quiz-step" id="b3-5">
+        <div class="q-meta"><span class="q-tag">Покупка бизнеса</span><span class="q-counter" id="b3-5-num"></span></div>
+        <div class="q-title">Уже видели конкретное предложение?</div>
+        <div class="q-options">
+          <div class="q-option" onclick="selectOption(this,'b3',5)">Да, есть конкретный вариант</div>
+          <div class="q-option" onclick="selectOption(this,'b3',5)">Есть несколько вариантов — выбираю</div>
+          <div class="q-option" onclick="selectOption(this,'b3',5)">Ещё ищу</div>
+        </div>
+        <div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b3',5)">Далее →</button></div>
+      </div>
+
+      <div class="quiz-step" id="b3-6">
+        <div class="q-meta"><span class="q-tag">Покупка бизнеса</span><span class="q-counter" id="b3-6-num"></span></div>
+        <div class="q-title">Есть опыт в этой отрасли?</div>
+        <div class="q-options">
+          <div class="q-option" onclick="selectOption(this,'b3',6)">Нет — буду учиться</div>
+          <div class="q-option" onclick="selectOption(this,'b3',6)">Немного разбираюсь</div>
+          <div class="q-option" onclick="selectOption(this,'b3',6)">Да, хорошо знаю эту сферу</div>
+        </div>
+        <div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b3',6)">Далее →</button></div>
+      </div>
+
+      <div class="quiz-step" id="b3-7">
+        <div class="q-meta"><span class="q-tag">Покупка бизнеса</span><span class="q-counter" id="b3-7-num"></span></div>
+        <div class="q-title">Планируете управлять сами?</div>
+        <div class="q-options">
+          <div class="q-option" onclick="selectOption(this,'b3',7)">Да, буду управлять лично</div>
+          <div class="q-option" onclick="selectOption(this,'b3',7)">Найму управляющего директора</div>
+          <div class="q-option" onclick="selectOption(this,'b3',7)">Ещё не думал об этом</div>
+        </div>
+        <div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b3',7)">Далее →</button></div>
+      </div>
+
+      <div class="quiz-step" id="b3-8">
+        <div class="q-meta"><span class="q-tag">Покупка бизнеса</span><span class="q-counter" id="b3-8-num"></span></div>
+        <div class="q-title">Кто ваши будущие покупатели? <span style="font-size:13px;color:rgba(232,238,248,0.4);font-weight:300">(можно несколько)</span></div>
+        <div class="q-options multi" id="b3-8-multi">
+          <div class="q-option" onclick="toggleMulti(this,'b3',8)">Обычные люди (B2C)</div>
+          <div class="q-option" onclick="toggleMulti(this,'b3',8)">Малый и средний бизнес (B2B)</div>
+          <div class="q-option" onclick="toggleMulti(this,'b3',8)">Крупный бизнес (B2B)</div>
+          <div class="q-option" onclick="toggleMulti(this,'b3',8)">Государство (B2G)</div>
+        </div>
+        <div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStepMulti('b3',8)">Далее →</button></div>
+      </div>
+
+      <div class="quiz-step" id="b3-9">
+        <div class="q-meta"><span class="q-tag">Покупка бизнеса</span><span class="q-counter" id="b3-9-num"></span></div>
+        <div class="q-title">Если первый год окажется убыточным — финансово выдержите?</div>
+        <div class="q-options">
+          <div class="q-option" onclick="selectOption(this,'b3',9)">Да, есть запас</div>
+          <div class="q-option" onclick="selectOption(this,'b3',9)">Частично — придётся крутиться</div>
+          <div class="q-option" onclick="selectOption(this,'b3',9)">Нет, деньги нужны быстро</div>
+        </div>
+        <div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b3',9)">Далее →</button></div>
+      </div>
+
+      <div class="quiz-step" id="b3-10">
+        <div class="q-meta"><span class="q-tag">Покупка бизнеса</span><span class="q-counter" id="b3-10-num"></span></div>
+        <div class="q-title">Что пугает больше всего?</div>
+        <div class="q-options">
+          <div class="q-option" onclick="selectOption(this,'b3',10)">Обман продавца — купить кота в мешке</div>
+          <div class="q-option" onclick="selectOption(this,'b3',10)">Не разберусь в управлении</div>
+          <div class="q-option" onclick="selectOption(this,'b3',10)">Не хватит денег после покупки</div>
+          <div class="q-option" onclick="selectOption(this,'b3',10)">Сильные конкуренты задавят</div>
+          <div class="q-option" onclick="selectOption(this,'b3',10)">Пока ничего не пугает</div>
+        </div>
+        <div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="finishQuiz('b3')">Получить вердикт →</button></div>
+      </div>
+
+      <!-- ═══ ВЕТКА 4 — ЧТО-ТО ПОШЛО НЕ ТАК (10 вопросов) ═══ -->
+      <div class="quiz-step" id="b4-1">
+        <div class="q-meta"><span class="q-tag">Что-то не так</span><span class="q-counter" id="b4-1-num"></span></div>
+        <div class="q-title">Отрасль бизнеса</div>
+        <div class="q-options">
+          <div class="q-option" onclick="selectOption(this,'b4',1)">Производство</div>
+          <div class="q-option" onclick="selectOption(this,'b4',1)">Торговля и ритейл</div>
+          <div class="q-option" onclick="selectOption(this,'b4',1)">Услуги для людей (красота, здоровье, ремонт)</div>
+          <div class="q-option" onclick="selectOption(this,'b4',1)">Услуги для бизнеса (консалтинг, маркетинг, IT)</div>
+          <div class="q-option" onclick="selectOption(this,'b4',1)">Общепит (кафе, ресторан, доставка)</div>
+          <div class="q-option" onclick="selectOption(this,'b4',1)">IT и технологии</div>
+          <div class="q-option" onclick="selectOption(this,'b4',1)">Строительство и ремонт</div>
+          <div class="q-option" onclick="selectOption(this,'b4',1)">Медицина и здоровье</div>
+          <div class="q-option" onclick="selectOption(this,'b4',1)">Образование</div>
+          <div class="q-option" onclick="selectOption(this,'b4',1)">Туризм и гостиницы</div>
+          <div class="q-option" onclick="selectOption(this,'b4',1)">Транспорт и логистика</div>
+          <div class="q-option" onclick="selectOption(this,'b4',1)">Недвижимость</div>
+        </div>
+        <div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b4',1)">Далее →</button></div>
+      </div>
+
+      <div class="quiz-step" id="b4-2">
+        <div class="q-meta"><span class="q-tag">Что-то не так</span><span class="q-counter" id="b4-2-num"></span></div>
+        <div class="q-title">Сколько времени уже работаете?</div>
+        <div class="q-options">
+          <div class="q-option" onclick="selectOption(this,'b4',2)">Меньше 6 месяцев</div>
+          <div class="q-option" onclick="selectOption(this,'b4',2)">6–12 месяцев</div>
+          <div class="q-option" onclick="selectOption(this,'b4',2)">1–3 года</div>
+          <div class="q-option" onclick="selectOption(this,'b4',2)">Больше 3 лет</div>
+        </div>
+        <div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b4',2)">Далее →</button></div>
+      </div>
+
+      <div class="quiz-step" id="b4-3">
+        <div class="q-meta"><span class="q-tag">Что-то не так</span><span class="q-counter" id="b4-3-num"></span></div>
+        <div class="q-title">Где продаёте?</div>
+        <div class="q-options">
+          <div class="q-option" onclick="selectOption(this,'b4',3)">Один город</div>
+          <div class="q-option" onclick="selectOption(this,'b4',3)">Регион</div>
+          <div class="q-option" onclick="selectOption(this,'b4',3)">Вся Россия</div>
+          <div class="q-option" onclick="selectOption(this,'b4',3)">Россия + зарубеж</div>
+        </div>
+        <div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b4',3)">Далее →</button></div>
+      </div>
+
+      <div class="quiz-step" id="b4-4">
+        <div class="q-meta"><span class="q-tag">Что-то не так</span><span class="q-counter" id="b4-4-num"></span></div>
+        <div class="q-title">Выручка сейчас</div>
+        <div class="q-options">
+          <div class="q-option" onclick="selectOption(this,'b4',4)">Нет совсем — ноль</div>
+          <div class="q-option" onclick="selectOption(this,'b4',4)">До 100 000 ₽ в месяц</div>
+          <div class="q-option" onclick="selectOption(this,'b4',4)">100 000 — 500 000 ₽ в месяц</div>
+          <div class="q-option" onclick="selectOption(this,'b4',4)">Больше 500 000 ₽ в месяц</div>
+        </div>
+        <div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b4',4)">Далее →</button></div>
+      </div>
+
+      <div class="quiz-step" id="b4-5">
+        <div class="q-meta"><span class="q-tag">Что-то не так</span><span class="q-counter" id="b4-5-num"></span></div>
+        <div class="q-title">Маржа — что остаётся после расходов?</div>
+        <div class="q-options">
+          <div class="q-option" onclick="selectOption(this,'b4',5)">Работаем в убыток</div>
+          <div class="q-option" onclick="selectOption(this,'b4',5)">До 10% — едва выходим в ноль</div>
+          <div class="q-option" onclick="selectOption(this,'b4',5)">10–30%</div>
+          <div class="q-option" onclick="selectOption(this,'b4',5)">Больше 30%</div>
+        </div>
+        <div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b4',5)">Далее →</button></div>
+      </div>
+
+      <div class="quiz-step" id="b4-6">
+        <div class="q-meta"><span class="q-tag">Что-то не так</span><span class="q-counter" id="b4-6-num"></span></div>
+        <div class="q-title">В чём главная проблема — как вы её видите?</div>
+        <div class="q-options">
+          <div class="q-option" onclick="selectOption(this,'b4',6)">Нет клиентов — не знаю как привлекать</div>
+          <div class="q-option" onclick="selectOption(this,'b4',6)">Клиенты есть, но не платят или возвращают</div>
+          <div class="q-option" onclick="selectOption(this,'b4',6)">Высокие расходы — не можем выйти в плюс</div>
+          <div class="q-option" onclick="selectOption(this,'b4',6)">Проблемы с командой</div>
+          <div class="q-option" onclick="selectOption(this,'b4',6)">Продукт не заходит рынку</div>
+          <div class="q-option" onclick="selectOption(this,'b4',6)">Не понимаю в чём проблема</div>
+        </div>
+        <div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b4',6)">Далее →</button></div>
+      </div>
+
+      <div class="quiz-step" id="b4-7">
+        <div class="q-meta"><span class="q-tag">Что-то не так</span><span class="q-counter" id="b4-7-num"></span></div>
+        <div class="q-title">Пробовали что-то менять?</div>
+        <div class="q-options">
+          <div class="q-option" onclick="selectOption(this,'b4',7)">Да, меняли — не помогло</div>
+          <div class="q-option" onclick="selectOption(this,'b4',7)">Да, меняли — стало хуже</div>
+          <div class="q-option" onclick="selectOption(this,'b4',7)">Нет, не знаем что менять</div>
+        </div>
+        <div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b4',7)">Далее →</button></div>
+      </div>
+
+      <div class="quiz-step" id="b4-8">
+        <div class="q-meta"><span class="q-tag">Что-то не так</span><span class="q-counter" id="b4-8-num"></span></div>
+        <div class="q-title">Кто ваши покупатели? <span style="font-size:13px;color:rgba(232,238,248,0.4);font-weight:300">(можно несколько)</span></div>
+        <div class="q-options multi" id="b4-8-multi">
+          <div class="q-option" onclick="toggleMulti(this,'b4',8)">Обычные люди (B2C)</div>
+          <div class="q-option" onclick="toggleMulti(this,'b4',8)">Малый и средний бизнес (B2B)</div>
+          <div class="q-option" onclick="toggleMulti(this,'b4',8)">Крупный бизнес (B2B)</div>
+          <div class="q-option" onclick="toggleMulti(this,'b4',8)">Государство (B2G)</div>
+        </div>
+        <div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStepMulti('b4',8)">Далее →</button></div>
+      </div>
+
+      <div class="quiz-step" id="b4-9">
+        <div class="q-meta"><span class="q-tag">Что-то не так</span><span class="q-counter" id="b4-9-num"></span></div>
+        <div class="q-title">Сколько месяцев ещё можете работать в минус?</div>
+        <div class="q-options">
+          <div class="q-option" onclick="selectOption(this,'b4',9)">1–2 месяца — критично</div>
+          <div class="q-option" onclick="selectOption(this,'b4',9)">3–6 месяцев</div>
+          <div class="q-option" onclick="selectOption(this,'b4',9)">Больше полугода</div>
+          <div class="q-option" onclick="selectOption(this,'b4',9)">Уже нечем платить — надо решать сейчас</div>
+        </div>
+        <div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="nextStep('b4',9)">Далее →</button></div>
+      </div>
+
+      <div class="quiz-step" id="b4-10">
+        <div class="q-meta"><span class="q-tag">Что-то не так</span><span class="q-counter" id="b4-10-num"></span></div>
+        <div class="q-title">Что хотите получить от диагностики?</div>
+        <div class="q-options">
+          <div class="q-option" onclick="selectOption(this,'b4',10)">Понять где именно проблема</div>
+          <div class="q-option" onclick="selectOption(this,'b4',10)">Решить — закрывать или продолжать</div>
+          <div class="q-option" onclick="selectOption(this,'b4',10)">Найти точки роста</div>
+          <div class="q-option" onclick="selectOption(this,'b4',10)">Просто честный взгляд со стороны</div>
+        </div>
+        <div class="q-nav"><button class="q-back" onclick="goBack()">← Назад</button><button class="q-next" onclick="finishQuiz('b4')">Получить вердикт →</button></div>
+      </div>
 
       <!-- ОЖИДАНИЕ -->
       <div class="waiting-screen" id="waiting-screen">
@@ -539,7 +1081,8 @@ footer{padding:28px 64px;border-top:1px solid rgba(255,255,255,0.06);display:fle
             <div class="dul-item">Красные флаги — что проверить до вложений</div>
             <div class="dul-item">Аналоги бизнесов которые выжили и почему</div>
           </div>
-          <button class="btn-deep" onclick="orderDeepAnalysis()">Получить Deep Analysis за 2 990 ₽ →</button>
+          <button class="btn-deep" onclick="orderDeepAnalysis()">Узнай что тебя ждёт дальше →</button>
+          <div class="deep-upsell-cta">Deep Analysis · 2 990 ₽ · запускаем скоро</div>
         </div>
         <button class="btn-restart" onclick="restartQuiz()">Пройти новую диагностику</button>
       </div>
@@ -563,7 +1106,7 @@ footer{padding:28px 64px;border-top:1px solid rgba(255,255,255,0.06);display:fle
 
 <script>
 // ── СТОП-СЛОВА (фильтр) ──
-const STOP_WORDS = ['порно','секс','эскорт','наркот','героин','кокаин','мефедрон','бомб','взрывч','оружи','автомат','пистолет','война','вагнер','убий','террор','экстремизм','мошенниц','пирамид','алкоголь','водка','пиво','табак','сигарет','мат','хуй','пизд','еба','блять','сука','проститут'];
+const STOP_WORDS = ['порнография','эскорт услуги','героин','кокаин','мефедрон','взрывчатка','терроризм','экстремизм','финансовая пирамида','проституция'];
 
 function containsStopWords(text){
   const lower = text.toLowerCase();
@@ -571,10 +1114,10 @@ function containsStopWords(text){
 }
 
 // ── WEBHOOK URL — СЮДА ВСТАВИТЬ URL ИЗ MAKE ──
-const MAKE_WEBHOOK_URL = 'Вставь это:  `https://hook.eu1.make.com/izdwpewxe5hxsytsg3frlfiistzk5ih8`';
+const MAKE_WEBHOOK_URL = 'https://hook.eu1.make.com/izdwpewxe5hxsytsg3frlfiistzk5ih8';
 
 const S={branch:null,step:0,history:[],answers:{}};
-const BL={b1:14,b2:11,b3:11,b4:10};
+const BL={b1:13,b2:11,b3:10,b4:10};
 
 function show(id){
   document.querySelectorAll('.quiz-step').forEach(s=>s.classList.remove('active'));
@@ -606,6 +1149,20 @@ function selectOption(el,b,s){
   el.closest('.q-options').querySelectorAll('.q-option').forEach(o=>o.classList.remove('selected'));
   el.classList.add('selected');
   S.answers[b+'-'+s]=el.textContent.trim();
+}
+
+function toggleMulti(el,b,s){
+  el.classList.toggle('selected');
+  const selected=[...el.closest('.q-options').querySelectorAll('.q-option.selected')].map(o=>o.textContent.trim());
+  S.answers[b+'-'+s]=selected.join(', ');
+}
+
+function nextStepMulti(b,cur){
+  const k=b+'-'+cur;
+  const selected=[...document.querySelectorAll('#'+k+'-multi .q-option.selected')];
+  if(!selected.length){alert('Пожалуйста, выберите хотя бы один вариант');return;}
+  S.answers[k]=selected.map(o=>o.textContent.trim()).join(', ');
+  S.history.push(k);S.step=cur+1;show(b+'-'+(cur+1));
 }
 
 function nextStep(b,cur){
@@ -689,12 +1246,8 @@ async function finishQuiz(b){
     waiting.classList.remove('active');
     console.error('Webhook error:',err);
     // Показываем демо-вердикт если webhook не настроен
-    if(MAKE_WEBHOOK_URL==='Вставь это:  `https://hook.eu1.make.com/izdwpewxe5hxsytsg3frlfiistzk5ih8`'){
-      showVerdict(getDemoVerdict(), branchNames[b]);
-    } else {
-      document.getElementById('error-screen').classList.add('active');
-      document.getElementById('error-screen').scrollIntoView({behavior:'smooth',block:'nearest'});
-    }
+    document.getElementById('error-screen').classList.add('active');
+    document.getElementById('error-screen').scrollIntoView({behavior:'smooth',block:'nearest'});
   }
 }
 
@@ -733,9 +1286,33 @@ function getDemoVerdict(){
   };
 }
 
+function showDeepComingSoon(){
+  // Создаём модальное окно если ещё нет
+  let modal = document.getElementById('deep-modal');
+  if(!modal){
+    modal = document.createElement('div');
+    modal.id = 'deep-modal';
+    modal.style.cssText = 'position:fixed;inset:0;z-index:999;display:flex;align-items:center;justify-content:center;background:rgba(7,17,30,0.88);backdrop-filter:blur(8px);padding:20px';
+    modal.innerHTML = `
+      <div style="background:#0A1828;border:1px solid rgba(59,130,246,0.3);padding:40px 36px;max-width:420px;width:100%;position:relative">
+        <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#1D4ED8,#3B82F6,#60A5FA)"></div>
+        <div style="font-size:10px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:#3B82F6;margin-bottom:16px">Deep Analysis</div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:0.04em;color:#E8EEF8;margin-bottom:12px;line-height:1.1">СКОРО<br>ОТКРЫВАЕМ</div>
+        <p style="font-size:14px;color:rgba(232,238,248,0.55);line-height:1.7;margin-bottom:28px">Deep Analysis — полный разбор проекта с финансовой логикой и дорожной картой на 3 месяца. Запускаем в ближайшие дни.<br><br>Пройдите Free Verdict прямо сейчас — это бесплатно и займёт 3 минуты.</p>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <a href="#quiz" onclick="document.getElementById('deep-modal').style.display='none'" style="display:block;background:#3B82F6;color:#fff;border:none;padding:14px;text-align:center;font-size:12px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;text-decoration:none;transition:background .2s">Пройти Free Verdict →</a>
+          <button onclick="document.getElementById('deep-modal').style.display='none'" style="background:transparent;border:1px solid rgba(255,255,255,0.1);color:rgba(232,238,248,0.35);padding:12px;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;cursor:pointer;font-family:'DM Sans',sans-serif;width:100%;transition:all .2s">Закрыть</button>
+        </div>
+      </div>`;
+    modal.addEventListener('click', function(e){ if(e.target===modal) modal.style.display='none'; });
+    document.body.appendChild(modal);
+  } else {
+    modal.style.display = 'flex';
+  }
+}
+
 function orderDeepAnalysis(){
-  // TODO: интегрировать платёжную систему
-  alert('Платёжная система будет подключена в ближайшие дни. Напишите нам в Telegram: @LadderBizBot');
+  showDeepComingSoon();
 }
 
 function restartQuiz(){
@@ -744,9 +1321,18 @@ function restartQuiz(){
   document.getElementById('verdict-result').classList.remove('active');
   document.getElementById('error-screen').classList.remove('active');
   document.getElementById('progressBar').style.width='0%';
+  document.querySelectorAll('.q-option').forEach(o=>o.classList.remove('selected'));
+  document.querySelectorAll('.q-input').forEach(i=>i.value='');
   show('step-0');
   document.getElementById('quiz').scrollIntoView({behavior:'smooth'});
 }
+
+// Сброс при загрузке страницы
+window.addEventListener('load', function(){
+  document.getElementById('waiting-screen').classList.remove('active');
+  document.getElementById('verdict-result').classList.remove('active');
+  document.getElementById('error-screen').classList.remove('active');
+});
 
 // ── АНИМАЦИИ ──
 const obs=new IntersectionObserver((es)=>{es.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('vis'),i*80);obs.unobserve(e.target);}});},{threshold:0.05});
