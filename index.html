@@ -250,8 +250,8 @@ footer{padding:28px 64px;border-top:1px solid rgba(255,255,255,0.06);display:fle
 .fu{opacity:0;transform:translateY(16px);transition:opacity .7s ease,transform .7s ease}
 .fu.vis{opacity:1;transform:translateY(0)}
 @media(max-width:960px){
-  html,body{overflow-x:hidden;max-width:100vw;width:100%}
   *{max-width:100%;word-break:break-word}
+  html,body{overflow-x:hidden;max-width:100vw;width:100%}
   nav{padding:0 16px;height:56px}
   .nav-link{display:none}
   .nav-cta{padding:8px 14px;font-size:12px}
@@ -259,7 +259,7 @@ footer{padding:28px 64px;border-top:1px solid rgba(255,255,255,0.06);display:fle
   .hero-left{padding:88px 20px 52px;border-right:none;border-bottom:1px solid rgba(255,255,255,0.06)}
   .hero h1{font-size:clamp(40px,10vw,64px)}
   .hero-sub{font-size:15px;margin-bottom:36px}
-  .hero-right{padding:36px 20px;min-height:220px}
+  .hero-right{display:none}
   .scenarios,.verdict-section,.pricing,.quiz{padding:52px 20px}
   .sc-header,.vd-inner,.pr-header,.quiz-inner{grid-template-columns:1fr;gap:32px}
   .sc-grid{grid-template-columns:1fr 1fr}
@@ -283,8 +283,15 @@ footer{padding:28px 64px;border-top:1px solid rgba(255,255,255,0.06);display:fle
   .vr-score-block{padding:24px 20px}
   .vr-block{padding:20px 16px}
   footer{padding:20px;flex-direction:column;text-align:center}
-  .hero-illustration{max-width:100%;overflow:hidden}
   svg{max-width:100%;height:auto}
+  .roadmap{padding:52px 20px}
+  .rm-grid{grid-template-columns:1fr}
+  .rm-card{padding:28px 20px}
+  .rm-price{font-size:28px}
+  .rm-name{font-size:15px}
+  .rm-text{font-size:13px}
+  .rm-feat{font-size:13px}
+  .rm-btn{font-size:12px;padding:14px}
 }
 @media(max-width:480px){
   .sc-grid{grid-template-columns:1fr}
