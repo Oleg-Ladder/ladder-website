@@ -246,9 +246,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .rm-free-btn{display:block;width:100%;padding:18px 32px;background:#3B82F6;color:#fff;border:none;font-size:14px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;text-align:center;text-decoration:none;transition:all .2s;font-family:'DM Sans',sans-serif;animation:pulse-btn 2s infinite}
 .rm-free-btn:hover{background:#2563EB;transform:translateY(-2px)}
 .rm-free-sub{font-size:11px;color:rgba(232,238,248,0.35);text-align:center;letter-spacing:0.04em}
-.rm-btn.waitlist{background:transparent;border:1px solid rgba(255,255,255,0.15);color:rgba(232,238,248,0.6)}
+.rm-btn.waitlist{background:#07111E;border:1px solid #3B82F6;color:#3B82F6}
 .rm-btn.active{background:#3B82F6;color:#fff}
-.rm-btn.waitlist:hover{border-color:#3B82F6;color:#E8EEF8}
+.rm-btn.waitlist:hover{background:#3B82F6;color:#fff}
 .waitlist-modal{display:none;position:fixed;inset:0;z-index:999;align-items:center;justify-content:center;background:rgba(7,17,30,0.92);backdrop-filter:blur(8px);padding:20px}
 .waitlist-modal.open{display:flex}
 .wl-box{background:#0A1828;border:1px solid rgba(59,130,246,0.3);padding:40px 36px;max-width:420px;width:100%;position:relative}
@@ -451,7 +451,7 @@ footer{padding:28px 64px;border-top:1px solid rgba(255,255,255,0.06);display:fle
     <div class="vd-card fu">
       <div class="vd-card-header">
         <div><div class="vdh-label">Ladder Score</div><div class="vdh-case">Кофейня в спальном районе, Москва</div></div>
-        <div class="vdh-right"><div class="vdh-score">61<span>/100</span></div><div class="vdh-risk">СРЕДНИЙ РИСК</div></div>
+        <div class="vdh-right"><div class="vdh-score"><span id="score-counter">0</span><span>/100</span></div><div class="vdh-risk">СРЕДНИЙ РИСК</div></div>
       </div>
       <div class="vd-axes">
         <div class="ax-row"><div class="ax-lbl">Идея <span>7/10</span></div><div class="ax-bar"><div class="ax-fill" style="width:70%"></div></div></div>
@@ -1516,10 +1516,49 @@ window.addEventListener('load', function(){
 });
 
 // ── АНИМАЦИИ ──
-const obs=new IntersectionObserver((es)=>{es.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('vis'),i*80);obs.unobserve(e.target);}});},{threshold:0.05});
-document.querySelectorAll('.fu').forEach(el=>obs.observe(el));
-const bObs=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll('.ax-fill,.vam-fill').forEach(b=>{const w=b.getAttribute('data-w')||b.style.width;if(!b.getAttribute('data-w'))b.setAttribute('data-w',w);b.style.width='0';b.style.transition='none';setTimeout(()=>{b.style.transition='width 0.8s ease';b.style.width=w;},100);});}});},{threshold:0.2});
-document.querySelectorAll('.vd-card,.vd-left').forEach(el=>bObs.observe(el));
+function animateBars(container) {
+  container.querySelectorAll('.ax-fill,.vam-fill').forEach(b => {
+    const w = b.getAttribute('data-w') || b.style.width;
+    if (!b.getAttribute('data-w')) b.setAttribute('data-w', w);
+    b.style.width = '0';
+    b.style.transition = 'none';
+    setTimeout(() => {
+      b.style.transition = 'width 1s ease';
+      b.style.width = w;
+    }, 80);
+  });
+}
+
+function animateCounter(el, target, duration) {
+  let start = 0;
+  const step = Math.ceil(target / (duration / 30));
+  const timer = setInterval(() => {
+    start += step;
+    if (start >= target) {
+      start = target;
+      clearInterval(timer);
+    }
+    el.textContent = start;
+  }, 30);
+}
+
+let scoreAnimated = false;
+const bObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      animateBars(e.target);
+      const counter = document.getElementById('score-counter');
+      if (counter && !scoreAnimated) {
+        scoreAnimated = false;
+      }
+      if (counter) {
+        animateCounter(counter, 61, 900);
+      }
+    }
+  });
+}, {threshold: 0.3});
+
+document.querySelectorAll('.vd-card,.vd-axes-mini').forEach(el => bObs.observe(el));
 </script>
 </body>
 </html>
