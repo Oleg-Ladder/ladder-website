@@ -234,9 +234,20 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .rm-feat{font-size:12px;color:rgba(232,238,248,0.65);display:flex;gap:8px;align-items:flex-start}
 .rm-feat::before{content:'→';color:#3B82F6;flex-shrink:0}
 .rm-btn{width:100%;padding:12px;border:none;font-size:11px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s;text-align:center;text-decoration:none;display:block}
-.rm-btn.active{background:#3B82F6;color:#fff}
-.rm-btn.active:hover{background:#2563EB}
+.rm-grid-3{grid-template-columns:repeat(3,1fr)}
+.rm-free{display:grid;grid-template-columns:1fr auto;gap:48px;align-items:center;background:linear-gradient(135deg,rgba(59,130,246,0.08) 0%,rgba(29,78,216,0.04) 100%);border:1px solid rgba(59,130,246,0.25);padding:48px;margin-bottom:2px;position:relative;overflow:hidden}
+.rm-free::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#1D4ED8,#3B82F6,#60A5FA)}
+.rm-free-left{flex:1}
+.rm-free-price{font-family:'Bebas Neue',sans-serif;font-size:56px;color:#E8EEF8;line-height:1;margin:12px 0 4px;letter-spacing:0.04em}
+.rm-free-name{font-size:20px;font-weight:500;color:#E8EEF8;margin-bottom:12px}
+.rm-free-desc{font-size:15px;color:rgba(232,238,248,0.65);line-height:1.7;max-width:540px;margin-bottom:20px}
+.rm-free-features{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.rm-free-right{display:flex;flex-direction:column;align-items:center;gap:16px;min-width:260px}
+.rm-free-btn{display:block;width:100%;padding:18px 32px;background:#3B82F6;color:#fff;border:none;font-size:14px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;text-align:center;text-decoration:none;transition:all .2s;font-family:'DM Sans',sans-serif;animation:pulse-btn 2s infinite}
+.rm-free-btn:hover{background:#2563EB;transform:translateY(-2px)}
+.rm-free-sub{font-size:11px;color:rgba(232,238,248,0.35);text-align:center;letter-spacing:0.04em}
 .rm-btn.waitlist{background:transparent;border:1px solid rgba(255,255,255,0.15);color:rgba(232,238,248,0.6)}
+.rm-btn.active{background:#3B82F6;color:#fff}
 .rm-btn.waitlist:hover{border-color:#3B82F6;color:#E8EEF8}
 .waitlist-modal{display:none;position:fixed;inset:0;z-index:999;align-items:center;justify-content:center;background:rgba(7,17,30,0.92);backdrop-filter:blur(8px);padding:20px}
 .waitlist-modal.open{display:flex}
@@ -269,8 +280,8 @@ footer{padding:28px 64px;border-top:1px solid rgba(255,255,255,0.06);display:fle
 .f-logo{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:0.12em;color:rgba(232,238,248,0.3)}
 .f-logo span{color:#3B82F6}
 .f-text{font-size:12px;color:rgba(232,238,248,0.25);letter-spacing:0.04em}
-.fu{opacity:0;transform:translateY(16px);transition:opacity .7s ease,transform .7s ease}
-.fu.vis{opacity:1;transform:translateY(0)}
+.fu{opacity:1;transform:none}
+.fu.vis{opacity:1;transform:none}
 @media(max-width:960px){
   html,body{overflow-x:hidden;max-width:100vw;width:100%}
   p,h1,h2,h3,h4,h5,li{word-break:break-word}
@@ -308,6 +319,12 @@ footer{padding:28px 64px;border-top:1px solid rgba(255,255,255,0.06);display:fle
   svg{max-width:100%;height:auto}
   .roadmap{padding:52px 20px}
   .rm-grid{grid-template-columns:1fr}
+  .rm-grid-3{grid-template-columns:1fr}
+  .rm-free{grid-template-columns:1fr;padding:28px 20px;gap:24px}
+  .rm-free-price{font-size:40px}
+  .rm-free-features{grid-template-columns:1fr}
+  .rm-free-right{min-width:auto;width:100%}
+  .rm-free-btn{padding:16px}
   .rm-card{padding:28px 20px}
   .rm-price{font-size:28px}
   .rm-name{font-size:15px}
@@ -500,23 +517,30 @@ footer{padding:28px 64px;border-top:1px solid rgba(255,255,255,0.06);display:fle
 <section class="roadmap" id="roadmap">
   <div class="rm-eyebrow">Экосистема продуктов</div>
   <h2 class="rm-title">БОЛЬШЕ ЧЕМ<br>ПРОСТО <em>ВЕРДИКТ</em></h2>
-  <p class="rm-desc">Ladder растёт вместе с тобой — от первой проверки идеи до полной дорожной карты с финансовой моделью. Присоединяйся к листу ожидания.</p>
-  <div class="rm-grid">
+  <p class="rm-desc">Ladder растёт вместе с тобой — от первой проверки идеи до полной дорожной карты с финансовой моделью.</p>
 
-    <div class="rm-card c1">
-      <div class="rm-status live">Доступно сейчас</div>
-      <div class="rm-price">0 ₽</div>
-      <div class="rm-name">Free Verdict</div>
-      <div class="rm-text">Базовая диагностика — проверь идею за 3 минуты.</div>
-      <div class="rm-features">
-        <div class="rm-feat">Ladder Score по параметрам</div>
-        <div class="rm-feat">Топ-3 риска проекта</div>
+  <!-- FREE VERDICT — ВВЕРХУ НА ВСЮ ШИРИНУ -->
+  <div class="rm-free">
+    <div class="rm-free-left">
+      <div class="rm-status live">Доступно прямо сейчас — бесплатно</div>
+      <div class="rm-free-price">0 ₽</div>
+      <div class="rm-free-name">Free Verdict</div>
+      <div class="rm-free-desc">Три независимых AI проверят твою идею и вынесут честный вердикт — прямо на сайте, без email и регистрации. Займёт 3 минуты.</div>
+      <div class="rm-free-features">
+        <div class="rm-feat">Ladder Score по 6 параметрам</div>
+        <div class="rm-feat">Топ-3 критических риска</div>
         <div class="rm-feat">Первое действие прямо сейчас</div>
-        <div class="rm-feat">Вердикт на сайте — без email</div>
+        <div class="rm-feat">Вердикт на сайте — анонимно</div>
       </div>
-      <a href="#quiz" class="rm-btn active">Начать бесплатно →</a>
     </div>
+    <div class="rm-free-right">
+      <a href="#quiz" class="rm-free-btn">ПОПРОБУЙ БЕСПЛАТНО →</a>
+      <div class="rm-free-sub">Никакой регистрации · Результат за 60 секунд</div>
+    </div>
+  </div>
 
+  <!-- 3 ПЛАТНЫХ ПРОДУКТА НИЖЕ -->
+  <div class="rm-grid rm-grid-3">
     <div class="rm-card c2">
       <div class="rm-status soon">Скоро</div>
       <div class="rm-price">2 990 ₽</div>
@@ -558,6 +582,7 @@ footer{padding:28px 64px;border-top:1px solid rgba(255,255,255,0.06);display:fle
       </div>
       <button class="rm-btn waitlist" onclick="openWaitlist('Дорожная карта — от 40 000 ₽')">Войти в лист ожидания</button>
     </div>
+  </div>
 
   </div>
 </section>
