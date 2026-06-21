@@ -184,7 +184,54 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .dul-item::before{content:'→';color:#3B82F6;flex-shrink:0}
 .btn-deep{width:100%;padding:16px;background:#3B82F6;border:none;color:#fff;font-size:13px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background .2s}
 .btn-deep:hover{background:#2563EB}
-.q-option.multi-hint{border-color:rgba(59,130,246,0.3)}
+@keyframes pulse-btn{0%,100%{box-shadow:0 0 0 0 rgba(59,130,246,0.5)}50%{box-shadow:0 0 0 8px rgba(59,130,246,0)}}
+.roadmap{padding:100px 64px;background:#0A1828;border-top:1px solid rgba(255,255,255,0.06)}
+.rm-eyebrow{font-size:11px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:#3B82F6;margin-bottom:20px;display:flex;align-items:center;gap:12px}
+.rm-eyebrow::before{content:'';width:32px;height:1px;background:#3B82F6}
+.rm-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,3.5vw,54px);line-height:0.95;letter-spacing:0.02em;color:#E8EEF8;margin-bottom:16px}
+.rm-title em{color:#3B82F6;font-style:normal}
+.rm-desc{font-size:16px;color:rgba(232,238,248,0.6);line-height:1.75;max-width:560px;margin-bottom:64px}
+.rm-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,0.06)}
+.rm-card{background:#0A1828;padding:36px 28px;position:relative;overflow:hidden;transition:background .25s}
+.rm-card:hover{background:#0D2137}
+.rm-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;transition:transform .3s;transform-origin:left}
+.rm-card.c1::before{background:#3B82F6;transform:scaleX(1)}
+.rm-card.c2::before{background:#8B5CF6;transform:scaleX(0)}
+.rm-card.c3::before{background:#10B981;transform:scaleX(0)}
+.rm-card.c4::before{background:#F59E0B;transform:scaleX(0)}
+.rm-card:hover::before{transform:scaleX(1)}
+.rm-status{font-size:10px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:20px;display:inline-block;padding:4px 10px}
+.rm-status.live{color:#10B981;background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.2)}
+.rm-status.soon{color:#3B82F6;background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.2)}
+.rm-status.coming{color:#8B5CF6;background:rgba(139,92,246,0.1);border:1px solid rgba(139,92,246,0.2)}
+.rm-status.future{color:#F59E0B;background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.2)}
+.rm-price{font-family:'Bebas Neue',sans-serif;font-size:36px;color:#E8EEF8;letter-spacing:0.04em;line-height:1;margin-bottom:8px}
+.rm-name{font-size:16px;font-weight:500;color:#E8EEF8;margin-bottom:12px}
+.rm-text{font-size:13px;color:rgba(232,238,248,0.55);line-height:1.65;margin-bottom:24px}
+.rm-features{display:flex;flex-direction:column;gap:8px;margin-bottom:28px}
+.rm-feat{font-size:12px;color:rgba(232,238,248,0.65);display:flex;gap:8px;align-items:flex-start}
+.rm-feat::before{content:'→';color:#3B82F6;flex-shrink:0}
+.rm-btn{width:100%;padding:12px;border:none;font-size:11px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s;text-align:center;text-decoration:none;display:block}
+.rm-btn.active{background:#3B82F6;color:#fff}
+.rm-btn.active:hover{background:#2563EB}
+.rm-btn.waitlist{background:transparent;border:1px solid rgba(255,255,255,0.15);color:rgba(232,238,248,0.6)}
+.rm-btn.waitlist:hover{border-color:#3B82F6;color:#E8EEF8}
+.waitlist-modal{display:none;position:fixed;inset:0;z-index:999;align-items:center;justify-content:center;background:rgba(7,17,30,0.92);backdrop-filter:blur(8px);padding:20px}
+.waitlist-modal.open{display:flex}
+.wl-box{background:#0A1828;border:1px solid rgba(59,130,246,0.3);padding:40px 36px;max-width:420px;width:100%;position:relative}
+.wl-box::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#1D4ED8,#3B82F6,#60A5FA)}
+.wl-tag{font-size:10px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:#3B82F6;margin-bottom:12px}
+.wl-title{font-family:'Bebas Neue',sans-serif;font-size:28px;color:#E8EEF8;margin-bottom:8px;letter-spacing:0.04em}
+.wl-desc{font-size:13px;color:rgba(232,238,248,0.5);line-height:1.7;margin-bottom:24px}
+.wl-input{width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.12);padding:13px 16px;font-size:14px;color:#E8EEF8;font-family:'DM Sans',sans-serif;margin-bottom:10px;outline:none;transition:border-color .2s}
+.wl-input:focus{border-color:#3B82F6}
+.wl-submit{width:100%;padding:13px;background:#3B82F6;border:none;color:#fff;font-size:12px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background .2s;margin-bottom:10px}
+.wl-submit:hover{background:#2563EB}
+.wl-close{width:100%;padding:10px;background:transparent;border:1px solid rgba(255,255,255,0.1);color:rgba(232,238,248,0.35);font-size:11px;letter-spacing:0.06em;text-transform:uppercase;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s}
+.wl-close:hover{border-color:#3B82F6;color:#E8EEF8}
+.wl-success{display:none;text-align:center;padding:20px 0}
+.wl-success-icon{font-size:40px;margin-bottom:12px}
+.wl-success-text{font-size:15px;color:#10B981;font-weight:500}
 .deep-upsell-cta{font-size:13px;color:rgba(232,238,248,0.5);text-align:center;margin-top:8px}
 .btn-restart{width:100%;padding:12px;background:transparent;border:1px solid rgba(255,255,255,0.1);color:rgba(232,238,248,0.35);font-size:12px;letter-spacing:0.06em;text-transform:uppercase;cursor:pointer;font-family:'DM Sans',sans-serif;margin-top:8px;transition:all .2s}
 .btn-restart:hover{border-color:#3B82F6;color:#E8EEF8}
@@ -256,7 +303,7 @@ footer{padding:28px 64px;border-top:1px solid rgba(255,255,255,0.06);display:fle
   <div class="nav-right">
     <a href="#how" class="nav-link">Как работает</a>
     <a href="#pricing" class="nav-link">Тарифы</a>
-    <a href="#quiz" class="nav-cta">Пройти диагностику</a>
+    <a href="#quiz" class="nav-cta" style="background:#3B82F6;box-shadow:0 0 0 0 rgba(59,130,246,0.5);animation:pulse-btn 2s infinite">Начать бесплатно →</a>
   </div>
 </nav>
 
@@ -441,7 +488,89 @@ footer{padding:28px 64px;border-top:1px solid rgba(255,255,255,0.06);display:fle
 
 <div class="divider"></div>
 
-<!-- QUIZ -->
+<section class="roadmap" id="roadmap">
+  <div class="rm-eyebrow">Экосистема продуктов</div>
+  <h2 class="rm-title">БОЛЬШЕ ЧЕМ<br>ПРОСТО <em>ВЕРДИКТ</em></h2>
+  <p class="rm-desc">Ladder растёт вместе с тобой — от первой проверки идеи до полной дорожной карты с финансовой моделью. Присоединяйся к листу ожидания.</p>
+  <div class="rm-grid">
+
+    <div class="rm-card c1">
+      <div class="rm-status live">Доступно сейчас</div>
+      <div class="rm-price">0 ₽</div>
+      <div class="rm-name">Free Verdict</div>
+      <div class="rm-text">Базовая диагностика — проверь идею за 3 минуты.</div>
+      <div class="rm-features">
+        <div class="rm-feat">Ladder Score по параметрам</div>
+        <div class="rm-feat">Топ-3 риска проекта</div>
+        <div class="rm-feat">Первое действие прямо сейчас</div>
+        <div class="rm-feat">Вердикт на сайте — без email</div>
+      </div>
+      <a href="#quiz" class="rm-btn active">Начать бесплатно →</a>
+    </div>
+
+    <div class="rm-card c2">
+      <div class="rm-status soon">Скоро</div>
+      <div class="rm-price">2 990 ₽</div>
+      <div class="rm-name">Deep Analysis</div>
+      <div class="rm-text">Полный разбор с финансовой логикой и планом действий.</div>
+      <div class="rm-features">
+        <div class="rm-feat">Глубокий анализ слабых мест</div>
+        <div class="rm-feat">Проверка финансовой модели</div>
+        <div class="rm-feat">Дорожная карта на 90 дней</div>
+        <div class="rm-feat">Скрипт первой продажи</div>
+      </div>
+      <button class="rm-btn waitlist" onclick="openWaitlist('Deep Analysis — 2 990 ₽')">Войти в лист ожидания</button>
+    </div>
+
+    <div class="rm-card c3">
+      <div class="rm-status coming">В разработке</div>
+      <div class="rm-price">990 ₽/мес</div>
+      <div class="rm-name">Мониторинг</div>
+      <div class="rm-text">Проверяй как меняется ситуация — раз в месяц или квартал.</div>
+      <div class="rm-features">
+        <div class="rm-feat">Повторная диагностика через 3 мес.</div>
+        <div class="rm-feat">Динамика по параметрам</div>
+        <div class="rm-feat">Сравнение с первым вердиктом</div>
+        <div class="rm-feat">Новые риски и точки роста</div>
+      </div>
+      <button class="rm-btn waitlist" onclick="openWaitlist('Мониторинг — 990 ₽/мес')">Войти в лист ожидания</button>
+    </div>
+
+    <div class="rm-card c4">
+      <div class="rm-status future">Этап 3</div>
+      <div class="rm-price">от 40 000 ₽</div>
+      <div class="rm-name">Дорожная карта</div>
+      <div class="rm-text">Полная проработка проекта — для тех кто готов идти до конца.</div>
+      <div class="rm-features">
+        <div class="rm-feat">Детальная финансовая модель</div>
+        <div class="rm-feat">План на 12 месяцев</div>
+        <div class="rm-feat">Анализ рынка и конкурентов</div>
+        <div class="rm-feat">Стратегия привлечения инвестиций</div>
+      </div>
+      <button class="rm-btn waitlist" onclick="openWaitlist('Дорожная карта — от 40 000 ₽')">Войти в лист ожидания</button>
+    </div>
+
+  </div>
+</section>
+
+<!-- WAITLIST MODAL -->
+<div class="waitlist-modal" id="waitlist-modal" onclick="if(event.target===this)closeWaitlist()">
+  <div class="wl-box">
+    <div class="wl-tag" id="wl-product-tag">Deep Analysis</div>
+    <div class="wl-title">ХОЧУ ПЕРВЫМ</div>
+    <div class="wl-desc">Оставь контакт — напишем как только откроется. Никакого спама, только один анонс.</div>
+    <div id="wl-form">
+      <input class="wl-input" type="text" id="wl-name" placeholder="Имя">
+      <input class="wl-input" type="tel" id="wl-phone" placeholder="Телефон или Telegram">
+      <button class="wl-submit" onclick="submitWaitlist()">Занять место →</button>
+      <button class="wl-close" onclick="closeWaitlist()">Закрыть</button>
+    </div>
+    <div class="wl-success" id="wl-success">
+      <div class="wl-success-icon">✓</div>
+      <div class="wl-success-text">Отлично! Мы напишем первым.</div>
+    </div>
+  </div>
+</div>
 <section class="quiz" id="quiz">
   <div class="quiz-inner">
     <div>
@@ -1286,7 +1415,25 @@ function getDemoVerdict(){
   };
 }
 
-function showDeepComingSoon(){
+function openWaitlist(product){
+  document.getElementById('wl-product-tag').textContent=product;
+  document.getElementById('wl-form').style.display='block';
+  document.getElementById('wl-success').style.display='none';
+  document.getElementById('wl-name').value='';
+  document.getElementById('wl-phone').value='';
+  document.getElementById('waitlist-modal').classList.add('open');
+}
+function closeWaitlist(){
+  document.getElementById('waitlist-modal').classList.remove('open');
+}
+function submitWaitlist(){
+  const name=document.getElementById('wl-name').value.trim();
+  const phone=document.getElementById('wl-phone').value.trim();
+  if(!name||!phone){alert('Пожалуйста, заполните оба поля');return;}
+  document.getElementById('wl-form').style.display='none';
+  document.getElementById('wl-success').style.display='block';
+  setTimeout(closeWaitlist,2500);
+}
   // Создаём модальное окно если ещё нет
   let modal = document.getElementById('deep-modal');
   if(!modal){
