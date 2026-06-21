@@ -48,10 +48,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .sc-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:#3B82F6;transform:scaleX(0);transform-origin:left;transition:transform .3s}
 .sc-card:hover{background:#0D1F35}
 .sc-card:hover::before{transform:scaleX(1)}
-.sc-num{font-family:'Bebas Neue',sans-serif;font-size:40px;color:rgba(59,130,246,0.2);letter-spacing:0.04em;line-height:1;margin-bottom:20px;transition:color .25s}
-.sc-card:hover .sc-num{color:rgba(59,130,246,0.5)}
+.sc-num{font-family:'Bebas Neue',sans-serif;font-size:40px;color:rgba(59,130,246,0.5);letter-spacing:0.04em;line-height:1;margin-bottom:20px;transition:color .25s}
+.sc-card:hover .sc-num{color:#3B82F6}
 .sc-name{font-size:16px;font-weight:500;color:#E8EEF8;margin-bottom:10px;line-height:1.3}
-.sc-text{font-size:13px;color:rgba(232,238,248,0.5);line-height:1.65}
+.sc-text{font-size:14px;color:rgba(232,238,248,0.75);line-height:1.65}
 .verdict-section{padding:100px 64px;background:#0A1828;border-top:1px solid rgba(255,255,255,0.06);border-bottom:1px solid rgba(255,255,255,0.06)}
 .vd-inner{display:grid;grid-template-columns:1fr 1.6fr;gap:80px;align-items:start}
 .vd-eyebrow{font-size:11px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:#3B82F6;margin-bottom:20px;display:flex;align-items:center;gap:12px}
@@ -217,8 +217,8 @@ footer{padding:28px 64px;border-top:1px solid rgba(255,255,255,0.06);display:fle
   .sc-header,.vd-inner,.pr-header,.quiz-inner{grid-template-columns:1fr;gap:32px}
   .sc-grid{grid-template-columns:1fr 1fr}
   .sc-card{padding:24px 16px}
-  .sc-name{font-size:14px}
-  .sc-text{font-size:12px}
+  .sc-name{font-size:15px}
+  .sc-text{font-size:14px;color:rgba(232,238,248,0.8)}
   .pr-grid{grid-template-columns:1fr;max-width:100%}
   .pr-card{padding:32px 24px}
   .pr-price{font-size:48px}
@@ -332,9 +332,9 @@ footer{padding:28px 64px;border-top:1px solid rgba(255,255,255,0.06);display:fle
   <div class="sc-header fu">
     <div>
       <div class="sc-eyebrow">Что мы проверяем</div>
-      <h2 class="sc-title">ВАША<br><em>СИТУАЦИЯ</em><br>— НАШ АНАЛИЗ</h2>
+      <h2 class="sc-title">ТВОЯ ИДЕЯ<br><em>ПОД</em><br>МИКРОСКОПОМ</h2>
     </div>
-    <p class="sc-desc">Ladder работает с четырьмя типами запросов. Под каждый — свои вопросы, своя логика анализа, свой вердикт. Никаких универсальных шаблонов.</p>
+    <p class="sc-desc">Четыре сценария — одна цель: узнать правду до того, как вложишь деньги. Под каждый сценарий — свои вопросы, своя логика, свой вердикт. Никаких универсальных шаблонов.</p>
   </div>
   <div class="sc-grid fu">
     <div class="sc-card" onclick="document.getElementById('quiz').scrollIntoView({behavior:'smooth'})">
@@ -366,8 +366,8 @@ footer{padding:28px 64px;border-top:1px solid rgba(255,255,255,0.06);display:fle
   <div class="vd-inner">
     <div class="fu">
       <div class="vd-eyebrow">Пример вердикта</div>
-      <h2 class="vd-title">ЧТО<br>ПОЛУЧАЕТЕ<br>НА <em>ВЫХОДЕ</em></h2>
-      <p class="vd-desc">Не мотивационный текст. Конкретный разбор вашей ситуации по параметрам — с баллами, рисками и рекомендациями.</p>
+      <h2 class="vd-title">НЕ СОВЕТ.<br>НЕ ПРОГНОЗ.<br><em>ПРИГОВОР.</em></h2>
+      <p class="vd-desc">Три независимых AI смотрят на твою идею с разных сторон. Claude-арбитр сводит всё в один вердикт — с баллами, рисками и конкретным шагом. Без воды.</p>
       <div class="vd-axes-mini">
         <div class="vam-row"><span class="vam-label">Идея</span><div class="vam-bar"><div class="vam-fill" style="width:70%"></div></div><span class="vam-val">7</span></div>
         <div class="vam-row"><span class="vam-label">Рынок</span><div class="vam-bar"><div class="vam-fill" style="width:50%"></div></div><span class="vam-val">5</span></div>
@@ -1337,7 +1337,7 @@ window.addEventListener('load', function(){
 // ── АНИМАЦИИ ──
 const obs=new IntersectionObserver((es)=>{es.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('vis'),i*80);obs.unobserve(e.target);}});},{threshold:0.05});
 document.querySelectorAll('.fu').forEach(el=>obs.observe(el));
-const bObs=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll('.ax-fill,.vam-fill').forEach(b=>{const w=b.style.width;b.style.width='0';setTimeout(()=>{b.style.width=w;},300);});bObs.unobserve(e.target);}});},{threshold:0.2});
+const bObs=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll('.ax-fill,.vam-fill').forEach(b=>{const w=b.getAttribute('data-w')||b.style.width;if(!b.getAttribute('data-w'))b.setAttribute('data-w',w);b.style.width='0';b.style.transition='none';setTimeout(()=>{b.style.transition='width 0.8s ease';b.style.width=w;},100);});}});},{threshold:0.2});
 document.querySelectorAll('.vd-card,.vd-left').forEach(el=>bObs.observe(el));
 </script>
 </body>
