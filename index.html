@@ -402,14 +402,14 @@ footer{padding:28px 64px;border-top:1px solid rgba(255,255,255,0.06);display:fle
 <div class="divider"></div>
 
 <section class="scenarios" id="how">
-  <div class="sc-header fu">
+  <div class="sc-header">
     <div>
       <div class="sc-eyebrow">Что мы проверяем</div>
       <h2 class="sc-title">ТВОЯ ИДЕЯ<br><em>ПОД</em><br>МИКРОСКОПОМ</h2>
     </div>
     <p class="sc-desc">Четыре сценария — одна цель: узнать правду до того, как вложишь деньги. Под каждый сценарий — свои вопросы, своя логика, свой вердикт. Никаких универсальных шаблонов.</p>
   </div>
-  <div class="sc-grid fu">
+  <div class="sc-grid">
     <div class="sc-card" onclick="document.getElementById('quiz').scrollIntoView({behavior:'smooth'})">
       <div class="sc-num">01</div>
       <div class="sc-name">Новая идея</div>
@@ -437,29 +437,29 @@ footer{padding:28px 64px;border-top:1px solid rgba(255,255,255,0.06);display:fle
 
 <section class="verdict-section">
   <div class="vd-inner">
-    <div class="fu">
+    <div class="">
       <div class="vd-eyebrow">Пример вердикта</div>
       <h2 class="vd-title">НЕ СОВЕТ.<br>НЕ ПРОГНОЗ.<br><em>ПРИГОВОР.</em></h2>
       <p class="vd-desc">Три независимых AI смотрят на твою идею с разных сторон. Claude-арбитр сводит всё в один вердикт — с баллами, рисками и конкретным шагом. Без воды.</p>
       <div class="vd-axes-mini">
-        <div class="vam-row"><span class="vam-label">Идея</span><div class="vam-bar"><div class="vam-fill" style="width:70%"></div></div><span class="vam-val">7</span></div>
-        <div class="vam-row"><span class="vam-label">Рынок</span><div class="vam-bar"><div class="vam-fill" style="width:50%"></div></div><span class="vam-val">5</span></div>
-        <div class="vam-row"><span class="vam-label">Деньги</span><div class="vam-bar"><div class="vam-fill red" style="width:40%"></div></div><span class="vam-val" style="color:#EF4444">4</span></div>
-        <div class="vam-row"><span class="vam-label">Реалистичность</span><div class="vam-bar"><div class="vam-fill" style="width:50%"></div></div><span class="vam-val">5</span></div>
+        <div class="vam-row"><span class="vam-label">Идея</span><div class="vam-bar"><div class="vam-fill" data-w="70%" style="width:0"></div></div><span class="vam-val">7</span></div>
+        <div class="vam-row"><span class="vam-label">Рынок</span><div class="vam-bar"><div class="vam-fill" data-w="50%" style="width:0"></div></div><span class="vam-val">5</span></div>
+        <div class="vam-row"><span class="vam-label">Деньги</span><div class="vam-bar"><div class="vam-fill red" data-w="40%" style="width:0"></div></div><span class="vam-val" style="color:#EF4444">4</span></div>
+        <div class="vam-row"><span class="vam-label">Реалистичность</span><div class="vam-bar"><div class="vam-fill" data-w="50%" style="width:0"></div></div><span class="vam-val">5</span></div>
       </div>
     </div>
-    <div class="vd-card fu">
+    <div class="vd-card">
       <div class="vd-card-header">
         <div><div class="vdh-label">Ladder Score</div><div class="vdh-case">Кофейня в спальном районе, Москва</div></div>
         <div class="vdh-right"><div class="vdh-score"><span id="score-counter">0</span><span>/100</span></div><div class="vdh-risk">СРЕДНИЙ РИСК</div></div>
       </div>
       <div class="vd-axes">
-        <div class="ax-row"><div class="ax-lbl">Идея <span>7/10</span></div><div class="ax-bar"><div class="ax-fill" style="width:70%"></div></div></div>
-        <div class="ax-row"><div class="ax-lbl">Рынок <span>5/10</span></div><div class="ax-bar"><div class="ax-fill" style="width:50%"></div></div></div>
-        <div class="ax-row"><div class="ax-lbl">Деньги <span>4/10</span></div><div class="ax-bar"><div class="ax-fill red" style="width:40%"></div></div></div>
-        <div class="ax-row"><div class="ax-lbl">Команда <span>6/10</span></div><div class="ax-bar"><div class="ax-fill" style="width:60%"></div></div></div>
-        <div class="ax-row"><div class="ax-lbl">Реалистичность <span>5/10</span></div><div class="ax-bar"><div class="ax-fill" style="width:50%"></div></div></div>
-        <div class="ax-row"><div class="ax-lbl">Продажи <span>7/10</span></div><div class="ax-bar"><div class="ax-fill" style="width:70%"></div></div></div>
+        <div class="ax-row"><div class="ax-lbl">Идея <span>7/10</span></div><div class="ax-bar"><div class="ax-fill" data-w="70%" style="width:0"></div></div></div>
+        <div class="ax-row"><div class="ax-lbl">Рынок <span>5/10</span></div><div class="ax-bar"><div class="ax-fill" data-w="50%" style="width:0"></div></div></div>
+        <div class="ax-row"><div class="ax-lbl">Деньги <span>4/10</span></div><div class="ax-bar"><div class="ax-fill red" data-w="40%" style="width:0"></div></div></div>
+        <div class="ax-row"><div class="ax-lbl">Команда <span>6/10</span></div><div class="ax-bar"><div class="ax-fill" data-w="60%" style="width:0"></div></div></div>
+        <div class="ax-row"><div class="ax-lbl">Реалистичность <span>5/10</span></div><div class="ax-bar"><div class="ax-fill" data-w="50%" style="width:0"></div></div></div>
+        <div class="ax-row"><div class="ax-lbl">Продажи <span>7/10</span></div><div class="ax-bar"><div class="ax-fill" data-w="70%" style="width:0"></div></div></div>
       </div>
       <div class="vd-quote">«Идея эмоционально привлекательна, но <em>финансовая модель не выдержит реальных условий</em>. Аренда в выбранной локации съест маржу раньше, чем появится постоянный поток клиентов.»</div>
       <div class="vd-recs">
@@ -474,14 +474,14 @@ footer{padding:28px 64px;border-top:1px solid rgba(255,255,255,0.06);display:fle
 <div class="divider"></div>
 
 <section class="pricing" id="pricing">
-  <div class="pr-header fu">
+  <div class="pr-header">
     <div>
       <div class="pr-eyebrow">Тарифы</div>
       <h2 class="pr-title">НАЧНИТЕ<br><em>БЕСПЛАТНО</em></h2>
     </div>
     <p class="pr-desc">Базовая диагностика — бесплатно. Если захотите полного разбора с финансовой логикой и дорожной картой — есть Deep Analysis.</p>
   </div>
-  <div class="pr-grid fu">
+  <div class="pr-grid">
     <div class="pr-card">
       <div class="pr-tag">Free Verdict</div>
       <div class="pr-price">0 ₽</div>
@@ -1516,49 +1516,55 @@ window.addEventListener('load', function(){
 });
 
 // ── АНИМАЦИИ ──
+function animateCounter(el, target) {
+  let cur = 0;
+  el.textContent = '0';
+  const timer = setInterval(() => {
+    cur += 2;
+    if (cur >= target) { cur = target; clearInterval(timer); }
+    el.textContent = cur;
+  }, 18);
+}
+
 function animateBars(container) {
   container.querySelectorAll('.ax-fill,.vam-fill').forEach(b => {
-    const w = b.getAttribute('data-w') || b.style.width;
-    if (!b.getAttribute('data-w')) b.setAttribute('data-w', w);
-    b.style.width = '0';
+    const finalW = b.getAttribute('data-w');
+    if (!finalW) return;
     b.style.transition = 'none';
+    b.style.width = '0';
     setTimeout(() => {
-      b.style.transition = 'width 1s ease';
-      b.style.width = w;
-    }, 80);
+      b.style.transition = 'width 1.2s ease';
+      b.style.width = finalW;
+    }, 60);
   });
 }
 
-function animateCounter(el, target, duration) {
-  let start = 0;
-  const step = Math.ceil(target / (duration / 30));
-  const timer = setInterval(() => {
-    start += step;
-    if (start >= target) {
-      start = target;
-      clearInterval(timer);
-    }
-    el.textContent = start;
-  }, 30);
+let lastTrigger = 0;
+function checkVerdictVisible() {
+  const section = document.querySelector('.verdict-section');
+  if (!section) return;
+  const rect = section.getBoundingClientRect();
+  const inView = rect.top < window.innerHeight && rect.bottom > 0;
+  const now = Date.now();
+  if (inView && now - lastTrigger > 2000) {
+    lastTrigger = now;
+    section.querySelectorAll('.ax-fill,.vam-fill').forEach(b => {
+      const finalW = b.getAttribute('data-w');
+      if (!finalW) return;
+      b.style.transition = 'none';
+      b.style.width = '0';
+      setTimeout(() => {
+        b.style.transition = 'width 1.2s ease';
+        b.style.width = finalW;
+      }, 60);
+    });
+    const counter = document.getElementById('score-counter');
+    if (counter) animateCounter(counter, 61);
+  }
 }
 
-let scoreAnimated = false;
-const bObs = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      animateBars(e.target);
-      const counter = document.getElementById('score-counter');
-      if (counter && !scoreAnimated) {
-        scoreAnimated = false;
-      }
-      if (counter) {
-        animateCounter(counter, 61, 900);
-      }
-    }
-  });
-}, {threshold: 0.3});
-
-document.querySelectorAll('.vd-card,.vd-axes-mini').forEach(el => bObs.observe(el));
+window.addEventListener('scroll', checkVerdictVisible, {passive:true});
+setTimeout(checkVerdictVisible, 600);
 </script>
 </body>
 </html>
