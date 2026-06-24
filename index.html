@@ -82,6 +82,29 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .vd-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,3.5vw,54px);line-height:0.95;letter-spacing:0.02em;color:#E8EEF8;margin-bottom:24px}
 .vd-title em{color:#3B82F6;font-style:normal}
 .vd-desc{font-size:15px;color:rgba(232,238,248,0.6);line-height:1.75;margin-bottom:40px}
+.vd-left-col{display:flex;flex-direction:column;gap:24px}
+.vd-cases{display:flex;flex-direction:column;gap:8px}
+.vd-case{font-size:13px;color:rgba(232,238,248,0.4);padding:10px 14px;border:1px solid rgba(255,255,255,0.06);cursor:pointer;transition:all .2s}
+.vd-case:hover{color:#E8EEF8;border-color:rgba(59,130,246,0.3)}
+.vd-case.active{color:#3B82F6;border-color:#3B82F6;background:rgba(59,130,246,0.06)}
+.vam-mini{display:flex;flex-direction:column;gap:10px}
+.vd-card-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:24px;padding-bottom:20px;border-bottom:1px solid rgba(255,255,255,0.06)}
+.vd-score-wrap{text-align:right}
+.vd-score-num{font-family:'Bebas Neue',sans-serif;font-size:52px;color:#3B82F6;line-height:1;letter-spacing:0.02em}
+.vd-score-of{font-size:24px;color:rgba(232,238,248,0.3)}
+.vd-risk-badge{font-size:10px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#F59E0B;background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.2);padding:4px 10px;margin-top:6px;display:inline-block}
+.vd-bars{display:flex;flex-direction:column;gap:4px;margin-bottom:24px}
+.vd-bar-row{display:flex;align-items:center;gap:12px;padding:10px 12px;cursor:pointer;transition:background .15s}
+.vd-bar-row:hover{background:rgba(59,130,246,0.04)}
+.vd-bar-lbl{font-size:12px;color:rgba(232,238,248,0.55);width:120px;flex-shrink:0;display:flex;justify-content:space-between}
+.vd-bar-lbl span{color:rgba(232,238,248,0.9);font-weight:500}
+.vd-bar-track{flex:1;height:4px;background:rgba(255,255,255,0.06);overflow:hidden}
+.vd-bar-arrow{font-size:16px;color:rgba(59,130,246,0.4);flex-shrink:0;transition:transform .2s}
+.vd-bar-row.open .vd-bar-arrow{transform:rotate(90deg);color:#3B82F6}
+.vd-detail{display:none;font-size:12px;color:rgba(232,238,248,0.55);padding:6px 12px 12px 144px;line-height:1.6}
+.vd-detail.open{display:block}
+.vd-detail.danger{color:#EF4444;background:rgba(239,68,68,0.04);padding:8px 12px 8px 144px}
+.red-val{color:#EF4444!important}
 .vd-axes-mini{display:flex;flex-direction:column;gap:14px}
 .vam-row{display:flex;align-items:center;gap:14px}
 .vam-label{font-size:12px;color:rgba(232,238,248,0.5);width:110px;flex-shrink:0}
@@ -357,7 +380,7 @@ footer{padding:28px 64px;border-top:1px solid rgba(255,255,255,0.06);display:fle
 <section class="hero">
   <div class="hero-left">
     <div class="hero-eyebrow">Диагностика бизнес-решений</div>
-    <h1>БИЗНЕС-<br>РЕШЕНИЯ<br>НАЧИНАЮТСЯ<br>С <em>ПРАВИЛЬНЫХ</em> ВОПРОСОВ</h1>
+    <h1>БИЗНЕС-<br>РЕШЕНИЯ<br>НАЧИНАЮТСЯ<br><em>С ПРАВИЛЬНЫХ</em><br>ВОПРОСОВ</h1>
     <p class="hero-sub">Ladder анализирует вашу ситуацию через несколько AI-моделей и выдаёт <strong>честный вердикт</strong> — до того как вы потеряли деньги и время.</p>
     <div class="hero-actions">
       <a href="#quiz" class="btn-primary">Пройти диагностику</a>
@@ -436,37 +459,78 @@ footer{padding:28px 64px;border-top:1px solid rgba(255,255,255,0.06);display:fle
 
 <div class="divider"></div>
 
-<section class="verdict-section">
+<section class="verdict-section" id="verdict-demo">
   <div class="vd-inner">
-    <div class="">
+    <div class="vd-left-col">
       <div class="vd-eyebrow">Пример вердикта</div>
-      <h2 class="vd-title">НЕ СОВЕТ.<br>НЕ ПРОГНОЗ.<br><em>ПРИГОВОР.</em></h2>
+      <h2 class="vd-title">НЕ СОВЕТ.<br>НЕ ПРОГНОЗ.<br><em>ДИАГНОЗ.</em></h2>
       <p class="vd-desc">Три независимых AI смотрят на твою идею с разных сторон. Claude-арбитр сводит всё в один вердикт — с баллами, рисками и конкретным шагом. Без воды.</p>
-      <div class="vd-axes-mini">
-        <div class="vam-row"><span class="vam-label">Идея</span><div class="vam-bar"><div class="vam-fill" data-w="70%" style="width:0"></div></div><span class="vam-val">7</span></div>
-        <div class="vam-row"><span class="vam-label">Рынок</span><div class="vam-bar"><div class="vam-fill" data-w="50%" style="width:0"></div></div><span class="vam-val">5</span></div>
-        <div class="vam-row"><span class="vam-label">Деньги</span><div class="vam-bar"><div class="vam-fill red" data-w="40%" style="width:0"></div></div><span class="vam-val" style="color:#EF4444">4</span></div>
-        <div class="vam-row"><span class="vam-label">Реалистичность</span><div class="vam-bar"><div class="vam-fill" data-w="50%" style="width:0"></div></div><span class="vam-val">5</span></div>
+      <div class="vd-cases">
+        <div class="vd-case active" onclick="switchCase(0)">Кофейня, Москва</div>
+        <div class="vd-case" onclick="switchCase(1)">Мебельное производство</div>
+        <div class="vd-case" onclick="switchCase(2)">IT-стартап</div>
+      </div>
+      <div class="vam-mini" id="vam-mini">
+        <div class="vam-row"><span class="vam-label">Идея</span><div class="vam-bar"><div class="vam-fill" id="m0" data-w="70%" style="width:0"></div></div><span class="vam-val" id="mv0">7</span></div>
+        <div class="vam-row"><span class="vam-label">Рынок</span><div class="vam-bar"><div class="vam-fill" id="m1" data-w="50%" style="width:0"></div></div><span class="vam-val" id="mv1">5</span></div>
+        <div class="vam-row"><span class="vam-label">Деньги</span><div class="vam-bar"><div class="vam-fill red" id="m2" data-w="40%" style="width:0"></div></div><span class="vam-val red-val" id="mv2">4</span></div>
+        <div class="vam-row"><span class="vam-label">Продажи</span><div class="vam-bar"><div class="vam-fill" id="m3" data-w="50%" style="width:0"></div></div><span class="vam-val" id="mv3">5</span></div>
       </div>
     </div>
-    <div class="vd-card">
-      <div class="vd-card-header">
-        <div><div class="vdh-label">Ladder Score</div><div class="vdh-case">Кофейня в спальном районе, Москва</div></div>
-        <div class="vdh-right"><div class="vdh-score"><span id="score-counter">0</span><span>/100</span></div><div class="vdh-risk">СРЕДНИЙ РИСК</div></div>
+    <div class="vd-card" id="vd-card-main">
+      <div class="vd-card-top">
+        <div class="vd-card-meta">
+          <div class="vdh-label">LADDER SCORE</div>
+          <div class="vdh-case" id="vd-case-name">Кофейня в спальном районе, Москва</div>
+        </div>
+        <div class="vd-score-wrap">
+          <div class="vd-score-num"><span id="score-counter">0</span><span class="vd-score-of">/100</span></div>
+          <div class="vd-risk-badge" id="vd-risk">СРЕДНИЙ РИСК</div>
+        </div>
       </div>
-      <div class="vd-axes">
-        <div class="ax-row"><div class="ax-lbl">Идея <span>7/10</span></div><div class="ax-bar"><div class="ax-fill" data-w="70%" style="width:0"></div></div></div>
-        <div class="ax-row"><div class="ax-lbl">Рынок <span>5/10</span></div><div class="ax-bar"><div class="ax-fill" data-w="50%" style="width:0"></div></div></div>
-        <div class="ax-row"><div class="ax-lbl">Деньги <span>4/10</span></div><div class="ax-bar"><div class="ax-fill red" data-w="40%" style="width:0"></div></div></div>
-        <div class="ax-row"><div class="ax-lbl">Команда <span>6/10</span></div><div class="ax-bar"><div class="ax-fill" data-w="60%" style="width:0"></div></div></div>
-        <div class="ax-row"><div class="ax-lbl">Реалистичность <span>5/10</span></div><div class="ax-bar"><div class="ax-fill" data-w="50%" style="width:0"></div></div></div>
-        <div class="ax-row"><div class="ax-lbl">Продажи <span>7/10</span></div><div class="ax-bar"><div class="ax-fill" data-w="70%" style="width:0"></div></div></div>
+      <div class="vd-bars" id="vd-bars">
+        <div class="vd-bar-row" onclick="toggleDetail('d0')">
+          <div class="vd-bar-lbl">Идея <span id="b0v">7/10</span></div>
+          <div class="vd-bar-track"><div class="ax-fill" id="b0" data-w="70%" style="width:0"></div></div>
+          <span class="vd-bar-arrow">›</span>
+        </div>
+        <div class="vd-detail" id="d0">Идея привлекательна и попадает в реальную потребность рынка. Концепция понятна целевой аудитории.</div>
+        <div class="vd-bar-row" onclick="toggleDetail('d1')">
+          <div class="vd-bar-lbl">Рынок <span id="b1v">5/10</span></div>
+          <div class="vd-bar-track"><div class="ax-fill" id="b1" data-w="50%" style="width:0"></div></div>
+          <span class="vd-bar-arrow">›</span>
+        </div>
+        <div class="vd-detail" id="d1">Рынок насыщен. В радиусе 500м уже 3 кофейни. Нужна чёткая причина выбрать именно вас.</div>
+        <div class="vd-bar-row" onclick="toggleDetail('d2')">
+          <div class="vd-bar-lbl">Деньги <span id="b2v" style="color:#EF4444">4/10</span></div>
+          <div class="vd-bar-track"><div class="ax-fill red" id="b2" data-w="40%" style="width:0"></div></div>
+          <span class="vd-bar-arrow">›</span>
+        </div>
+        <div class="vd-detail danger" id="d2">⚠ КРИТИЧНО: Аренда съест маржу до появления постоянного потока. Точка безубыточности — 180+ чашек в день.</div>
+        <div class="vd-bar-row" onclick="toggleDetail('d3')">
+          <div class="vd-bar-lbl">Команда <span id="b3v">6/10</span></div>
+          <div class="vd-bar-track"><div class="ax-fill" id="b3" data-w="60%" style="width:0"></div></div>
+          <span class="vd-bar-arrow">›</span>
+        </div>
+        <div class="vd-detail" id="d3">Есть базовый опыт в сфере. Рекомендуем усилить операционную экспертизу до открытия.</div>
+        <div class="vd-bar-row" onclick="toggleDetail('d4')">
+          <div class="vd-bar-lbl">Реалистичность <span id="b4v">5/10</span></div>
+          <div class="vd-bar-track"><div class="ax-fill" id="b4" data-w="50%" style="width:0"></div></div>
+          <span class="vd-bar-arrow">›</span>
+        </div>
+        <div class="vd-detail" id="d4">Сроки и бюджет занижены. Реальный запуск займёт на 2-3 месяца дольше планируемого.</div>
+        <div class="vd-bar-row" onclick="toggleDetail('d5')">
+          <div class="vd-bar-lbl">Продажи <span id="b5v">7/10</span></div>
+          <div class="vd-bar-track"><div class="ax-fill" id="b5" data-w="70%" style="width:0"></div></div>
+          <span class="vd-bar-arrow">›</span>
+        </div>
+        <div class="vd-detail" id="d5">Локация проходимая. Формат «кофе с собой» даёт хороший потенциал повторных покупок.</div>
       </div>
-      <div class="vd-quote">«Идея эмоционально привлекательна, но <em>финансовая модель не выдержит реальных условий</em>. Аренда в выбранной локации съест маржу раньше, чем появится постоянный поток клиентов.»</div>
-      <div class="vd-recs">
-        <div class="vd-rec">Проверить фактическую стоимость аренды — не объявления, а подписанные договоры</div>
-        <div class="vd-rec">Начать с формата «кофе с собой» — снизить точку безубыточности в 2 раза</div>
-        <div class="vd-rec">Протестировать спрос 2 недели до подписания договора</div>
+      <div class="vd-quote" id="vd-quote">«Идея привлекательна, но <strong>финансовая модель не выдержит реальных условий</strong>. Аренда съест маржу раньше, чем появится постоянный поток клиентов.»</div>
+      <div class="vd-recs" id="vd-recs">
+        <div class="vd-rec">→ Проверить фактическую стоимость аренды — не объявления, а договоры</div>
+        <div class="vd-rec">→ Начать с формата «кофе с собой» — снизить точку безубыточности в 2 раза</div>
+        <div class="vd-rec">→ Протестировать спрос 2 недели до подписания договора</div>
       </div>
     </div>
   </div>
@@ -1516,56 +1580,158 @@ window.addEventListener('load', function(){
   document.getElementById('error-screen').classList.remove('active');
 });
 
-// ── АНИМАЦИИ ──
-function animateCounter(el, target) {
-  let cur = 0;
-  el.textContent = '0';
-  const timer = setInterval(() => {
-    cur += 2;
-    if (cur >= target) { cur = target; clearInterval(timer); }
-    el.textContent = cur;
-  }, 18);
-}
+// ── ИНТЕРАКТИВНЫЙ ВЕРДИКТ ──
+const CASES = [
+  {
+    name: 'Кофейня в спальном районе, Москва',
+    score: 61, risk: 'СРЕДНИЙ РИСК', riskColor: '#F59E0B',
+    bars: [{l:'Идея',v:'7/10',w:'70%'},{l:'Рынок',v:'5/10',w:'50%'},{l:'Деньги',v:'4/10',w:'40%',red:true},{l:'Команда',v:'6/10',w:'60%'},{l:'Реалистичность',v:'5/10',w:'50%'},{l:'Продажи',v:'7/10',w:'70%'}],
+    details: ['Идея попадает в реальную потребность. Концепция понятна аудитории.','Рынок насыщен. В радиусе 500м уже 3 кофейни. Нужна причина выбрать вас.','⚠ КРИТИЧНО: Аренда съест маржу до появления постоянного потока. 180+ чашек в день.','Базовый опыт есть. Усилите операционную экспертизу до открытия.','Сроки занижены. Реальный запуск — на 2-3 месяца дольше.','Локация проходимая. Формат «кофе с собой» даёт хороший потенциал.'],
+    quote: '«Идея привлекательна, но финансовая модель не выдержит реальных условий. Аренда съест маржу раньше, чем появится постоянный поток клиентов.»',
+    recs: ['→ Проверить фактическую стоимость аренды — не объявления, а договоры','→ Начать с формата «кофе с собой» — снизить точку безубыточности в 2 раза','→ Протестировать спрос 2 недели до подписания договора'],
+    mini: [{l:'Идея',v:'7',w:'70%'},{l:'Рынок',v:'5',w:'50%'},{l:'Деньги',v:'4',w:'40%',red:true},{l:'Продажи',v:'5',w:'50%'}]
+  },
+  {
+    name: 'Мебельное производство, регион',
+    score: 74, risk: 'НИЗКИЙ РИСК', riskColor: '#10B981',
+    bars: [{l:'Идея',v:'8/10',w:'80%'},{l:'Рынок',v:'7/10',w:'70%'},{l:'Деньги',v:'6/10',w:'60%'},{l:'Команда',v:'8/10',w:'80%'},{l:'Реалистичность',v:'7/10',w:'70%'},{l:'Продажи',v:'7/10',w:'70%'}],
+    details: ['Производство под заказ — правильная ниша. Маржа выше чем у перекупщиков.','Спрос стабильный. Конкуренция есть, но рынок не перегрет.','Производственное оборудование — главный риск. Нужен резерв 20%.','Опыт в производстве — серьёзное преимущество перед новичками.','Реалистичная оценка рынка и сроков. Хорошая база для старта.','B2B продажи через дизайнеров и застройщиков — правильный канал.'],
+    quote: '«Сильная позиция: опыт в производстве + растущий спрос. Главный риск — недооценка оборотного капитала на первые 3 месяца.»',
+    recs: ['→ Заключить 2-3 предварительных договора до закупки оборудования','→ Сформировать резерв на оборудование +20% от сметы','→ Первые 6 месяцев — только заказная мебель, без склада'],
+    mini: [{l:'Идея',v:'8',w:'80%'},{l:'Рынок',v:'7',w:'70%'},{l:'Деньги',v:'6',w:'60%'},{l:'Продажи',v:'7',w:'70%'}]
+  },
+  {
+    name: 'IT-стартап, SaaS для B2B',
+    score: 52, risk: 'ВЫСОКИЙ РИСК', riskColor: '#EF4444',
+    bars: [{l:'Идея',v:'7/10',w:'70%'},{l:'Рынок',v:'5/10',w:'50%'},{l:'Деньги',v:'3/10',w:'30%',red:true},{l:'Команда',v:'5/10',w:'50%'},{l:'Реалистичность',v:'4/10',w:'40%',red:true},{l:'Продажи',v:'6/10',w:'60%'}],
+    details: ['Идея актуальна, но без уникального отличия от существующих решений.','Рынок занят крупными игроками. Нужна чёткая нишевая специализация.','⚠ КРИТИЧНО: Runway меньше 6 месяцев. Критически мало для B2B цикла продаж.','Нет технического сооснователя. Найм разработчика на раннем этапе — риск.','Цикл продаж B2B — 3-6 месяцев. Деньги закончатся раньше первой оплаты.','Есть понимание целевой аудитории. Но нет доказанного канала привлечения.'],
+    quote: '«Идея рабочая, но не хватает денег и команды для B2B. С текущим runway до первой оплаты не доживёте.»',
+    recs: ['→ Найти технического кофаундера вместо найма разработчика','→ Увеличить runway минимум до 12 месяцев до старта продаж','→ Начать с 1 нишевого сегмента, а не универсального продукта'],
+    mini: [{l:'Идея',v:'7',w:'70%'},{l:'Рынок',v:'5',w:'50%'},{l:'Деньги',v:'3',w:'30%',red:true},{l:'Продажи',v:'6',w:'60%'}]
+  }
+];
 
-function animateBars(container) {
-  container.querySelectorAll('.ax-fill,.vam-fill').forEach(b => {
-    const finalW = b.getAttribute('data-w');
-    if (!finalW) return;
-    b.style.transition = 'none';
-    b.style.width = '0';
+let currentCase = 0;
+
+function runBars() {
+  // Main bars
+  for (let i = 0; i < 6; i++) {
+    const el = document.getElementById('b'+i);
+    if (!el) continue;
+    const w = el.getAttribute('data-w');
+    el.style.transition = 'none';
+    el.style.width = '0';
+    const idx = i;
     setTimeout(() => {
-      b.style.transition = 'width 1.2s ease';
-      b.style.width = finalW;
-    }, 60);
-  });
+      el.style.transition = 'width 1s ease';
+      el.style.width = w;
+    }, 50 + idx * 80);
+  }
+  // Mini bars
+  for (let i = 0; i < 4; i++) {
+    const el = document.getElementById('m'+i);
+    if (!el) continue;
+    const w = el.getAttribute('data-w');
+    el.style.transition = 'none';
+    el.style.width = '0';
+    const idx = i;
+    setTimeout(() => {
+      el.style.transition = 'width 1s ease';
+      el.style.width = w;
+    }, 50 + idx * 80);
+  }
+  // Counter
+  const counter = document.getElementById('score-counter');
+  if (counter) {
+    const target = CASES[currentCase].score;
+    let cur = 0;
+    counter.textContent = '0';
+    const t = setInterval(() => {
+      cur += 2;
+      if (cur >= target) { cur = target; clearInterval(t); }
+      counter.textContent = cur;
+    }, 20);
+  }
 }
 
-let lastTrigger = 0;
+function switchCase(idx) {
+  currentCase = idx;
+  const c = CASES[idx];
+  // Update case buttons
+  document.querySelectorAll('.vd-case').forEach((el,i) => el.classList.toggle('active', i===idx));
+  // Update card name
+  document.getElementById('vd-case-name').textContent = c.name;
+  // Update risk badge
+  const badge = document.getElementById('vd-risk');
+  badge.textContent = c.risk;
+  badge.style.color = c.riskColor;
+  badge.style.background = c.riskColor + '18';
+  badge.style.borderColor = c.riskColor + '40';
+  // Update bars
+  for (let i = 0; i < 6; i++) {
+    const bar = document.getElementById('b'+i);
+    const lbl = document.getElementById('b'+i+'v');
+    if (!bar || !lbl) continue;
+    const b = c.bars[i];
+    bar.setAttribute('data-w', b.w);
+    bar.className = 'ax-fill' + (b.red ? ' red' : '');
+    lbl.textContent = b.v;
+    lbl.style.color = b.red ? '#EF4444' : '';
+  }
+  // Update mini bars
+  for (let i = 0; i < 4; i++) {
+    const bar = document.getElementById('m'+i);
+    const val = document.getElementById('mv'+i);
+    if (!bar || !val) continue;
+    const b = c.mini[i];
+    bar.setAttribute('data-w', b.w);
+    bar.className = 'vam-fill' + (b.red ? ' red' : '');
+    val.textContent = b.v;
+    val.className = 'vam-val' + (b.red ? ' red-val' : '');
+  }
+  // Update details, quote, recs
+  for (let i = 0; i < 6; i++) {
+    const d = document.getElementById('d'+i);
+    const row = d && d.previousElementSibling;
+    if (d) { d.textContent = c.details[i]; d.classList.remove('open','danger'); if(c.bars[i]&&c.bars[i].red) d.classList.add('danger'); }
+    if (row) row.classList.remove('open');
+  }
+  document.getElementById('vd-quote').innerHTML = '«' + c.quote.replace(/«|»/g,'') + '»';
+  const recsEl = document.getElementById('vd-recs');
+  recsEl.innerHTML = c.recs.map(r=>`<div class="vd-rec">${r}</div>`).join('');
+  // Animate
+  runBars();
+}
+
+function toggleDetail(id) {
+  const el = document.getElementById(id);
+  const row = el.previousElementSibling;
+  const isOpen = el.classList.contains('open');
+  // Close all
+  document.querySelectorAll('.vd-detail').forEach(d => d.classList.remove('open'));
+  document.querySelectorAll('.vd-bar-row').forEach(r => r.classList.remove('open'));
+  // Toggle this one
+  if (!isOpen) { el.classList.add('open'); row.classList.add('open'); }
+}
+
+// Scroll trigger
+let verdictTriggered = false;
 function checkVerdictVisible() {
-  const section = document.querySelector('.verdict-section');
+  const section = document.getElementById('verdict-demo');
   if (!section) return;
   const rect = section.getBoundingClientRect();
-  const inView = rect.top < window.innerHeight && rect.bottom > 0;
-  const now = Date.now();
-  if (inView && now - lastTrigger > 2000) {
-    lastTrigger = now;
-    section.querySelectorAll('.ax-fill,.vam-fill').forEach(b => {
-      const finalW = b.getAttribute('data-w');
-      if (!finalW) return;
-      b.style.transition = 'none';
-      b.style.width = '0';
-      setTimeout(() => {
-        b.style.transition = 'width 1.2s ease';
-        b.style.width = finalW;
-      }, 60);
-    });
-    const counter = document.getElementById('score-counter');
-    if (counter) animateCounter(counter, 61);
+  if (rect.top < window.innerHeight * 0.85 && !verdictTriggered) {
+    verdictTriggered = true;
+    runBars();
+  }
+  // Reset when scrolled away so it re-animates
+  if (rect.bottom < 0 || rect.top > window.innerHeight) {
+    verdictTriggered = false;
   }
 }
 
 window.addEventListener('scroll', checkVerdictVisible, {passive:true});
-setTimeout(checkVerdictVisible, 600);
+setTimeout(checkVerdictVisible, 500);
 </script>
 </body>
 </html>
