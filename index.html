@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -1534,23 +1533,22 @@ function submitWaitlist(){
   document.getElementById('wl-success').style.display='block';
   setTimeout(closeWaitlist,2500);
 }
+function showDeepComingSoon(){
   // Создаём модальное окно если ещё нет
   let modal = document.getElementById('deep-modal');
   if(!modal){
     modal = document.createElement('div');
     modal.id = 'deep-modal';
     modal.style.cssText = 'position:fixed;inset:0;z-index:999;display:flex;align-items:center;justify-content:center;background:rgba(7,17,30,0.88);backdrop-filter:blur(8px);padding:20px';
-    modal.innerHTML = `
-      <div style="background:#0A1828;border:1px solid rgba(59,130,246,0.3);padding:40px 36px;max-width:420px;width:100%;position:relative">
-        <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#1D4ED8,#3B82F6,#60A5FA)"></div>
-        <div style="font-size:10px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:#3B82F6;margin-bottom:16px">Deep Analysis</div>
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:0.04em;color:#E8EEF8;margin-bottom:12px;line-height:1.1">СКОРО<br>ОТКРЫВАЕМ</div>
-        <p style="font-size:14px;color:rgba(232,238,248,0.55);line-height:1.7;margin-bottom:28px">Deep Analysis — полный разбор проекта с финансовой логикой и дорожной картой на 3 месяца. Запускаем в ближайшие дни.<br><br>Пройдите Free Verdict прямо сейчас — это бесплатно и займёт 3 минуты.</p>
-        <div style="display:flex;flex-direction:column;gap:10px">
-          <a href="#quiz" onclick="document.getElementById('deep-modal').style.display='none'" style="display:block;background:#3B82F6;color:#fff;border:none;padding:14px;text-align:center;font-size:12px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;text-decoration:none;transition:background .2s">Пройти Free Verdict →</a>
-          <button onclick="document.getElementById('deep-modal').style.display='none'" style="background:transparent;border:1px solid rgba(255,255,255,0.1);color:rgba(232,238,248,0.35);padding:12px;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;cursor:pointer;font-family:'DM Sans',sans-serif;width:100%;transition:all .2s">Закрыть</button>
-        </div>
-      </div>`;
+    modal.innerHTML = '<div style="background:#0A1828;border:1px solid rgba(59,130,246,0.3);padding:40px 36px;max-width:420px;width:100%;position:relative">'
+      + '<div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#1D4ED8,#3B82F6,#60A5FA)"></div>'
+      + '<div style="font-size:10px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:#3B82F6;margin-bottom:16px">Deep Analysis</div>'
+      + '<div style="font-family:\'Bebas Neue\',sans-serif;font-size:32px;letter-spacing:0.04em;color:#E8EEF8;margin-bottom:12px;line-height:1.1">СКОРО<br>ОТКРЫВАЕМ</div>'
+      + '<p style="font-size:14px;color:rgba(232,238,248,0.55);line-height:1.7;margin-bottom:28px">Deep Analysis — полный разбор с финансовой логикой и дорожной картой. Запускаем в ближайшие дни.<br><br>Пройдите Free Verdict прямо сейчас — бесплатно, 3 минуты.</p>'
+      + '<div style="display:flex;flex-direction:column;gap:10px">'
+      + '<a href="#quiz" onclick="document.getElementById(\'deep-modal\').style.display=\'none\'" style="display:block;background:#3B82F6;color:#fff;padding:14px;text-align:center;font-size:12px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;text-decoration:none">Пройти Free Verdict →</a>'
+      + '<button onclick="document.getElementById(\'deep-modal\').style.display=\'none\'" style="background:transparent;border:1px solid rgba(255,255,255,0.1);color:rgba(232,238,248,0.35);padding:12px;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;cursor:pointer;width:100%">Закрыть</button>'
+      + '</div></div>';
     modal.addEventListener('click', function(e){ if(e.target===modal) modal.style.display='none'; });
     document.body.appendChild(modal);
   } else {
@@ -1587,14 +1585,11 @@ function animateAll() {
   bars.forEach(function(b, i) {
     var w = b.getAttribute('data-w');
     if (!w) return;
-    b.style.transition = 'none';
-    b.style.width = '0';
-    requestAnimationFrame(function() {
-      requestAnimationFrame(function() {
-        b.style.transition = 'width 1s ease';
-        b.style.width = w;
-      });
-    });
+    b.style.width = '0px';
+    setTimeout(function(bar, width) {
+      bar.style.transition = 'width 1s ease';
+      bar.style.width = width;
+    }, 50 + i * 120, b, w);
   });
   var counter = document.getElementById('score-counter');
   if (counter) {
@@ -1741,7 +1736,7 @@ function switchCase(idx) {
   }
   document.getElementById('vd-quote').innerHTML = '«' + c.quote.replace(/«|»/g,'') + '»';
   const recsEl = document.getElementById('vd-recs');
-  recsEl.innerHTML = c.recs.map(r=>`<div class="vd-rec">${r}</div>`).join('');
+  recsEl.innerHTML = c.recs.map(function(r){ return '<div class="vd-rec">' + r + '</div>'; }).join('');
   // Animate
   animated = false;
   animateAll();
