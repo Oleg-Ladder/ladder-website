@@ -1623,8 +1623,8 @@ function onScroll() {
   if (!inView) animated = false; // сброс — при следующем скролле анимирует снова
 }
 window.addEventListener('scroll', onScroll, {passive: true});
-// Запуск при загрузке если секция уже видна
-window.addEventListener('load', function() { setTimeout(onScroll, 300); });
+// Запуск сразу — без ожидания скролла
+setTimeout(animateAll, 500);
 const CASES = [
   {
     name: 'Кофейня в спальном районе, Москва',
