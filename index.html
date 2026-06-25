@@ -231,9 +231,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .btn-deep{width:100%;padding:16px;background:#3B82F6;border:none;color:#fff;font-size:13px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background .2s}
 .btn-deep:hover{background:#2563EB}
 @keyframes pulse-btn{0%,100%{box-shadow:0 0 0 0 rgba(59,130,246,0.5)}50%{box-shadow:0 0 0 8px rgba(59,130,246,0)}}
-@keyframes growBar{from{width:0}to{width:var(--w)}}
-.ax-fill{animation:growBar 1.2s ease forwards}
-.vam-fill{animation:growBar 1s ease forwards}
 .roadmap{padding:100px 64px;background:#0A1828;border-top:1px solid rgba(255,255,255,0.06)}
 .rm-eyebrow{font-size:11px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:#3B82F6;margin-bottom:20px;display:flex;align-items:center;gap:12px}
 .rm-eyebrow::before{content:'';width:32px;height:1px;background:#3B82F6}
@@ -474,10 +471,10 @@ footer{padding:28px 64px;border-top:1px solid rgba(255,255,255,0.06);display:fle
         <div class="vd-case" onclick="switchCase(2)">IT-стартап</div>
       </div>
       <div class="vam-mini" id="vam-mini">
-        <div class="vam-row"><span class="vam-label">Идея</span><div class="vam-bar"><div class="vam-fill" id="m0" data-w="70%" style="--w:70%;width:70%"></div></div><span class="vam-val" id="mv0">7</span></div>
-        <div class="vam-row"><span class="vam-label">Рынок</span><div class="vam-bar"><div class="vam-fill" id="m1" data-w="50%" style="--w:50%;width:50%"></div></div><span class="vam-val" id="mv1">5</span></div>
-        <div class="vam-row"><span class="vam-label">Деньги</span><div class="vam-bar"><div class="vam-fill red" id="m2" data-w="40%" style="--w:40%;width:40%"></div></div><span class="vam-val red-val" id="mv2">4</span></div>
-        <div class="vam-row"><span class="vam-label">Продажи</span><div class="vam-bar"><div class="vam-fill" id="m3" data-w="50%" style="--w:50%;width:50%"></div></div><span class="vam-val" id="mv3">5</span></div>
+        <div class="vam-row"><span class="vam-label">Идея</span><div class="vam-bar"><div class="vam-fill" id="m0" data-w="70%" style="width:0"></div></div><span class="vam-val" id="mv0">7</span></div>
+        <div class="vam-row"><span class="vam-label">Рынок</span><div class="vam-bar"><div class="vam-fill" id="m1" data-w="50%" style="width:0"></div></div><span class="vam-val" id="mv1">5</span></div>
+        <div class="vam-row"><span class="vam-label">Деньги</span><div class="vam-bar"><div class="vam-fill red" id="m2" data-w="40%" style="width:0"></div></div><span class="vam-val red-val" id="mv2">4</span></div>
+        <div class="vam-row"><span class="vam-label">Продажи</span><div class="vam-bar"><div class="vam-fill" id="m3" data-w="50%" style="width:0"></div></div><span class="vam-val" id="mv3">5</span></div>
       </div>
     </div>
     <div class="vd-card" id="vd-card-main">
@@ -494,37 +491,37 @@ footer{padding:28px 64px;border-top:1px solid rgba(255,255,255,0.06);display:fle
       <div class="vd-bars" id="vd-bars">
         <div class="vd-bar-row" onclick="toggleDetail('d0')">
           <div class="vd-bar-lbl">Идея <span id="b0v">7/10</span></div>
-          <div class="vd-bar-track"><div class="ax-fill" id="b0" data-w="70%" style="--w:70%;width:70%"></div></div>
+          <div class="vd-bar-track"><div class="ax-fill" id="b0" data-w="70%" style="width:0"></div></div>
           <span class="vd-bar-arrow">›</span>
         </div>
         <div class="vd-detail" id="d0">Идея привлекательна и попадает в реальную потребность рынка. Концепция понятна целевой аудитории.</div>
         <div class="vd-bar-row" onclick="toggleDetail('d1')">
           <div class="vd-bar-lbl">Рынок <span id="b1v">5/10</span></div>
-          <div class="vd-bar-track"><div class="ax-fill" id="b1" data-w="50%" style="--w:50%;width:50%"></div></div>
+          <div class="vd-bar-track"><div class="ax-fill" id="b1" data-w="50%" style="width:0"></div></div>
           <span class="vd-bar-arrow">›</span>
         </div>
         <div class="vd-detail" id="d1">Рынок насыщен. В радиусе 500м уже 3 кофейни. Нужна чёткая причина выбрать именно вас.</div>
         <div class="vd-bar-row" onclick="toggleDetail('d2')">
           <div class="vd-bar-lbl">Деньги <span id="b2v" style="color:#EF4444">4/10</span></div>
-          <div class="vd-bar-track"><div class="ax-fill red" id="b2" data-w="40%" style="--w:40%;width:40%"></div></div>
+          <div class="vd-bar-track"><div class="ax-fill red" id="b2" data-w="40%" style="width:0"></div></div>
           <span class="vd-bar-arrow">›</span>
         </div>
         <div class="vd-detail danger" id="d2">⚠ КРИТИЧНО: Аренда съест маржу до появления постоянного потока. Точка безубыточности — 180+ чашек в день.</div>
         <div class="vd-bar-row" onclick="toggleDetail('d3')">
           <div class="vd-bar-lbl">Команда <span id="b3v">6/10</span></div>
-          <div class="vd-bar-track"><div class="ax-fill" id="b3" data-w="60%" style="--w:60%;width:60%"></div></div>
+          <div class="vd-bar-track"><div class="ax-fill" id="b3" data-w="60%" style="width:0"></div></div>
           <span class="vd-bar-arrow">›</span>
         </div>
         <div class="vd-detail" id="d3">Есть базовый опыт в сфере. Рекомендуем усилить операционную экспертизу до открытия.</div>
         <div class="vd-bar-row" onclick="toggleDetail('d4')">
           <div class="vd-bar-lbl">Реалистичность <span id="b4v">5/10</span></div>
-          <div class="vd-bar-track"><div class="ax-fill" id="b4" data-w="50%" style="--w:50%;width:50%"></div></div>
+          <div class="vd-bar-track"><div class="ax-fill" id="b4" data-w="50%" style="width:0"></div></div>
           <span class="vd-bar-arrow">›</span>
         </div>
         <div class="vd-detail" id="d4">Сроки и бюджет занижены. Реальный запуск займёт на 2-3 месяца дольше планируемого.</div>
         <div class="vd-bar-row" onclick="toggleDetail('d5')">
           <div class="vd-bar-lbl">Продажи <span id="b5v">7/10</span></div>
-          <div class="vd-bar-track"><div class="ax-fill" id="b5" data-w="70%" style="--w:70%;width:70%"></div></div>
+          <div class="vd-bar-track"><div class="ax-fill" id="b5" data-w="70%" style="width:0"></div></div>
           <span class="vd-bar-arrow">›</span>
         </div>
         <div class="vd-detail" id="d5">Локация проходимая. Формат «кофе с собой» даёт хороший потенциал повторных покупок.</div>
@@ -1583,7 +1580,51 @@ window.addEventListener('load', function(){
   document.getElementById('error-screen').classList.remove('active');
 });
 
-// ── ИНТЕРАКТИВНЫЙ ВЕРДИКТ ──
+// ── АНИМАЦИЯ ПОЛОС И СЧЁТЧИКА ──
+function animateAll() {
+  // Полосы
+  var bars = document.querySelectorAll('.ax-fill, .vam-fill');
+  bars.forEach(function(b, i) {
+    var w = b.getAttribute('data-w');
+    if (!w) return;
+    b.style.width = '0';
+    b.style.transition = 'none';
+    ;(function(bar, width, delay) {
+      setTimeout(function() {
+        bar.style.transition = 'width 1s ease';
+        bar.style.width = width;
+      }, delay);
+    })(b, w, 80 + i * 100);
+  });
+  // Счётчик
+  var counter = document.getElementById('score-counter');
+  if (!counter) return;
+  var target = CASES[currentCase].score;
+  counter.textContent = '0';
+  var cur = 0;
+  var t = setInterval(function() {
+    cur += 2;
+    if (cur >= target) { cur = target; clearInterval(t); }
+    counter.textContent = cur;
+  }, 18);
+}
+
+// При скролле к секции
+var animated = false;
+function onScroll() {
+  var sec = document.getElementById('verdict-demo');
+  if (!sec) return;
+  var r = sec.getBoundingClientRect();
+  var inView = r.top < window.innerHeight && r.bottom > 0;
+  if (inView && !animated) {
+    animated = true;
+    animateAll();
+  }
+  if (!inView) animated = false; // сброс — при следующем скролле анимирует снова
+}
+window.addEventListener('scroll', onScroll, {passive: true});
+// Запуск при загрузке если секция уже видна
+window.addEventListener('load', function() { setTimeout(onScroll, 300); });
 const CASES = [
   {
     name: 'Кофейня в спальном районе, Москва',
@@ -1703,7 +1744,8 @@ function switchCase(idx) {
   const recsEl = document.getElementById('vd-recs');
   recsEl.innerHTML = c.recs.map(r=>`<div class="vd-rec">${r}</div>`).join('');
   // Animate
-  runBars();
+  animated = false;
+  animateAll();
 }
 
 function toggleDetail(id) {
