@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -1622,8 +1623,7 @@ function onScroll() {
   if (!inView) animated = false; // сброс — при следующем скролле анимирует снова
 }
 window.addEventListener('scroll', onScroll, {passive: true});
-// Запуск сразу — без ожидания скролла
-setTimeout(animateAll, 500);
+// Запуск сразу после загрузки
 const CASES = [
   {
     name: 'Кофейня в спальном районе, Москва',
@@ -1775,6 +1775,7 @@ function checkVerdictVisible() {
 }
 
 // old animation removed
+setTimeout(animateAll, 600);
 </script>
 </body>
 </html>
