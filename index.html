@@ -1731,7 +1731,8 @@ function checkVerdictVisible() {
 }
 
 window.addEventListener('scroll', checkVerdictVisible, {passive:true});
-setTimeout(checkVerdictVisible, 500);
+window.addEventListener('load', () => setTimeout(runBars, 400));
+document.addEventListener('DOMContentLoaded', () => setTimeout(runBars, 800));
 </script>
 </body>
 </html>
